@@ -1,0 +1,81 @@
+{% extends 'base_customer.html' %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'js/update_job.js' %}"></script>
+{% endblock script %}
+
+{% block header %}
+    <h1>Registrar cita</h1>
+{% endblock header %}
+
+{% block content %}
+
+{% if user_vehicles %}
+    <form method="POST" class="confirm-form">
+        {% csrf_token %}
+    
+        {% for f in form %}
+            <div class="input-group mb-3 justify-content-center">
+                <div class="label">
+                    <span class="form-control bg-light">
+                        {{ f.label_tag }}
+                        {{ f }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="mx-auto text-center mb-3">
+            <button class="btn btn-success confirm-button" data-action="confirm" type="submit">
+                Registrar Cita
+            </button>
+            <a class="btn btn-primary" href="{% url 'appointment' %}">
+                Lista de citas
+            </a>
+        </div>
+    </form>
+
+
+{% else %}
+    <form method="POST" disabled>
+        {% csrf_token %}
+        <div class="mx-auto text-center mb-3">
+            <p>Primero debes registrar un vehículo antes de crear una cita.</p>
+            <button class="btn btn-primary">
+                <a href="{% url 'register_vehicle' %}">Registrar Vehículo</a>
+            </button>
+        </div>
+        
+        {% for f in form %}
+            <div class="input-group mb-3 justify-content-center">
+                <div class="label">
+                    <span class="form-control bg-light">
+                        {{ f.label_tag }}
+                        {{ f }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="mx-auto text-center mb-3">
+            <button class="btn btn-secondary"type="submit" disabled>
+                Registrar Cita
+            </button>
+            <a class="btn btn-primary" href="{% url 'appointment' %}">
+                Lista de citas
+            </a>
+
+        </div>
+    </form>
+{% endif %}
+
+
+    {% if existing_appointment %}
+        <li class="alert alert-danger mt-5 pb-0 pt-2">El mecánico ya tiene cita programada para esta fecha y horario.</li>
+    {% endif %}
+
+
+
+{% endblock content %}
+

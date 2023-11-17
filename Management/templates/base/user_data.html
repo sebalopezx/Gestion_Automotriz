@@ -1,0 +1,108 @@
+{% extends base_template %}
+{% load filters %}
+{% load static %}
+
+{% block header %}
+    <h1>Mis datos</h1>
+{% endblock header %}
+
+{% block content %}
+    
+    {% if list_data %}
+        <ul class="user-data list-group text-center mb-3">
+        {% for data in list_data %}
+            <li class="list-group-item"><span class="">Usuario:</span> {{ data.username }}</li>
+            <li class="list-group-item"><span class="">Email:</span> {{ data.email }}</li>
+            <li class="list-group-item"><span class="">Nombre:</span> {{ data.first_name }}</li>
+            <li class="list-group-item"><span class="">Apellido:</span> {{ data.last_name }}</li> 
+        </ul>
+        <div class="mx-auto text-center">
+
+            <a class="btn btn-warning my-2" href="{% url 'detail_user_data' data.id %}">
+                Modificar datos
+            </a>
+            <a class="btn btn-warning my-2" href="{% url 'update_password' data.id %}">
+                Modificar contraseña
+            </a>
+        </div>
+        {% endfor %}    
+    {% else %}
+        {{ error }}
+    {% endif %}
+
+
+{% if user_type_value == "Customer" %}
+<h3 class="mt-3 text-center">~Puntos~</h3>
+<p class="user-data border rounded p-2 my-3">El sistema de puntos hace un descuento del 10% en tu próximo servicio cuando tengas {{ POINTS }} puntos</p>
+<ul class="list-group text-center">
+    <li class="user-data list-group-item list-group-item-success mb-2">Puntos: {{ points.points }}</li>
+</ul>
+    {% if points.points >= POINTS %}
+    <form action="{% url 'create_coupon_points' %}" method="POST" class="confirm-form">
+        {% csrf_token %}
+        <div class="mx-auto text-center mt-2">
+            <button class="btn btn-success confirm-button" data-action="points" >
+                Canjear {{ POINTS }} puntos
+            </button>
+        </div>
+    </form>
+    {% else %}
+    <div class="mx-auto text-center mt-2">
+        <button class="btn btn-outline-secondary" disabled>
+            Canjear {{ POINTS }} puntos
+        </button>
+    </div>
+    {% endif %}
+
+
+    {% if coupons %}
+    <h3 class="mt-3 text-center">~Cupones~</h3>
+
+    {% for coupon in coupons %}
+        <div class="container-coupon container rounded mx-auto text-center">
+            <div class="row">
+                <div class="col-sm-6 mx-auto my-3">
+                    <div class="coupon bg-light rounded d-flex justify-content-between">
+                        <div class="p-1 d-flex justify-content-center align-items-center">
+                            <div class="icon-container ">
+                                    {% comment %} <i class="fa-solid fa-car fa-3x"></i> {% endcomment %}
+                                    <i class="fa-solid fa-wrench fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="py-3 w-50 d-block text-center">
+                                <h4 class="text-bold">Cupón</h4>
+                                <p class="text-muted mb-0">{{ coupon }}</p>
+                        </div>
+                        <div class="coupon-line">
+                            <div class="info m-2 d-flex align-items-center">
+                                <div class="coupon-condition w-100">
+                                    <div class="">
+                                        <span>{{ coupon.valid|coupon_valid }}</span>
+                                    </div>
+                                    {% if coupon.valid == True %}
+                                        <button  class="btn btn-sm btn-outline-danger p-1" disabled>
+                                            Eliminar cupón
+                                        </button>
+                                    {% else %}
+                                        <form action="{% url 'delete_coupon' coupon.id %}" method="POST" class="confirm-form">
+                                            {% csrf_token %}
+                                            <button class="btn btn-sm btn-danger p-1 confirm-button" data-action="delete">
+                                                Eliminar cupón
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+    {% endif %}
+{% endif %}
+
+
+{% endblock content %}

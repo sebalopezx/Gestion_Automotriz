@@ -1,0 +1,307 @@
+$color-primary: #ff7c38;
+
+
+@font-face {
+    font-family: fuentePrincipal;
+    src: url('../fonts/SpaceGrotesk-SemiBold.ttf') format('woff');
+}
+@font-face {
+    font-family: fuenteSecondary;
+    src: url('../fonts/Comfortaa-Regular.ttf') format('woff');
+}
+@font-face {
+    font-family: fuenteSecondaryBold;
+    src: url('../fonts/Comfortaa-Bold.ttf') format('woff');
+}
+
+
+body{
+    overflow-y: scroll;
+    font-family: fuenteSecondary !important;
+}
+p,span,.btn,.btn:disabled,li{
+    font-size: .9rem !important;
+}
+h5{
+    font-family: fuenteSecondaryBold;
+    font-weight: 700;
+}
+h1{
+    color: $color-primary;
+    font-family: fuentePrincipal !important;
+}
+h2,h3,h4,.navbar-brand{
+    font-family: fuentePrincipal !important;
+}
+
+// BOTONES 
+.btn-primary {
+    color: whitesmoke !important;
+    background-color: $color-primary !important;
+    border-color: $color-primary !important;
+}
+.btn,a,i,form button{
+    transition: .3s !important;
+}
+button,a{
+    color: whitesmoke !important;
+}
+button a{
+    text-decoration: none;
+}
+
+.btn:hover{
+    color: black !important;
+}
+.btn-outline-primary{
+    border: $color-primary;
+    border-color: $color-primary !important;
+}
+.btn-outline-primary:hover{
+    background-color: $color-primary !important;
+    border-color: $color-primary !important;
+}
+button:disabled,.btn-outline-primary:disabled{
+    color: black !important;
+}
+.navbar .navbar-toggler{
+    color: $color-primary !important;
+}
+.text-primary{
+    color: $color-primary !important;
+}
+.border{
+    border: 1px solid $color-primary !important;
+}
+
+
+// NAVEGADORES
+.dropdown-menu {
+    min-width: 200px; 
+    width: auto;
+    white-space: nowrap; 
+    overflow-x: hidden;
+}
+.dropdown-item {
+    width: auto;
+    display: block;
+}
+
+
+
+// INFORMACION CONTACTO
+.user-data li span{
+    color: $color-primary;
+    font-weight: bold;
+}
+.info-contact span,i{
+    color: $color-primary;
+}
+.user-data{
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+// NAVEGADOR
+#search-nav{
+    top: 54px;
+}
+.navbar .navbar-nav .nav-link:hover,i:hover {
+    // transition: .5s;
+    color: $color-primary !important;
+    text-shadow: lighten($color: $color-primary, $amount: 10) 0px 0px 5px;
+}
+.navbar .navbar-nav .nav-link.active {
+    color: $color-primary !important; 
+}
+
+
+
+// CUPONES
+.container-coupon{
+    background-color: #dedede;
+}
+.coupon .coupon-line {
+    border-left: 1px dashed #ddd;
+    width: 40% !important;
+    position:relative;
+}
+.coupon .coupon-line .info::after, .coupon .coupon-line .info::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #dedede;
+    border-radius: 100%;
+}
+.coupon .coupon-line .info::before {
+    top: -10px;
+    left: -10px;
+}
+.coupon .coupon-line .info::after {
+    bottom: -10px;
+    left: -10px;
+}
+@media (max-width: 768px) {
+    .coupon h4{
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .coupon p{
+        font-size: 0.9rem;
+    }
+}
+
+
+// FORMULARIOS 
+.form-login.border-primary{
+    border-color: #ff7c38 !important;
+}
+.form-login a,
+.forms-mechanics a{
+    text-decoration: underline;
+    color: black !important;
+}
+.form-login a:hover,
+.forms-mechanics a:hover{
+    color: $color-primary !important;
+}
+
+
+form .form-login{
+    max-width: 460px;
+}
+form{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+form .label{
+    width: 600px;
+    max-width: 1200px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+div.input-group input,
+div.input-group select {
+    width: 50%;
+    display: inline-block;
+    margin-left: 2px;
+    padding-left: 10px;
+}
+form select{
+    height: 30px;
+}
+
+form textarea:empty {
+    height: 28px;
+}
+form textarea{
+    width: 50%;
+    height: 28px;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+form input[type="text"][disabled]{
+    width: 50% !important;
+    display: inline-block !important;
+}
+
+@media (max-width: 1024px) {
+    form.search-patent input{
+        height: 38px;
+        margin-top: 0px;
+    }
+    form .form-login{
+        max-width: 250px;
+    }
+
+    form{
+        max-width: 100%;
+    }
+    form .label{
+        width: 100%;
+        text-align: center;
+    }
+    div.input-group input,
+    div.input-group select{
+        width: 100%;
+        display: inline-block;
+        margin-left: 0px;
+        padding-left: 5px;
+    }
+    form textarea{
+        width: 100%;
+
+    }
+}
+
+
+// MECANICOS
+.mechanic-list article{
+    height: 350px;
+}
+.mechanic-list article .card .card-title{
+    height: 50px;
+    overflow: hidden;
+}
+
+
+// TRABAJOS
+.jobs .btn-jobs .custom-btn{
+    width: 110px;
+}
+.jobs .form-job-pending {
+    padding-left: 0;
+    width: 100%;
+}
+.jobs .form-job-pending .job-pending textarea{
+    width: 100%; 
+}
+.list-services-job{
+    width: fit-content;
+}
+
+
+// TOAST DE INFORMACION
+#toast-container{
+    position: fixed;
+    bottom: 0; 
+    right: 0;
+    z-index: 999;
+}
+
+
+// FONDO LOGIN
+.fondo-login{
+    min-height: 100vh; 
+    // min-height: 100vh; 
+    // max-height: 75vh; 
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center; 
+    // align-items: center; 
+    // min-height: 75vh;
+    // max-height: 90vh;
+    background-image: url("../images/fondo_login.jpg") !important;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.form-login{
+    background: transparent;
+    backdrop-filter: blur(20px);
+    /* color: whitesmoke; */
+}
+
+.form-login span{
+    /* color: whitesmoke; */
+    background: transparent;
+}
+.form-login a{
+    font-weight: 600;
+}

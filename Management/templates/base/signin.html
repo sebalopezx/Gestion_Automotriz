@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+  
+
+{% block login %}
+<div class="fondo-login ">
+<br><br><br><br><br><br><br>
+<div class="mx-auto my-auto mb-5">
+<form action="" method="POST" class="form-login-container justify-content-center mt-5 flex-shrink-0">
+    
+    {% csrf_token %}
+
+    <div class="form-login pt-4 ps-2 mx-auto border border-primary rounded">
+        <h1 class="text-center mb-3">Login</h1>
+
+        {% for f in form_login %}
+        <div class="input-group mb-3 justify-content-center">
+            <div class="label">
+                <span class="form-control border-0">
+                    {{ f.label_tag }}
+                    {{ f }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if error %}
+            <li class="list-group-item list-group-item-warning mx-3">{{error}}</li>
+        {% endif %}
+        <div class="text-center mt-3 mb-2">
+            <button class="btn btn-primary mb-3">
+                Iniciar Sesión
+            </button>
+            <br>
+            <span>No tienes cuenta, <a href="{% url "signup" %}">Registrate</a></span>
+        </div>
+    </div> 
+
+
+</form>
+</div>
+
+
+</div>
+{% endblock login %}
+

@@ -1,0 +1,65 @@
+{% extends 'base_customer.html' %}
+
+{% block header %}
+    <h1>Vehículos</h1>
+{% endblock header %}
+
+{% block content %}
+
+
+    <!-- Identificar si existen vehiculos -->
+    {% if list_vehicle %}
+        {% for vehicle in list_vehicle %}
+        <div class="card text-center">
+            <div class="card-header">
+                {{ vehicle.brand|capfirst }} 
+                {{ vehicle.model|capfirst }} 
+                Patente: {{ vehicle.patent }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title fst-italic ">~Estado de citas del vehículo~</h5>
+          
+     
+            <!-- appointment_set permite accedes a las relaciones del vhiculo con las citas -->
+                {% for appointment in vehicle.appointment_set.all %}
+                    {% if appointment.inprogress and appointment.job_set.all %}
+                        <a class="btn btn-sm btn-primary mt-3" href="{% url 'state_vehicle' appointment.id %}">
+                                ID Cita:({{ appointment.id }}) Estado
+                        </a>
+                    {% elif appointment.inprogress and not appointment.job_set.all %}
+                        <button class="btn btn-sm btn-outline-danger mt-3">
+                            ID Cita:({{ appointment.id }}) Eliminada            
+                        </button>
+                    {% else %}
+                        <button class="btn btn-sm btn-outline-primary mt-3" disabled>
+                            ID Cita:({{ appointment.id }}) En espera            
+                        </button>
+                    {% endif %}
+                {% endfor %}
+                <br>
+                <form action="{% url 'delete_vehicle' vehicle.id %}" method="POST" class="confirm-form">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger mt-3 confirm-button" data-action="delete">
+                        Eliminar Vehículo
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <li class="list-group-item list-group-item-warning mb-5">{{ error }}</li>
+    {% endif %}
+
+
+<div class="mx-auto text-center mt-5">
+        <a class="btn btn-primary mt-3"href="{% url 'register_vehicle' %}">
+            Registrar nuevo Vehículo
+        </a>
+        <a class="btn btn-primary mt-3" href="{% url 'register_date' %}">
+            Registrar nueva Cita
+        </a>
+</div>
+
+
+{% endblock content %}

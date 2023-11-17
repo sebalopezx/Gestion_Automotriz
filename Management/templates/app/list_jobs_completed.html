@@ -1,0 +1,50 @@
+{% extends 'base_recepcionist.html' %}
+
+{% block header %}
+    <h1>Listado de Trabajos Finalizados</h1>
+{% endblock header %}
+
+{% block content %}
+
+    {% if list_jobs %}
+
+        {% for job in list_jobs %}
+        {% if job.appointment.completed or job.status.id == 8 %}
+            <article class="jobs row border rounded shadow mb-3 p-1 ps-3">
+                <ul class="list-group my-2">
+                    <li class="list-group-item list-group-item-danger">&#127380; Cita: ({{ job.appointment.id }})  &#8470; Orden Trabajo: {{ job.id }}
+                        <div class="float-end d-flex ">
+                            <a class="btn btn-sm btn-info me-2" href="{% url 'state_vehicle' job.appointment.id %}">
+                                Detalles
+                            </a>
+                            <form action="{% url 'delete_job_completed' job.appointment.id 'completed' %}" method="POST" class="confirm-form">
+                                {% csrf_token %} 
+                                <button class="btn btn-sm btn-danger confirm-button" data-action="delete">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="list-group-item">{{ job }}</li>
+                    <li class="list-group-item">Detalles: {% if job.description_job %}{{ job.description_job }}{% else %}Sin descripción{% endif %}</li>
+                    <li class="list-group-item">Estado: {{ job.status }}</li>        
+                </ul>
+                {% comment %} <div class="text-center mx-auto mt-3">
+                    <form action="{% url 'delete_job_completed' job.appointment.id 'completed' %}" method="POST">
+                        {% csrf_token %} 
+                        <button class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </form>
+                </div> {% endcomment %}
+            </article>
+        {% endif %}
+        {% endfor %}
+        
+    {% else %}
+        <li class="list-group-item list-group-item-warning">{{ error }}</li>
+    {% endif %}
+
+
+
+{% endblock content %}

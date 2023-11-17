@@ -1,0 +1,53 @@
+{% extends base_template %}
+
+{% block header %}
+    <h1>Mis datos</h1>
+{% endblock header %}
+
+{% block content %}
+
+<form action="" method="POST" class="confirm-form">
+    {% if form_update %}
+
+        {% csrf_token %}
+        
+        {% for f in form_update %}
+            <div class="input-group mb-3 justify-content-center">
+                <div class="label">
+                    <span class="form-control bg-light">
+                        {{ f.label_tag }}
+                        {{ f }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+        <div class="mx-auto text-center">
+            <button class="btn btn-success mt-3 confirm-button" data-action="confirm" type="submit">
+                Modificar datos
+            </button>
+
+            <a class="btn btn-primary mt-3" href="{% url 'user_data' %}">
+                Volver a mis datos
+            </a>
+        </div>
+        
+
+    {% else %}
+        {{ error }}
+    {% endif %}
+</form>
+
+{% comment %} <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>  {% endcomment %}
+
+{% comment %} <a href="{% url 'register_vehicle' %}">Registrar nuevo Vehículo</a> {% endcomment %}
+
+{% endblock content %}
+
+{% comment %} {% block error %}{% endblock error %} {% endcomment %}

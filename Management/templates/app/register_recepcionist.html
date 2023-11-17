@@ -1,0 +1,39 @@
+{% extends 'base_recepcionist.html' %}
+
+{% block header %}
+    <h1>Registrar Recepcionista</h1>
+{% endblock header %}
+
+{% block content %}
+
+<form action="" method="POST" class="confirm-form">
+    {% csrf_token %}
+    
+    {% for f in form_register %}
+    <div class="input-group mb-3 justify-content-center">
+        <div class="label">
+            <span class="form-control ">
+                {{ f.label_tag }}
+                {{ f }}
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <ul class="info-password list-group mb-3 p-3 mx-auto">
+        <li class="list-group-item list-group-item-info text-center">La contraseña no puede asemejarse tanto a su otra información personal.</li>
+        <li class="list-group-item list-group-item-info text-center">La contraseña debe contener al menos 8 caracteres.</li>
+        <li class="list-group-item list-group-item-info text-center">La contraseña no puede ser una clave utilizada comúnmente.</li>
+        <li class="list-group-item list-group-item-info text-center">La contraseña no puede ser completamente numérica</li>
+    </ul>
+
+    <div class="text-center mx-auto mt-3">
+        <button class="btn btn-success mb-3 confirm-button" data-action="confirm">
+            Registrar
+        </button>
+    </div>
+
+</form>
+{{error}}
+
+{% endblock content %}

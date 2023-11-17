@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static  %}
+
+{% block nav %}
+{% with current_url=request.path %}
+
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Getión Automotriz</a>
+            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon "></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" 
+                        href="{% url 'index' %}">Inicio</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/user_data/' in current_url %}active{% endif %}" 
+                        href="{% url 'user_data' %}">Mis Datos</a>
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle {% if '/register_vehicle/' in current_url or '/vehicle/' in current_url %}active{% endif %}" 
+                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Vehículos</a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li class="nav-item">
+                                <a class="nav-link {% if '/register_vehicle/' in current_url %}active{% endif %}" 
+                                href="{% url 'register_vehicle' %}">Registrar Vehículo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if '/vehicle/' in current_url %}active{% endif %}" 
+                                href="{% url 'vehicle' %}">Ver Vehículos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if '/register_date/' in current_url or '/appointment/' in current_url %}active{% endif %}" 
+                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Citas</a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li class="nav-item">
+                                <a class="nav-link {% if '/register_date/' in current_url %}active{% endif %}" 
+                                href="{% url 'register_date' %}">Registrar Cita</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if '/appointment/' in current_url %}active{% endif %}" 
+                                href="{% url 'appointment' %}">Ver Citas</a>
+                            </li>
+                        </ul>
+                    </li>      
+                </ul>
+                
+                <ul class="navbar-nav mb-2 mb-lg-0 mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/user_data/' in current_url %}active{% endif %}" 
+                        href="{% url 'user_data' %}">
+                            <span class="badge btn btn-outline-primary">{{ user }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/signout/' in current_url %}active{% endif %}" 
+                        href="{% url 'signout' %}">
+                            <span class="badge btn btn-outline-danger">Cerrar Sesión</span>
+                        </a>
+                    </li>
+
+                    {% endif %}
+                </ul>          
+            </div>
+        </div>
+    </nav>
+
+{% endwith %}
+{% endblock nav %}
+
+{% block title %}
+<section class="title text-primary container text-center mt-5 my-3 flex-shrink-0">
+    {% block header %}
+    {% endblock header %}
+</section> 
+{% endblock title %}
+
+
+{% block main %}
+<section class="container border rounded shadow p-4 mb-5">
+    {% block content %}
+    {% endblock content %}
+</section>
+{% endblock main %}
+
+

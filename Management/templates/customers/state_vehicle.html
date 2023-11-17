@@ -1,0 +1,312 @@
+{% extends base_template %}
+{% load filters %}
+{% load static %}
+
+{% block header %}
+    <h1>Estado del Vehículo</h1>
+{% endblock header %}
+
+{% block content %}
+
+
+{% if state_vehicle %}
+    <h3 class="text-center">~Detalles Generales~</h3>
+    <ul class="list-group ">
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Cliente:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment.vehicle.customer.first_name }}
+                        {{ state_vehicle.appointment.vehicle.customer.last_name }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Marca:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment.vehicle.brand|capfirst }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Modelo:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment.vehicle.model|capfirst }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Año:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment.vehicle.year }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Fecha de cita:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment.date_register|custom_months_format }}
+                         a las {{ state_vehicle.appointment.attention }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">ID de cita:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment_id }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Fecha finalizado:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {% if state_vehicle.appointment.date_finished %} 
+                            {% comment %} {{ state_vehicle.appointment.date_finished|date:"d/F/Y H:i A"|capitalize_month }} {% endcomment %}
+                            {{ state_vehicle.appointment.date_finished|custom_date_format  }}
+                        {% else %} 
+                            En ejecución 
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+
+    <h3 class="text-center mt-3">~Detalle Servicios y Presupuesto~</h3>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-info">
+                <tr>
+                    <th scope="col">N°#</th>
+                    <th scope="col">Servico</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Puntos estimados</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            {% for service in services %}
+                <tr>
+                    <th scope="row">{{ service.id }}</th>
+                    <td>{{ service.service.name }}</td>
+                    <td>{{ service.service.price|format_clp }}</td>
+                    <td>{{ service.status_service|state_display }}</td>
+                    <td>{{ service.service.earn_points }}</td>
+                </tr>
+        
+
+        {% comment %} <div class="mt-2 ">
+            <ul class="list-group list-group-horizontal-md justify-content-center text-center ">
+                <li class="list-group-item list-group-item-secondary pt-0 pb-0">N°{{ service.id }}</li>
+                <li class="list-group-item pt-0 pb-0">{{ service.service.name }}</li>
+                <li class="list-group-item pt-0 pb-0">{{ service.service.price|format_clp }}</li>
+                <li class="list-group-item pt-0 pb-0">Estado: {{ service.status_service|state_display }}</li>
+                <li class="list-group-item pt-0 pb-0">Puntos a otorgar: {{ service.service.earn_points }}</li> 
+            </ul>
+        </div> {% endcomment %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <ul class="list-group list-group-horizontal-md justify-content-center text-center mt-3">
+            <li class="list-group-item list-group-item-success ">Puntos totales ganados: {{ earn_points }}</li>
+            <li class="list-group-item list-group-item-info ">Presupuesto Estimado: {{ estimated_total_price|format_clp }}</li>
+            {% if total_price %}
+            <li class="list-group-item list-group-item-warning ">Presupuesto Total: {{ total_price|format_clp }}</li>
+
+            {% comment %} {% if points.points >= POINTS %}
+            <button id="btnDiscount" data-total-price="{{ total_price }}">
+                Ver descuento
+            </button>
+            <p id="discount" class="descuento"></p>
+
+            {% else %}
+                <button data-total-price="{{ total_price }}" disabled>
+                    Ver descuento
+                </button>
+            {% endif %}  {% endcomment %}
+
+            {% else %}
+            <li class="list-group-item list-group-item-warning">Presupuesto Total: Sin presupuesto</li>
+        </ul>
+            {% endif %} 
+    </div>
+    
+    <h3 class="text-center mt-3 mb-2">~Checklist~</h3>
+    <ul class="list-group ">
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Estado:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.status }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Descripción:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.description_job }}
+                    </span>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ol class="list-group mt-1">
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row ">
+                <label for="brand" class="col-6 text-end">Cita agendada:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.appointment.inprogress|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Luces delanteras:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.front_lights|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Luces traseras:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.rear_lights|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Chasis:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.chassis|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Limpieza:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.cleaning|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Extinguidor:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.extinguisher|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Kit de primeros auxilios:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.first_aid_kit|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Triángulos:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.triangles|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Gata hidráulica:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.hydraulic_jack|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 pt-1 pb-1">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Rueda de repuesto:</label>
+                <div class="col-6 ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.spare_wheel|state_display }}
+                    </span>
+                </div>
+            </div>
+        </li>
+    </ol>
+
+
+
+{% else %}
+    <li class="list-group-item list-group-item-warning mb-5">{{ error }}</li>
+{% endif %}
+
+        
+        
+<div class="text-center mt-5">
+    {% if base_template == 'base_recepcionist.html' %}
+        <a class="btn btn-primary" href="{% url 'list_jobs_completed' %}">
+            Volver
+        </a>
+    {% else %}
+        <a class="btn btn-primary" href="{% url 'vehicle' %}">
+            Ver listado Vehículos
+        </a>
+    {% endif %}
+</div>
+
+
+{% endblock content %}
+
+{% comment %} 
+{% block script %}
+    <script src="{% static 'js/discount.js' %}"></script>
+{% endblock script %} {% endcomment %}
