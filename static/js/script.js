@@ -155,8 +155,10 @@ function isFormValid(form) {
 // FUNCION PARA CAPTURAR DESCRIPCION EN JOB PENDING
 
 function captureDescriptionJob() {
+    console.log("Capture Description Job function called");
     // Captura el valor del campo description_job del primer formulario.
     var descriptionJob = document.querySelector('#id_description_job').value;
+    console.log(descriptionJob);
 
     // Asigna el valor capturado al campo oculto del segundo formulario.
     document.querySelector('#description_job_cancel').value = descriptionJob;

@@ -1,0 +1,48 @@
+{% extends 'base_recepcionist.html' %}
+
+{% block header %}
+    <h1>Busqueda de citas en progreso</h1>
+    {% endblock header %}
+    
+    {% block content %}
+    {% if search and patent %}
+    
+        <h3 class="text-center text-dark">~Patente: {{ data }}~</h3>
+    
+        <article class="table-responsive rounded">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    {% include 'components/table_header_jobs.html' %}
+                </thead>
+                <tbody>
+                    {% for job in patent %}
+                    {% if not job.appointment.completed and job.appointment.inprogress %}
+                    {% include 'components/table_jobs.html' with job=job %}
+                    {% endif %}
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </article>
+
+    {% elif search and date %}
+        <h3 class="text-center">~Número de Cita ( {{ data }}  )~</h3>
+    
+        <article class="table-responsive rounded">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    {% include 'components/table_header_jobs.html' %}
+                </thead>
+                <tbody>
+                    {% for job in date %}
+                    {% include 'components/table_jobs.html' with job=job %}
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </article>
+    
+        
+    {% else %}
+        <li class="list-group-item list-group-item-warning">{{ error }}</li>
+    {% endif %}
+{% endblock content %}
+

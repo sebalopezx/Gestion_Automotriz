@@ -22,9 +22,10 @@ from django.conf.urls.static import static
 
 # from Management.views import signin
 from Management import views
+# from Management.api import obtener_marcas_y_modelos, VehicleDataAPIView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="administration"),
 
     path('', views.index , name='index' ),
 
@@ -39,10 +40,12 @@ urlpatterns = [
     path('user_data/<int:id>/update/', views.update_password , name='update_password'),
     path('user_data/create_coupon_points/', views.create_coupon_points , name='create_coupon_points'),
     path('user_data/<int:id>/delete_coupon/', views.delete_coupon , name='delete_coupon'),
+    path('user_data/<int:id>/delete_user/', views.delete_user, name='delete_user'),
 
     path('vehicle/', views.list_vehicles , name='vehicle'),
     path('vehicle/<int:id>/state/', views.state_vehicle , name='state_vehicle'),
     path('vehicle/<int:id>/delete/', views.delete_vehicle , name='delete_vehicle'),
+    path('vehicle/<int:id>/update/', views.update_vehicle , name='update_vehicle'),
     path('register_vehicle/', views.register_vehicle , name='register_vehicle'),
 
     path('appointment/', views.list_appointment , name='appointment'),
@@ -52,7 +55,8 @@ urlpatterns = [
     # path('points/', views.points, name='points'),
 
     # WORK USERS list_mechanic
-    path('register_recepcionist/', views.register_recepcionist ,name='register_recepcionist'),
+    # path('register_recepcionist/', views.register_recepcionist ,name='register_recepcionist'),
+    # path('gestion_coupons/', views.gestion_coupons, name='gestion_coupons'),
 
     path('list_mechanic/', views.list_mechanic ,name='list_mechanic'),
     path('list_mechanic/<int:id>/update/', views.update_mechanic ,name='update_mechanic'),
@@ -78,8 +82,10 @@ urlpatterns = [
     # re_path('search_patent/(?P<patent>[^/]+)?/', views.search_patent, name='search_patent')
     # re_path('search_patent/(?P<patent>.*)/', views.search_patent, name='search_patent')
     # re_path('search_patent/(?P<patent>[.*]+)?/', views.search_patent, name='search_patent')
-    re_path('search_patent/(?P<patent>[\w\d]+)?/', views.search_patent, name='search_patent')
+    re_path('search_patent/(?P<patent>[\w\d]+)?/', views.search_patent, name='search_patent'),
 
+    # path('obtener_marcas_y_modelos/', obtener_marcas_y_modelos, name='obtener_marcas_y_modelos'),
+    # path('api/vehicle_data/', VehicleDataAPIView.as_view(), name='vehicle_data_api'),
 
 
     # (?P<patent>.+)/$

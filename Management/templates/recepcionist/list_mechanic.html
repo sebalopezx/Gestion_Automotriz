@@ -1,5 +1,6 @@
 {% extends 'base_recepcionist.html' %}
 {% load static %}
+{% load filters %}
 
 
 {% block header %}
@@ -21,17 +22,17 @@
                 <h5 class="card-title"><b>{{ mechanic.first_name }} {{ mechanic.last_name }}</b></h5>
                 <p class="card-text"><b>Teléfono: </b>{{ mechanic.phone }}</p>
                 <p class="card-text"><b>Especialidad: </b>{{ mechanic.specialty }}</p>
-                {% comment %} <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> {% endcomment %}
+                <p class="card-text"><b>Disponibilidad: </b>{{ mechanic.is_active|state_display }}</p>
             </div>     
 
-            <div class="text-center m-1">
-                <a class="btn btn-sm btn-warning mx-auto" href="{% url 'update_mechanic' mechanic.id %}">
+            <div class="text-center mx-auto m-1 d-flex">
+                <a class="btn btn-sm py-0 me-2 btn-warning " href="{% url 'update_mechanic' mechanic.id %}">
                     Actualizar
                 </a>
 
                 <form action="{% url 'delete_mechanic' mechanic.id %}" method="POST" class="confirm-form">
                     {% csrf_token %} 
-                    <button class="btn btn-sm btn-danger mt-1 confirm-button" data-action="delete">
+                    <button class="btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
                         Eliminar
                     </button>
                 </form>

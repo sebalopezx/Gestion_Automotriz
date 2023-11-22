@@ -1,0 +1,38 @@
+<!-- CONTENT TABLE -->
+<!-- para trabajos finalizados y cancelados -->
+
+{% load filters %}
+
+<tr>
+    <td style="width: 10px;" class="text-center pe-2">{{ job.appointment.id }}</td>
+    <td style="width: 40px;">{{ job.appointment.vehicle.patent }}</td>
+    <td style="width: 150px;">{{ job.status }}</td>
+    <td style="width: 250px;">{{ job.appointment.vehicle.customer.first_name }} {{ job.appointment.vehicle.customer.last_name }}</td>
+    <td style="width: 50px;">{{ job.appointment.date_register|custom_date_list }}</td>
+    <td style="width: 250px;">{{ job.appointment.date_finished }}</td>
+    
+    <td style="width: 40px;" class="text-center">
+        <!-- CheckList -->
+        {% comment %} <a class="btn py-0 btn-info mb-2 " href="{% url 'checklist' job.id %}">
+            <i class="fa-solid fa-circle-info"></i>
+        </a> {% endcomment %}
+        <a class="btn btn-sm btn-info me-2" href="{% url 'state_vehicle' job.appointment.id %}">
+            <!-- Detalles -->
+            <i class="fa-solid fa-pen"></i>
+        </a>
+    </td>
+    <td style="width: 40px;" class="text-center">
+        {% comment %} <a class="btn py-0 btn-warning custom-btn mb-2 " href="{% url 'update_job' job.id %}">
+            <!-- Servicios -->
+            <i class="fa-solid fa-pen"></i>
+        </a> {% endcomment %}
+        <form action="{% url 'delete_job_completed' job.appointment.id 'completed' %}" method="POST" class="confirm-form">
+            {% csrf_token %} 
+            <button class="btn btn-sm btn-danger confirm-button" data-action="delete">
+                <!-- Eliminar -->
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </form> 
+    </td>
+   
+</tr>

@@ -8,7 +8,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Proyecto Gestion Automotriz</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <title>Gestion Automotriz</title>
      <!-- CSS -->
      <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
      <!-- BOOTSTRAP -->
@@ -41,10 +42,9 @@
     {% with current_url=request.path %}
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top" data-bs-theme="dark">
         <div class="container-fluid mx-auto">
-            <a class="navbar-brand" href="#">Getión Automotriz</a>
-            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon "></span>
-            </button>
+
+            {% include 'components/logo.html' %}
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
@@ -96,7 +96,7 @@
 
 
     {% block footer %}
-    <footer class="container-fluid bg-dark text-light mt-auto">
+    <footer class="container-fluid bg-dark text-light mt-auto text-center">
         <div class="container pt-3">
             <div class="row">
                 <div class="col-md-4">
@@ -111,16 +111,16 @@
                         <h4>Inforomación de Contacto</h4>
                         <div class="location">
                             <h6>Información casa Matriz:</h6>
-                            <p class="text-primary">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <span>Pajaritos, Maipú #999</span>
+                            <p class="">
+                                <i class="fa-solid fa-location-dot icon-custom"></i>
+                                <span class="text-light">Pajaritos, Maipú #999</span>
                             </p>
                         </div>
                         <div class="call">
                             <h6>Servicio al Cliente:</h6>
-                            <p class="text-primary">
-                                <i class="fa-solid fa-phone-volume"></i>
-                                <span>( +01 1234567890 )</span>
+                            <p class="">
+                                <i class="fa-solid fa-phone-volume icon-custom"></i>
+                                <span class="text-light">( +01 1234567890 )</span>
                             </p>
                         </div>
                     </div>
@@ -129,29 +129,34 @@
                 <div class="col-md-4">
                     <div class="about">
                         <h4>Nosotros</h4>
-                        <ul class="list-unstyled d-flex mt-3 pe-5">
-                            <li class="pe-3">
-                                <a href="https://sebalopezx.github.io/Portafolio/" target="_blank" title="Portafolio" alt="Portafolio">
+                        <ul class="list-unstyled d-flex justify-content-center">
+                            <li class="pe-3 icon-custom">
+                                <a class="icon-custom" 
+                                href="https://sebalopezx.github.io/Portafolio/" target="_blank" title="Portafolio" alt="Portafolio">
                                     <i class="fa-solid fa-address-card fs-4"></i>
                                 </a>
                             </li>
                             <li class="pe-3">
-                                <a href="https://www.linkedin.com/in/sebastian-lopez-nunez" target="_blank" title="Linkedin" alt="Linkedin">
+                                <a class="icon-custom" 
+                                href="https://www.linkedin.com/in/sebastian-lopez-nunez" target="_blank" title="Linkedin" alt="Linkedin">
                                     <i class="fa-brands fa-linkedin-in fs-4"></i>
                                 </a>
                             </li>
                             <li class="pe-3">
-                                <a href="https://github.com/sebalopezx" target="_blank" title="Github" alt="Github">
+                                <a class="icon-custom" 
+                                href="https://github.com/sebalopezx" target="_blank" title="Github" alt="Github">
                                     <i class="fa-brands fa-github fs-4"></i>
                                 </a>
                             </li>
                             <li class="pe-3">
-                                <a href="https://www.facebook.com/sebalopezxd/" target="_blank" title="Facebook" alt="Facebook">
+                                <a class="icon-custom" 
+                                href="https://www.facebook.com/sebalopezxd/" target="_blank" title="Facebook" alt="Facebook">
                                     <i class="fa-brands fa-facebook-f fs-4"></i>
                                 </a>
                             </li>
                             <li class="pe-3">
-                                <a href="https://www.instagram.com/sebalopzxd/" target="_blank" title="Instagram" alt="Instagram">
+                                <a class="icon-custom" 
+                                href="https://www.instagram.com/sebalopzxd/" target="_blank" title="Instagram" alt="Instagram">
                                     <i class="fa-brands fa-instagram fs-4"></i>
                                 </a>
                             </li>

@@ -6,10 +6,9 @@
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Getión Automotriz</a>
-            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon "></span>
-            </button>
+
+            {% include 'components/logo.html' %}
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                     <li class="nav-item">
@@ -51,22 +50,9 @@
                     </li>      
                 </ul>
                 
-                <ul class="navbar-nav mb-2 mb-lg-0 mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {% if '/user_data/' in current_url %}active{% endif %}" 
-                        href="{% url 'user_data' %}">
-                            <span class="badge btn btn-outline-primary">{{ user }}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if '/signout/' in current_url %}active{% endif %}" 
-                        href="{% url 'signout' %}">
-                            <span class="badge btn btn-outline-danger">Cerrar Sesión</span>
-                        </a>
-                    </li>
+                {% include 'components/login_buttons.html' %} 
 
-                    {% endif %}
-                </ul>          
+                {% endif %}
             </div>
         </div>
     </nav>

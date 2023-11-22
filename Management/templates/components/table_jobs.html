@@ -1,0 +1,58 @@
+<!-- CONTENT TABLE -->
+<!-- para trabajos diarios y en progreso -->
+{% load filters %}
+
+<tr>
+    <td style="width: 10px;" class="text-center pe-2">{{ job.appointment.id }}</td>
+    <td style="width: 40px;">{{ job.appointment.vehicle.patent }}</td>
+    <td style="width: 200px;">{{ job.status }}</td>
+    <td style="width: 200px;">{{ job.appointment.vehicle.customer.first_name }} {{ job.appointment.vehicle.customer.last_name }}</td>
+    <td style="width: 40px;">{{ job.appointment.date_register|custom_date_list }}</td>
+    <td style="width: 40px;">{{ job.appointment.attention }}</td>
+    
+    <td style="width: 40px;" class="text-center">
+        <!-- CheckList -->
+        <a class="btn py-0 btn-info mb-2 " href="{% url 'checklist' job.id %}">
+            <i class="fa-solid fa-circle-info"></i>
+        </a>
+    </td>
+    <td style="width: 40px;" class="text-center">
+        <a class="btn py-0 btn-warning custom-btn mb-2 " href="{% url 'update_job' job.id %}">
+            <!-- Servicios -->
+            <i class="fa-solid fa-pen"></i>
+        </a> 
+    </td>
+    <td style="width: 40px;" class="text-center">
+        {% if not job.status.id >= 4 %}
+            <form action="{% url 'delete_job_inprogress' job.appointment.id 'inprogress' %}" method="POST" class="d-inline confirm-form">
+                {% csrf_token %} 
+                <button class="btn py-0 btn-danger mb-2 confirm-button" data-action="delete">
+                    <!-- Cancelar -->
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </form>
+            {% else %}
+            <button class="btn py-0 btn-outline-danger mb-2" disabled>
+                <!-- Cancelar -->
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        {% endif %}
+    </td>
+    <td style="width: 40px;" class="text-center">
+        {% if job.status.id == 7 %}
+            <form action="{% url 'completed_job' job.id %}" method="POST" class="d-inline confirm-form"> 
+                {% csrf_token %} 
+                <button class="btn py-0 btn-success mb-2 confirm-button" data-action="confirm">
+                    <!--  Finalizar -->
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </form>
+            {% else %}
+            <button class="btn py-0 btn-outline-success mb-2" disabled>
+                <!-- Finalizar -->
+                <i class="fa-solid fa-check"></i>
+            </button>
+        {% endif %}
+    </td>
+</tr>
+

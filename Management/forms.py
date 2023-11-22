@@ -69,12 +69,12 @@ class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
         fields = ['brand', 'model', 'patent', 'year']
-        labels = {
-            'brand': 'Marca',
-            'model': 'Modelo',
-            'patent': 'Patente',
-            'year': 'Año'
-        }
+        # labels = {
+        #     'brand': 'Marca',
+        #     'model': 'Modelo',
+        #     'patent': 'Patente',
+        #     'year': 'Año'
+        # }
         widgets = {
             'brand': forms.Select(choices=[('','Elegir marca vehículo'), ('ford', 'Ford'), ('toyota', 'Toyota'), ('honda', 'Honda')]),
             'model': forms.Select(choices=[('','Elegir modelo vehículo'), ('focus', 'Focus'), ('corolla', 'Corolla'), ('civic', 'Civic')]),
@@ -84,10 +84,13 @@ class VehicleForm(forms.ModelForm):
     def clean_patent(self):
         patent = self.cleaned_data['patent']
         # Expresiones regulares para identificar solo números y letras
+        patent_upper = patent.upper()
         if not re.match("^[A-Za-z0-9]*$", patent):
             raise forms.ValidationError("La patente solo debe contener letras(A-Z) y números(0-9)")
         # Validación para patentes únicas
-        if Vehicle.objects.filter(patent=patent).exists():
+        if not self.instance and Vehicle.objects.filter(patent=patent_upper).exists():
+            raise forms.ValidationError("Ya existe un vehículo con esta patente.")
+        if self.instance and Vehicle.objects.exclude(id=self.instance.id).filter(patent=patent_upper).exists():
             raise forms.ValidationError("Ya existe un vehículo con esta patente.")
         return patent.upper()
 
@@ -97,10 +100,12 @@ class VehicleForm(forms.ModelForm):
 
 class AppointmentForm(CapitalizeField, forms.ModelForm):
     
-    def __init__(self, *args, user=None):
+    def __init__(self, *args, user=None, mechanic=None):
         super().__init__(*args)
         if user is not None:
-            self.fields['vehicle'].queryset = Vehicle.objects.filter(customer=user)
+            self.fields['vehicle'].queryset = Vehicle.objects.filter(customer=user, is_active=True)
+        # if mechanic is not None:
+        self.fields['mechanic'].queryset = Mechanic.objects.filter(is_active=True)
 
     class Meta:
         model = Appointment
@@ -140,13 +145,14 @@ class MechanicForm(CapitalizeField, forms.ModelForm):
      
     class Meta:
         model = Mechanic
-        fields = ['first_name', 'last_name', 'phone', 'specialty', 'image']
+        fields = ['first_name', 'last_name', 'phone', 'specialty', 'image', 'is_active']
         labels = {
             'first_name': 'Nombre',
             'last_name': 'Apellido',
             'phone': 'Teléfono',
             'specialty': 'Especialidad',
-            'image': 'Imágen'
+            'image': 'Imágen',
+            'is_active': '¿Está activo?'
         }
         widgets = {
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),

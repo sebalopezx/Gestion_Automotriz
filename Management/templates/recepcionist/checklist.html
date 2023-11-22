@@ -1,13 +1,15 @@
 {% extends 'base_recepcionist.html' %}
 {% load static %}
+{% load filters %}
 
 {% block script %}
     <script src={% static 'js/update_checklist.js' %}></script>
 {% endblock script %}
 
 {% block header %}
-    <h1>Checklist Vehículo: {{ checklist.job.appointment.vehicle }}</h1>
-    <h3 class="text-dark">&#127380; Cita: {{ checklist.job.appointment.id }} &#8470; Orden Trabajo: {{ checklist.id }}</h3>
+    <h1>Checklist</h1>
+        {% comment %} Vehículo: {{ checklist.job.appointment.vehicle }}</h1>
+    <h3 class="text-dark">&#127380; Cita: {{ checklist.job.appointment.id }} &#8470; Orden Trabajo: {{ checklist.id }}</h3> {% endcomment %}
 {% endblock header %}
 
 {% block content %}
@@ -15,8 +17,19 @@
 {% comment %} {% for check in form_work %}
     {{ check }}
 {% endfor %} {% endcomment %}
+    <h3 class="text-center">~Datos cliente~</h3>
+    <article class="jobs row border rounded shadow mb-3 p-1 ps-3">
+        <ul class="list-group py-1">
+            <li class="list-group-item list-group-item-dark">&#127380; Número de Cita: ( {{ checklist.job.appointment.id }} )</li>   
+            {% comment %} &#8470; Orden Trabajo: {{ checklist.id }} {% endcomment %}
+            <li class="list-group-item"><span class="details">Vehículo:</span> {{ checklist.job.appointment.vehicle }}</li>
+            <li class="list-group-item"><span class="details">Estado:</span> {{ checklist.job.status }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Trabajo:</span> {{ checklist.job.description_job|description_valid }}</li>
+        </ul>
+    </article>
 
-
+    <h3 class="text-center">~Estado del trabajo~</h3>
+    
     <form method="POST" id="form_update_checklist"> 
         {% csrf_token %}
         {% comment %} {{ form_status }} {% endcomment %}
@@ -45,7 +58,8 @@
 
         <h3 class="text-center">~Servicios~</h3>
         <div class="text-center justify-content-center ">
-            {% for service in list_services %}
+            
+            {% comment %} {% for service in list_services %}
                 <ul class="list-group list-group-horizontal-md">
                     <li class="list-group-item list-group-item-secondary label m-0 ">{{ service.pk }}</li>
                     <li class="list-group-item label m-0 ">{{ service.service.name }}</li>
@@ -57,13 +71,47 @@
                     <li class="list-group-item label m-0">
                         <form action="{% url 'delete_service' service.pk checklist.id %}" method="POST" class="confirm-form">
                             {% csrf_token %} 
-                            <button class="btn btn-sm btn-danger confirm-button" data-action="delete">
+                            <button class="btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
                                 Eliminar Servicio
                             </button>
                         </form>
                     </li>
                 </ul> 
-            {% endfor %}
+            {% endfor %} {% endcomment %}
+
+            <article class="table-responsive rounded">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Servicio</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in list_services %}
+                        <tr>
+                            <td style="width: 10px;">{{ service.pk }}</td>
+                            <td style="width: 200px;">{{ service.service.name }}</td>
+                            <td style="width: 10px;">
+                                <input type="checkbox" name="service_{{ service.id }}"
+                                {% if service.status_service %}checked{% endif %}>
+                            </td>
+                            <td style="width: 50px;">
+                                <form action="{% url 'delete_service' service.pk checklist.id %}" method="POST" class="confirm-form">
+                                    {% csrf_token %} 
+                                    <button class="btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
+                                        <!-- Eliminar Servicio -->
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </article>
 
             <div class="text-center mx-auto mt-3">
                 <button class="btn btn-success mt-3" id="btn_update_checklist" type="submit">

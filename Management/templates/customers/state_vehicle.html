@@ -135,7 +135,7 @@
         <ul class="list-group list-group-horizontal-md justify-content-center text-center mt-3">
             <li class="list-group-item list-group-item-success ">Puntos totales ganados: {{ earn_points }}</li>
             <li class="list-group-item list-group-item-info ">Presupuesto Estimado: {{ estimated_total_price|format_clp }}</li>
-            {% if total_price %}
+            {% comment %} {% if total_price %} {% endcomment %}
             <li class="list-group-item list-group-item-warning ">Presupuesto Total: {{ total_price|format_clp }}</li>
 
             {% comment %} {% if points.points >= POINTS %}
@@ -149,13 +149,14 @@
                     Ver descuento
                 </button>
             {% endif %}  {% endcomment %}
-
+{% comment %} 
             {% else %}
-            <li class="list-group-item list-group-item-warning">Presupuesto Total: Sin presupuesto</li>
+            <li class="list-group-item list-group-item-warning">Presupuesto Total: Sin presupuesto</li> {% endcomment %}
         </ul>
-            {% endif %} 
+            {% comment %} {% endif %}  {% endcomment %}
     </div>
-    
+
+
     <h3 class="text-center mt-3 mb-2">~Checklist~</h3>
     <ul class="list-group ">
         <li class="list-group-item col-12 list-group-item-info ">

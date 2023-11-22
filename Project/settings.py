@@ -96,7 +96,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'Management/templates/base'),
-            os.path.join(BASE_DIR, 'Management/templates/app'),
+            os.path.join(BASE_DIR, 'Management/templates/recepcionist'),
             os.path.join(BASE_DIR, 'Management/templates/customers'),
             os.path.join(BASE_DIR, 'templatestags')
         ],
@@ -159,7 +159,10 @@ AUTH_GROUP_MODEL_RECEPCIONIST = 'Management.Recepcionist'
 
 SESSION_COOKIE_SECURE = False  # Para desarrollo, puede ser True en producción
 SESSION_COOKIE_NAME = 'sessionid'  
-SESSION_COOKIE_AGE = 1209600  
+# SESSION_COOKIE_AGE = 1209600  
+# SESSION_COOKIE_AGE = 60 * 15
+
+
 
 
 # Internationalization
@@ -195,3 +198,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EDMUNDS_API_KEY = '&api_key=ar355ajjgkz5pxxv5g3dfakx'

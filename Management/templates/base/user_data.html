@@ -18,12 +18,18 @@
         </ul>
         <div class="mx-auto text-center">
 
-            <a class="btn btn-warning my-2" href="{% url 'detail_user_data' data.id %}">
+            <a class="btn  btn-sm py-0 btn-warning my-2" href="{% url 'detail_user_data' data.id %}">
                 Modificar datos
             </a>
-            <a class="btn btn-warning my-2" href="{% url 'update_password' data.id %}">
+            <a class="btn  btn-sm py-0 btn-warning my-2" href="{% url 'update_password' data.id %}">
                 Modificar contraseña
             </a>
+            <form action="{% url 'delete_user' request.user.id %}" method="POST" class="confirm-form d-inline">
+                {% csrf_token %}
+                <button class="confirm-button btn btn-sm py-0  btn-danger my-2" data-action="confirm">
+                    Eliminar cuenta
+                </button>
+            </form>
         </div>
         {% endfor %}    
     {% else %}
@@ -66,7 +72,8 @@
                         <div class="p-1 d-flex justify-content-center align-items-center">
                             <div class="icon-container ">
                                     {% comment %} <i class="fa-solid fa-car fa-3x"></i> {% endcomment %}
-                                    <i class="fa-solid fa-wrench fa-2x"></i>
+                                    <i class="fa-solid fa-wrench fa-3x icon-custom"></i>
+                                    
                             </div>
                         </div>
                         <div class="py-3 w-50 d-block text-center">
@@ -80,13 +87,13 @@
                                         <span>{{ coupon.valid|coupon_valid }}</span>
                                     </div>
                                     {% if coupon.valid == True %}
-                                        <button  class="btn btn-sm btn-outline-danger p-1" disabled>
+                                        <button  class="btn btn-sm py-0 btn-outline-danger p-1" disabled>
                                             Eliminar cupón
                                         </button>
                                     {% else %}
                                         <form action="{% url 'delete_coupon' coupon.id %}" method="POST" class="confirm-form">
                                             {% csrf_token %}
-                                            <button class="btn btn-sm btn-danger p-1 confirm-button" data-action="delete">
+                                            <button class="btn btn-sm py-0 btn-danger p-1 confirm-button" data-action="delete">
                                                 Eliminar cupón
                                             </button>
                                         </form>

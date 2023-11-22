@@ -42,9 +42,9 @@
         {% csrf_token %}
         <div class="mx-auto text-center mb-3">
             <p>Primero debes registrar un vehículo antes de crear una cita.</p>
-            <button class="btn btn-primary">
-                <a href="{% url 'register_vehicle' %}">Registrar Vehículo</a>
-            </button>
+            <a class="btn btn-sm btn-primary" href="{% url 'register_vehicle' %}">
+                Registrar Vehículo
+            </a>
         </div>
         
         {% for f in form %}

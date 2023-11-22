@@ -40,7 +40,7 @@ h2,h3,h4,.navbar-brand{
     background-color: $color-primary !important;
     border-color: $color-primary !important;
 }
-.btn,a,i,form button{
+.btn,a,.icon-custom,form button{
     transition: .3s !important;
 }
 button,a{
@@ -87,14 +87,17 @@ button:disabled,.btn-outline-primary:disabled{
     display: block;
 }
 
-
+.details{
+    color: $color-primary;
+    font-weight: bold;
+}
 
 // INFORMACION CONTACTO
 .user-data li span{
     color: $color-primary;
     font-weight: bold;
 }
-.info-contact span,i{
+.info-contact span,.icon-custom{
     color: $color-primary;
 }
 .user-data{
@@ -106,7 +109,7 @@ button:disabled,.btn-outline-primary:disabled{
 #search-nav{
     top: 54px;
 }
-.navbar .navbar-nav .nav-link:hover,i:hover {
+.navbar .navbar-nav .nav-link:hover,.icon-custom:hover {
     // transition: .5s;
     color: $color-primary !important;
     text-shadow: lighten($color: $color-primary, $amount: 10) 0px 0px 5px;
@@ -142,7 +145,7 @@ button:disabled,.btn-outline-primary:disabled{
     bottom: -10px;
     left: -10px;
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .coupon h4{
         font-size: 1rem;
         font-weight: bold;
@@ -152,10 +155,18 @@ button:disabled,.btn-outline-primary:disabled{
     }
 }
 
+// TABLAS
+
+// table thead tr th{
+//     max-height: 50px !important;
+//     min-height: 50px !important;
+//     height: 50px !important;
+//     width: 100% !important;
+// }
 
 // FORMULARIOS 
 .form-login.border-primary{
-    border-color: #ff7c38 !important;
+    border-color: $color-primary !important;
 }
 .form-login a,
 .forms-mechanics a{
@@ -172,9 +183,41 @@ form .form-login{
     max-width: 460px;
 }
 form{
-    max-width: 1200px;
+    // max-width: 1200px;
     margin: 0 auto;
 }
+// input[type="checkbox"]{
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     appearance: none;
+//     border: 1px solid black;
+//     width: 14px !important; 
+//     height: 14px !important;
+//     border-radius: 2px;
+//     outline: none;
+//     cursor: pointer;
+//     position: relative;
+// }
+// .form-mechanic input[type="checkbox"]{
+//     margin-right: 270px !important;
+// }
+// // input[type="checkbox"]:checked{
+// //     background-color: $color-primary;
+// // }
+// input[type="checkbox"]:not(:checked):hover {
+//     transition: .3s;
+//     background-color: $color-primary;
+// }
+// input[type="checkbox"]:checked::before {
+//     content: '✅';
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     font-size: 14px; 
+// }
+
+
 form .label{
     width: 600px;
     max-width: 1200px;
@@ -209,7 +252,7 @@ form input[type="text"][disabled]{
     display: inline-block !important;
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
     form.search-patent input{
         height: 38px;
         margin-top: 0px;
@@ -234,7 +277,6 @@ form input[type="text"][disabled]{
     }
     form textarea{
         width: 100%;
-
     }
 }
 
@@ -250,19 +292,53 @@ form input[type="text"][disabled]{
 
 
 // TRABAJOS
-.jobs .btn-jobs .custom-btn{
-    width: 110px;
-}
-.jobs .form-job-pending {
-    padding-left: 0;
-    width: 100%;
-}
-.jobs .form-job-pending .job-pending textarea{
-    width: 100%; 
-}
-.list-services-job{
-    width: fit-content;
-}
+
+// .jobs .btn-jobs .custom-btn{
+//     width: 90px;
+// }
+
+// .job-pending-title{
+//     width: 200px;
+//     flex-shrink: 0;
+// }
+
+// .form-job-pending .job-pending .job-pending-details {
+//     max-width: 750px;
+//     min-width: 650px;
+//     width: 100%;
+//     // border: 1px solid red;
+// }
+// .form-job-pending .job-pending .job-pending-details textarea{
+//     // max-width: 100% !important;
+//     // box-sizing: border-box;
+//     // width: 100% !important;
+//     // border: 1px solid red;
+
+// }
+// .form-job-pending .job-pending .btn{
+//     width: 200px;
+//     margin-left: 0;
+// }
+// .list-services-job{
+    // width: fit-content;
+// }
+// @media screen and (max-width: 1024px){
+
+// }
+
+// @media screen and (max-width: 1024px) {
+//     .jobs ul li .id_date{
+//         // display: block;
+//         width: 100%;
+//     }
+//     .jobs ul li .details{
+//         width: 100%;
+//     }
+//     .jobs ul li .btn-jobs {
+//         display: inline;
+//         width: 100%;
+//     }
+// }
 
 
 // TOAST DE INFORMACION
@@ -275,22 +351,22 @@ form input[type="text"][disabled]{
 
 
 // FONDO LOGIN
-.fondo-login{
-    min-height: 100vh; 
-    // min-height: 100vh; 
-    // max-height: 75vh; 
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center; 
-    // align-items: center; 
-    // min-height: 75vh;
-    // max-height: 90vh;
-    background-image: url("../images/fondo_login.jpg") !important;
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
+// .fondo-login{
+//     min-height: 100vh; 
+//     // min-height: 100vh; 
+//     // max-height: 75vh; 
+//     // display: flex;
+//     // flex-direction: column;
+//     // justify-content: center; 
+//     // align-items: center; 
+//     // min-height: 75vh;
+//     // max-height: 90vh;
+//     background-image: url("../images/fondo_login.jpg") !important;
+//     background-size: 100% 100%;
+//     background-position: center;
+//     background-repeat: no-repeat;
 
-}
+// }
 
 .form-login{
     background: transparent;
