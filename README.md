@@ -130,3 +130,14 @@ ejectute_project.bat
 ```
 
 > Este archivo contiene los **pip** para instalar todas las dependencias y requerimientos del proyecto creando todo dentro de un entorno virtual **'venv'** de Python.
+
+4. En caso que no quede activo el entorno **'venv'**, se debe activar desde la carpeta raiz del proyecto en el temrinal:
+```
+.\venv\Scripts\activate
+```
+>(venv)  = Demuestra el entorno ativo
+
+5. Ejecutar el comando de Django en el terminal:
+```
+python manage.py runserver
+```
