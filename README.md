@@ -1,14 +1,14 @@
-`<link>` : <https://github.com/sebalopezx/Gestion_Automotriz_2.0>
+# Proyecto: "Gestión Automotriz"
+`<link>` : <https://github.com/sebalopezx/Gestion_Automotriz_2.0><br>
 `<link>` : <https://gestion-automotriz.onrender.com/>
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo_car.png)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo.png)
 > Logo del proyecto
 
 ![Static Badge](https://img.shields.io/badge/versi%C3%B3n-2.0-orange)                            ![Static Badge](https://img.shields.io/badge/creador-Sebasti%C3%A1n%20L%C3%B3pez-orange)
 
 
 **Tabla de Contenido**
-*[TOCM]
 
 [TOC]
 
@@ -26,11 +26,11 @@ El objetivo principal de este proyecto es implementar un eficiente sistema de re
 Este sistema permitirá gestionar la programación de citas de mantenimiento, cuentas de usuario, vehículos registrados, y un sistema de puntos para descuentos por servicio.
 >Proyecto de estudio
 
-## Detalles de uso
-### Manejo de la aplicación
+## Manejo de la aplicación
 El sistema provee de tres intefaces de usuario:
 
-##### Clientes
+
+### Clientes
 El cliente podra gestionar:
 - Cuenta de usuario y password
 - Agregar vehículos al sistema
@@ -38,19 +38,24 @@ El cliente podra gestionar:
 - Listar sus citas agendadas
 - Listar sus vehículos
 - Visualizar estado de vehículo en mantenimiento
+
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/user_data.PNG)
 > Información de usuario con puntos obtenidos y cupones canjeados
+
 
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/register_vehicle.PNG)
 > Registro de vehículos
 
+
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/register_date2.PNG)
 > Agendar cita de mantenimiento
+
 
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/list_vehicles.PNG)
 > Listar vehículos y entrar a ver estado en tiempo real
 
-##### Recepcionista
+
+### Recepcionista
 El recepcionista podra gestionar:
 - Gestionar de citas diarias (día actual)
 - Gestionar todas las citas agendadas
@@ -60,13 +65,16 @@ El recepcionista podra gestionar:
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/list_jobs2.PNG)
 > Listar vehículos con citas agendadas
 
+
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/checklist_finalizado.PNG)
 > Checklist de vehículo seleccionado y cambiar estados de mantenimiento
+
 
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/list_mechanic.PNG)
 > Listar mecánicos para su gestión
 
-#### Administrador
+
+### Administrador
 El administrador del sistema tendra su interfaz propia donde:
 - Gestionara todo los aspectos del sistema
 - Gestionara valores, visualización de la página de inicio
@@ -74,8 +82,6 @@ El administrador del sistema tendra su interfaz propia donde:
 
 ![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/admin.PNG)
 > Panel de administración
-
-
 
 ## Instalación de entorno localhost
 
