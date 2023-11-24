@@ -6,14 +6,18 @@
 
 > Logo del proyecto
 
-![Static Badge](https://img.shields.io/badge/versi%C3%B3n-2.0-orange)                            ![Static Badge](https://img.shields.io/badge/creador-Sebasti%C3%A1n%20L%C3%B3pez-orange)
+![Static Badge](https://img.shields.io/badge/versi%C3%B3n-2.0-orange) ![Static Badge](https://img.shields.io/badge/creador-Sebasti%C3%A1n%20L%C3%B3pez-orange)
 
 
 **Tabla de Contenido**
 
-[TOCM]
-
-[TOC]
++ [Tecnologías usadas](#Tecnologías-usadas)
++ [Descripción de la aplicación](#Descripción-de-la-aplicación)
++ [Manejo de la aplicación](#Manejo-de-la-aplicación)
+	* [Clientes](#Clientes)
+	* [Recepcionista](#Recepcionista)
+	* [Administrador](#Administrador)
++ [Instalación de entorno localhost](#Instalación-de-entorno-localhost)
 
 ## Tecnologías usadas
 
@@ -30,7 +34,7 @@ Este sistema permitirá gestionar la programación de citas de mantenimiento, cu
 >Proyecto de estudio
 
 ## Manejo de la aplicación
-El sistema tiene tres intefaces de usuario:
+El sistema tiene de tres intefaces de usuario:
 
 
 ### Clientes
