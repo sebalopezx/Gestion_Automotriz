@@ -21,14 +21,22 @@
         {% endfor %}     
 
         <div class="text-center mx-auto mt-3">
-            <button class="btn btn-warning mt-3 confirm-button" data-action="confirm" type="submit">
+            <button class="btn btn-success mt-3 confirm-button" type="submit"
+            data-action-key="question"
+            data-title-key="update">
                 Actualizar
             </button>
             <a class="btn btn-primary mt-3" href="{% url 'list_mechanic' %}">
                 Mecánicos
             </a>
         </div>
+
+        {% if form_update.phone.errors %}
+            <div class="alert alert-danger mt-5 pb-0 pt-2">{{ form_update.phone.errors }}</div>
+        {% endif %}
+
     </form>
+
 
     
 {% endblock content %}

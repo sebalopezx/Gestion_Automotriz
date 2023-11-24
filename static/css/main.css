@@ -125,6 +125,10 @@ button:disabled, .btn-outline-primary:disabled {
   color: #ff7c38 !important;
 }
 
+div:where(.swal2-icon) {
+  box-sizing: border-box !important;
+}
+
 .container-coupon {
   background-color: #dedede;
 }
@@ -163,6 +167,11 @@ button:disabled, .btn-outline-primary:disabled {
     font-size: 0.9rem;
   }
 }
+table thead tr th,
+table tbody tr td {
+  white-space: nowrap;
+}
+
 .form-login.border-primary {
   border-color: #ff7c38 !important;
 }
@@ -250,6 +259,8 @@ form input[type=text][disabled] {
   }
 }
 .mechanic-list article {
+  width: 300px !important;
+  min-width: 300px !important;
   height: 350px;
 }
 

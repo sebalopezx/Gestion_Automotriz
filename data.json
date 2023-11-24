@@ -1,1391 +1,1920 @@
 [
-    {
-      "model": "admin.logentry",
-      "pk": 1,
-      "fields": {
-        "action_time": "2023-10-02T01:06:08.090Z",
-        "user": 1,
-        "content_type": 4,
-        "object_id": "2",
-        "object_repr": "cliente",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 2,
-      "fields": {
-        "action_time": "2023-10-02T01:06:19.938Z",
-        "user": 1,
-        "content_type": 4,
-        "object_id": "2",
-        "object_repr": "cliente",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 3,
-      "fields": {
-        "action_time": "2023-10-02T01:06:30.300Z",
-        "user": 1,
-        "content_type": 4,
-        "object_id": "3",
-        "object_repr": "recepcionista",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 4,
-      "fields": {
-        "action_time": "2023-10-02T01:06:42.913Z",
-        "user": 1,
-        "content_type": 4,
-        "object_id": "3",
-        "object_repr": "recepcionista",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\", \"Groups\"]}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 5,
-      "fields": {
-        "action_time": "2023-10-02T01:07:08.749Z",
-        "user": 1,
-        "content_type": 10,
-        "object_id": "1",
-        "object_repr": "Alan Brito",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 6,
-      "fields": {
-        "action_time": "2023-10-02T01:07:22.964Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "1",
-        "object_repr": "1. Servicio diagnóstico $10,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 7,
-      "fields": {
-        "action_time": "2023-10-02T01:07:31.890Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "2",
-        "object_repr": "2. Cambio de Frenos $50,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 8,
-      "fields": {
-        "action_time": "2023-10-02T01:07:39.881Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "3",
-        "object_repr": "3. Cambio líquido frenos y purga $30,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 9,
-      "fields": {
-        "action_time": "2023-10-02T01:07:48.784Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "4",
-        "object_repr": "4. Cambio bujía x1 $10,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 10,
-      "fields": {
-        "action_time": "2023-10-02T01:07:55.827Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "5",
-        "object_repr": "5. Cambio de aceite $20,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 11,
-      "fields": {
-        "action_time": "2023-10-02T01:08:03.412Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "6",
-        "object_repr": "6. Cambio de neumáticos $40,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 12,
-      "fields": {
-        "action_time": "2023-10-02T01:08:14.089Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "7",
-        "object_repr": "7. Alineación y Balanceo $20,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 13,
-      "fields": {
-        "action_time": "2023-10-02T01:08:23.620Z",
-        "user": 1,
-        "content_type": 11,
-        "object_id": "8",
-        "object_repr": "8. Cambio de correa $80,000 pesos",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 14,
-      "fields": {
-        "action_time": "2023-10-02T01:08:34.288Z",
-        "user": 1,
-        "content_type": 8,
-        "object_id": "1",
-        "object_repr": "08:00 AM",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 15,
-      "fields": {
-        "action_time": "2023-10-02T01:08:36.133Z",
-        "user": 1,
-        "content_type": 8,
-        "object_id": "2",
-        "object_repr": "13:00 PM",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 16,
-      "fields": {
-        "action_time": "2023-10-02T01:08:48.110Z",
-        "user": 1,
-        "content_type": 13,
-        "object_id": "1",
-        "object_repr": "Taller Automotriz Maipú. Maipú, Calle Saturno # 999",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 17,
-      "fields": {
-        "action_time": "2023-10-02T01:08:58.633Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "1",
-        "object_repr": "En espera",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 18,
-      "fields": {
-        "action_time": "2023-10-02T01:09:02.211Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "2",
-        "object_repr": "En diagnóstico",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 19,
-      "fields": {
-        "action_time": "2023-10-02T01:09:07.606Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "3",
-        "object_repr": "En espera confirmación de presupuesto",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 20,
-      "fields": {
-        "action_time": "2023-10-02T01:09:10.818Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "4",
-        "object_repr": "En mantención",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 21,
-      "fields": {
-        "action_time": "2023-10-02T01:09:13.948Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "5",
-        "object_repr": "En espera de repuesto",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 22,
-      "fields": {
-        "action_time": "2023-10-02T01:09:17.163Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "6",
-        "object_repr": "Listo para entrega",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 23,
-      "fields": {
-        "action_time": "2023-10-02T01:09:20.937Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "7",
-        "object_repr": "Finalizado",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 24,
-      "fields": {
-        "action_time": "2023-10-02T01:09:24.556Z",
-        "user": 1,
-        "content_type": 12,
-        "object_id": "8",
-        "object_repr": "Cancelado",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-      }
-    },
-    {
-      "model": "admin.logentry",
-      "pk": 25,
-      "fields": {
-        "action_time": "2023-10-02T01:12:08.182Z",
-        "user": 1,
-        "content_type": 4,
-        "object_id": "1",
-        "object_repr": "admin",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 1,
-      "fields": {
-        "name": "Can add log entry",
-        "content_type": 1,
-        "codename": "add_logentry"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 2,
-      "fields": {
-        "name": "Can change log entry",
-        "content_type": 1,
-        "codename": "change_logentry"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 3,
-      "fields": {
-        "name": "Can delete log entry",
-        "content_type": 1,
-        "codename": "delete_logentry"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 4,
-      "fields": {
-        "name": "Can view log entry",
-        "content_type": 1,
-        "codename": "view_logentry"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 5,
-      "fields": {
-        "name": "Can add permission",
-        "content_type": 2,
-        "codename": "add_permission"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 6,
-      "fields": {
-        "name": "Can change permission",
-        "content_type": 2,
-        "codename": "change_permission"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 7,
-      "fields": {
-        "name": "Can delete permission",
-        "content_type": 2,
-        "codename": "delete_permission"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 8,
-      "fields": {
-        "name": "Can view permission",
-        "content_type": 2,
-        "codename": "view_permission"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 9,
-      "fields": {
-        "name": "Can add group",
-        "content_type": 3,
-        "codename": "add_group"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 10,
-      "fields": {
-        "name": "Can change group",
-        "content_type": 3,
-        "codename": "change_group"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 11,
-      "fields": {
-        "name": "Can delete group",
-        "content_type": 3,
-        "codename": "delete_group"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 12,
-      "fields": {
-        "name": "Can view group",
-        "content_type": 3,
-        "codename": "view_group"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 13,
-      "fields": {
-        "name": "Can add user",
-        "content_type": 4,
-        "codename": "add_user"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 14,
-      "fields": {
-        "name": "Can change user",
-        "content_type": 4,
-        "codename": "change_user"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 15,
-      "fields": {
-        "name": "Can delete user",
-        "content_type": 4,
-        "codename": "delete_user"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 16,
-      "fields": {
-        "name": "Can view user",
-        "content_type": 4,
-        "codename": "view_user"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 17,
-      "fields": {
-        "name": "Can add content type",
-        "content_type": 5,
-        "codename": "add_contenttype"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 18,
-      "fields": {
-        "name": "Can change content type",
-        "content_type": 5,
-        "codename": "change_contenttype"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 19,
-      "fields": {
-        "name": "Can delete content type",
-        "content_type": 5,
-        "codename": "delete_contenttype"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 20,
-      "fields": {
-        "name": "Can view content type",
-        "content_type": 5,
-        "codename": "view_contenttype"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 21,
-      "fields": {
-        "name": "Can add session",
-        "content_type": 6,
-        "codename": "add_session"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 22,
-      "fields": {
-        "name": "Can change session",
-        "content_type": 6,
-        "codename": "change_session"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 23,
-      "fields": {
-        "name": "Can delete session",
-        "content_type": 6,
-        "codename": "delete_session"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 24,
-      "fields": {
-        "name": "Can view session",
-        "content_type": 6,
-        "codename": "view_session"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 25,
-      "fields": {
-        "name": "Can add appointment",
-        "content_type": 7,
-        "codename": "add_appointment"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 26,
-      "fields": {
-        "name": "Can change appointment",
-        "content_type": 7,
-        "codename": "change_appointment"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 27,
-      "fields": {
-        "name": "Can delete appointment",
-        "content_type": 7,
-        "codename": "delete_appointment"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 28,
-      "fields": {
-        "name": "Can view appointment",
-        "content_type": 7,
-        "codename": "view_appointment"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 29,
-      "fields": {
-        "name": "Can add attention",
-        "content_type": 8,
-        "codename": "add_attention"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 30,
-      "fields": {
-        "name": "Can change attention",
-        "content_type": 8,
-        "codename": "change_attention"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 31,
-      "fields": {
-        "name": "Can delete attention",
-        "content_type": 8,
-        "codename": "delete_attention"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 32,
-      "fields": {
-        "name": "Can view attention",
-        "content_type": 8,
-        "codename": "view_attention"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 33,
-      "fields": {
-        "name": "Can add job",
-        "content_type": 9,
-        "codename": "add_job"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 34,
-      "fields": {
-        "name": "Can change job",
-        "content_type": 9,
-        "codename": "change_job"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 35,
-      "fields": {
-        "name": "Can delete job",
-        "content_type": 9,
-        "codename": "delete_job"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 36,
-      "fields": {
-        "name": "Can view job",
-        "content_type": 9,
-        "codename": "view_job"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 37,
-      "fields": {
-        "name": "Can add mechanic",
-        "content_type": 10,
-        "codename": "add_mechanic"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 38,
-      "fields": {
-        "name": "Can change mechanic",
-        "content_type": 10,
-        "codename": "change_mechanic"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 39,
-      "fields": {
-        "name": "Can delete mechanic",
-        "content_type": 10,
-        "codename": "delete_mechanic"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 40,
-      "fields": {
-        "name": "Can view mechanic",
-        "content_type": 10,
-        "codename": "view_mechanic"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 41,
-      "fields": {
-        "name": "Can add service",
-        "content_type": 11,
-        "codename": "add_service"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 42,
-      "fields": {
-        "name": "Can change service",
-        "content_type": 11,
-        "codename": "change_service"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 43,
-      "fields": {
-        "name": "Can delete service",
-        "content_type": 11,
-        "codename": "delete_service"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 44,
-      "fields": {
-        "name": "Can view service",
-        "content_type": 11,
-        "codename": "view_service"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 45,
-      "fields": {
-        "name": "Can add vehicle status",
-        "content_type": 12,
-        "codename": "add_vehiclestatus"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 46,
-      "fields": {
-        "name": "Can change vehicle status",
-        "content_type": 12,
-        "codename": "change_vehiclestatus"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 47,
-      "fields": {
-        "name": "Can delete vehicle status",
-        "content_type": 12,
-        "codename": "delete_vehiclestatus"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 48,
-      "fields": {
-        "name": "Can view vehicle status",
-        "content_type": 12,
-        "codename": "view_vehiclestatus"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 49,
-      "fields": {
-        "name": "Can add workshop",
-        "content_type": 13,
-        "codename": "add_workshop"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 50,
-      "fields": {
-        "name": "Can change workshop",
-        "content_type": 13,
-        "codename": "change_workshop"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 51,
-      "fields": {
-        "name": "Can delete workshop",
-        "content_type": 13,
-        "codename": "delete_workshop"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 52,
-      "fields": {
-        "name": "Can view workshop",
-        "content_type": 13,
-        "codename": "view_workshop"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 53,
-      "fields": {
-        "name": "Can add work",
-        "content_type": 14,
-        "codename": "add_work"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 54,
-      "fields": {
-        "name": "Can change work",
-        "content_type": 14,
-        "codename": "change_work"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 55,
-      "fields": {
-        "name": "Can delete work",
-        "content_type": 14,
-        "codename": "delete_work"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 56,
-      "fields": {
-        "name": "Can view work",
-        "content_type": 14,
-        "codename": "view_work"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 57,
-      "fields": {
-        "name": "Can add vehicle",
-        "content_type": 15,
-        "codename": "add_vehicle"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 58,
-      "fields": {
-        "name": "Can change vehicle",
-        "content_type": 15,
-        "codename": "change_vehicle"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 59,
-      "fields": {
-        "name": "Can delete vehicle",
-        "content_type": 15,
-        "codename": "delete_vehicle"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 60,
-      "fields": {
-        "name": "Can view vehicle",
-        "content_type": 15,
-        "codename": "view_vehicle"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 61,
-      "fields": {
-        "name": "Can add point",
-        "content_type": 16,
-        "codename": "add_point"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 62,
-      "fields": {
-        "name": "Can change point",
-        "content_type": 16,
-        "codename": "change_point"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 63,
-      "fields": {
-        "name": "Can delete point",
-        "content_type": 16,
-        "codename": "delete_point"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 64,
-      "fields": {
-        "name": "Can view point",
-        "content_type": 16,
-        "codename": "view_point"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 65,
-      "fields": {
-        "name": "Can add coupon",
-        "content_type": 17,
-        "codename": "add_coupon"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 66,
-      "fields": {
-        "name": "Can change coupon",
-        "content_type": 17,
-        "codename": "change_coupon"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 67,
-      "fields": {
-        "name": "Can delete coupon",
-        "content_type": 17,
-        "codename": "delete_coupon"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 68,
-      "fields": {
-        "name": "Can view coupon",
-        "content_type": 17,
-        "codename": "view_coupon"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 69,
-      "fields": {
-        "name": "Can add checklist",
-        "content_type": 18,
-        "codename": "add_checklist"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 70,
-      "fields": {
-        "name": "Can change checklist",
-        "content_type": 18,
-        "codename": "change_checklist"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 71,
-      "fields": {
-        "name": "Can delete checklist",
-        "content_type": 18,
-        "codename": "delete_checklist"
-      }
-    },
-    {
-      "model": "auth.permission",
-      "pk": 72,
-      "fields": {
-        "name": "Can view checklist",
-        "content_type": 18,
-        "codename": "view_checklist"
-      }
-    },
-    {
-      "model": "auth.group",
-      "pk": 1,
-      "fields": {
-        "name": "Customer",
-        "permissions": []
-      }
-    },
-    {
-      "model": "auth.group",
-      "pk": 2,
-      "fields": {
-        "name": "Recepcionist",
-        "permissions": []
-      }
-    },
-    {
-      "model": "auth.user",
-      "pk": 1,
-      "fields": {
-        "password": "pbkdf2_sha256$600000$tKH2kA7WMsdv7N6fjh74mk$WVSX45MdzBsWEM09ihDzNq74ePgkI9E+Jme7zs7i/RI=",
-        "last_login": "2023-10-02T01:12:20.433Z",
-        "is_superuser": true,
-        "username": "admin",
-        "first_name": "",
-        "last_name": "",
-        "email": "admin@admin.com",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2023-10-02T01:05:22Z",
-        "groups": [
-          1,
-          2
-        ],
-        "user_permissions": []
-      }
-    },
-    {
-      "model": "auth.user",
-      "pk": 2,
-      "fields": {
-        "password": "pbkdf2_sha256$600000$iHkmj0dA7kic2fMpVH9E4a$j/BSOBIhjnSlxAD2pPejO2729RYUG47Y9H8U8pgpEjA=",
-        "last_login": "2023-10-02T01:09:41.542Z",
-        "is_superuser": false,
-        "username": "cliente",
-        "first_name": "Juan",
-        "last_name": "Perez",
-        "email": "juan@gmail.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2023-10-02T01:06:07Z",
-        "groups": [
-          1
-        ],
-        "user_permissions": []
-      }
-    },
-    {
-      "model": "auth.user",
-      "pk": 3,
-      "fields": {
-        "password": "pbkdf2_sha256$600000$S2WVaiO1KCe2OPSVYFJZjE$OF09CbqRctMPyoZvM1RY5/Z1V+73536YPdq1rNhEtZY=",
-        "last_login": "2023-10-02T01:12:34.324Z",
-        "is_superuser": false,
-        "username": "recepcionista",
-        "first_name": "Sebastian",
-        "last_name": "López",
-        "email": "seba@gmail.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2023-10-02T01:06:30Z",
-        "groups": [
-          2
-        ],
-        "user_permissions": []
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 1,
-      "fields": {
-        "app_label": "admin",
-        "model": "logentry"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 2,
-      "fields": {
-        "app_label": "auth",
-        "model": "permission"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 3,
-      "fields": {
-        "app_label": "auth",
-        "model": "group"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 4,
-      "fields": {
-        "app_label": "auth",
-        "model": "user"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 5,
-      "fields": {
-        "app_label": "contenttypes",
-        "model": "contenttype"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 6,
-      "fields": {
-        "app_label": "sessions",
-        "model": "session"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 7,
-      "fields": {
-        "app_label": "Management",
-        "model": "appointment"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 8,
-      "fields": {
-        "app_label": "Management",
-        "model": "attention"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 9,
-      "fields": {
-        "app_label": "Management",
-        "model": "job"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 10,
-      "fields": {
-        "app_label": "Management",
-        "model": "mechanic"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 11,
-      "fields": {
-        "app_label": "Management",
-        "model": "service"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 12,
-      "fields": {
-        "app_label": "Management",
-        "model": "vehiclestatus"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 13,
-      "fields": {
-        "app_label": "Management",
-        "model": "workshop"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 14,
-      "fields": {
-        "app_label": "Management",
-        "model": "work"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 15,
-      "fields": {
-        "app_label": "Management",
-        "model": "vehicle"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 16,
-      "fields": {
-        "app_label": "Management",
-        "model": "point"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 17,
-      "fields": {
-        "app_label": "Management",
-        "model": "coupon"
-      }
-    },
-    {
-      "model": "contenttypes.contenttype",
-      "pk": 18,
-      "fields": {
-        "app_label": "Management",
-        "model": "checklist"
-      }
-    },
-    {
-      "model": "sessions.session",
-      "pk": "gvfta2n1gswj8s12bgxtlsdugayvbcug",
-      "fields": {
-        "session_data": ".eJxVjMEOwiAQRP-FsyHAAqUevfcbyC5LpWpoUtqT8d9tkx70Npn3Zt4i4raWuLW8xInFVYC4_HaE6ZnrAfiB9T7LNNd1mUgeijxpk8PM-XU73b-Dgq3sa-UNWEyj9VkZPfrEVhEymRCAofOBneKku76H7DzsyRlKBhQpG8hq8fkC1fc3LA:1qn7UA:DFzVSw2_yqq6Bfqit13dfUFKZvZ9spzbwichEaLekQI",
-        "expire_date": "2023-10-16T01:12:34.401Z"
-      }
-    },
-    {
-      "model": "sessions.session",
-      "pk": "nchzqnorh8etwot8283laghkb2pojusk",
-      "fields": {
-        "session_data": "e30:1qn7TC:LA_ytPjh2buZKpZHnpsTdxszPzrNA-nXnZRtJg16UiA",
-        "expire_date": "2023-10-16T01:11:34.794Z"
-      }
-    },
-    {
-      "model": "sessions.session",
-      "pk": "r04li7zgtn35cjryy4wde5yjicl489bz",
-      "fields": {
-        "session_data": "e30:1qn7TJ:nZgGUG50_fpiHeB3vycJnXkQWPk9mqzJ8ZgRxSCUCSE",
-        "expire_date": "2023-10-16T01:11:41.746Z"
-      }
-    },
-    {
-      "model": "sessions.session",
-      "pk": "uzir8d6qshmhz3gy0mf40em9311e3mj1",
-      "fields": {
-        "session_data": "e30:1qn7T9:tNXon9XM9PJpJRtf3sgb6l2bdX3ERBcn7qvRVmp1hS0",
-        "expire_date": "2023-10-16T01:11:31.196Z"
-      }
-    },
-    {
-      "model": "Management.workshop",
-      "pk": 1,
-      "fields": {
-        "name": "Taller Automotriz Maipú",
-        "address": "Maipú, Calle Saturno",
-        "num_addres": 999
-      }
-    },
-    {
-      "model": "Management.mechanic",
-      "pk": 1,
-      "fields": {
-        "first_name": "Alan",
-        "last_name": "Brito",
-        "phone": "123123123",
-        "specialty": "Mecánico",
-        "image": "mechanics/foto_personal.jpg"
-      }
-    },
-    {
-      "model": "Management.attention",
-      "pk": 1,
-      "fields": {
-        "attention": "08:00:00"
-      }
-    },
-    {
-      "model": "Management.attention",
-      "pk": 2,
-      "fields": {
-        "attention": "13:00:00"
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 1,
-      "fields": {
-        "name": "Servicio diagnóstico",
-        "price": 10000,
-        "earn_points": 10
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 2,
-      "fields": {
-        "name": "Cambio de Frenos",
-        "price": 50000,
-        "earn_points": 50
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 3,
-      "fields": {
-        "name": "Cambio líquido frenos y purga",
-        "price": 30000,
-        "earn_points": 30
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 4,
-      "fields": {
-        "name": "Cambio bujía x1",
-        "price": 10000,
-        "earn_points": 5
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 5,
-      "fields": {
-        "name": "Cambio de aceite",
-        "price": 20000,
-        "earn_points": 15
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 6,
-      "fields": {
-        "name": "Cambio de neumáticos",
-        "price": 40000,
-        "earn_points": 40
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 7,
-      "fields": {
-        "name": "Alineación y Balanceo",
-        "price": 20000,
-        "earn_points": 15
-      }
-    },
-    {
-      "model": "Management.service",
-      "pk": 8,
-      "fields": {
-        "name": "Cambio de correa",
-        "price": 80000,
-        "earn_points": 80
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 1,
-      "fields": {
-        "status": "En espera"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 2,
-      "fields": {
-        "status": "En diagnóstico"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 3,
-      "fields": {
-        "status": "En espera confirmación de presupuesto"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 4,
-      "fields": {
-        "status": "En mantención"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 5,
-      "fields": {
-        "status": "En espera de repuesto"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 6,
-      "fields": {
-        "status": "Listo para entrega"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 7,
-      "fields": {
-        "status": "Finalizado"
-      }
-    },
-    {
-      "model": "Management.vehiclestatus",
-      "pk": 8,
-      "fields": {
-        "status": "Cancelado"
-      }
-    }
-    ]
-    
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2023-11-24T01:16:10.714Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "08:00 AM",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2023-11-24T01:16:14.714Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "13:00 PM",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2023-11-24T01:18:47.952Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "1. Agendar y reservar citas de mantenimiento",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2023-11-24T01:19:29.145Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "2. Visualizar el estado de tu vehículo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2023-11-24T01:19:48.768Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "3. Descuentos exclusivos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2023-11-24T01:20:22.504Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "4. Gestionar mecánicos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2023-11-24T01:20:49.668Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "5. Gestionar citas de mantenimiento",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2023-11-24T01:21:04.656Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "6. Gestionar estado de vehículo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2023-11-24T01:21:11.251Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "1. En espera",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2023-11-24T01:21:17.147Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "2",
+    "object_repr": "2. En diagnóstico",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2023-11-24T01:21:19.249Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "3",
+    "object_repr": "3. En espera confirmación de presupuesto",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2023-11-24T01:21:20.992Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "4",
+    "object_repr": "4. En mantención",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2023-11-24T01:21:24.004Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "5",
+    "object_repr": "5. En espera de repuesto",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2023-11-24T01:21:35.471Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "6",
+    "object_repr": "6. Listo para entrega",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2023-11-24T01:21:41.625Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "7",
+    "object_repr": "7. Finalizado",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2023-11-24T01:21:45.389Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "8",
+    "object_repr": "8. Cancelado",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2023-11-24T01:21:48.702Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "9",
+    "object_repr": "9. Eliminado",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2023-11-24T01:22:07.508Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "1",
+    "object_repr": "Alan Brito",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2023-11-24T01:22:28.228Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "Mario Neta",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2023-11-24T01:22:48.502Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Taller Automotriz Maipú. Maipú, Calle Saturno # 999",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2023-11-24T01:23:05.035Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "1. Bienvenido",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2023-11-24T01:23:09.399Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "2. Aplicación de gestión de citas",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2023-11-24T01:23:38.873Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "1. Servicio diagnóstico $10,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2023-11-24T01:24:09.166Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "2",
+    "object_repr": "2. Cambio pastillas o balatas de frenos $50,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2023-11-24T01:24:19.941Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "3",
+    "object_repr": "3. Cambio líquido frenos y purga $30,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2023-11-24T01:24:29.911Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "4",
+    "object_repr": "4. Cambio bujía x1 $10,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2023-11-24T01:24:40.371Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "5",
+    "object_repr": "5. Cambio de aceite $20,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2023-11-24T01:24:50.226Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "6",
+    "object_repr": "6. Cambio de neumáticos $40,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2023-11-24T01:25:01.972Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "7",
+    "object_repr": "7. Alineación y Balanceo $20,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2023-11-24T01:25:09.852Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "8",
+    "object_repr": "8. Cambio de correa $80,000 pesos",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2023-11-24T01:26:07.584Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "recepcionista",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2023-11-24T01:26:29.272Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "recepcionista",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Staff status\", \"Groups\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2023-11-24T01:44:18.365Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": " cliente - Puntos: 590",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Puntos\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2023-11-24T02:02:09.750Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "4. Gestionar mecánicos",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Im\\u00e1gen\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2023-11-24T02:03:45.812Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "5. Gestionar citas de mantenimiento",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Im\\u00e1gen\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2023-11-24T02:03:56.148Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "6. Gestionar estado de vehículo",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Im\\u00e1gen\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add Cita",
+    "content_type": 7,
+    "codename": "add_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change Cita",
+    "content_type": 7,
+    "codename": "change_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete Cita",
+    "content_type": 7,
+    "codename": "delete_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view Cita",
+    "content_type": 7,
+    "codename": "view_appointment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add Atención",
+    "content_type": 8,
+    "codename": "add_attention"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change Atención",
+    "content_type": 8,
+    "codename": "change_attention"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete Atención",
+    "content_type": 8,
+    "codename": "delete_attention"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view Atención",
+    "content_type": 8,
+    "codename": "view_attention"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Constante",
+    "content_type": 9,
+    "codename": "add_configconstant"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Constante",
+    "content_type": 9,
+    "codename": "change_configconstant"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Constante",
+    "content_type": 9,
+    "codename": "delete_configconstant"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Constante",
+    "content_type": 9,
+    "codename": "view_configconstant"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add Descripción",
+    "content_type": 10,
+    "codename": "add_description"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change Descripción",
+    "content_type": 10,
+    "codename": "change_description"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete Descripción",
+    "content_type": 10,
+    "codename": "delete_description"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view Descripción",
+    "content_type": 10,
+    "codename": "view_description"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add Trabajo",
+    "content_type": 11,
+    "codename": "add_job"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change Trabajo",
+    "content_type": 11,
+    "codename": "change_job"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete Trabajo",
+    "content_type": 11,
+    "codename": "delete_job"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view Trabajo",
+    "content_type": 11,
+    "codename": "view_job"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add Mecánico",
+    "content_type": 12,
+    "codename": "add_mechanic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change Mecánico",
+    "content_type": 12,
+    "codename": "change_mechanic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete Mecánico",
+    "content_type": 12,
+    "codename": "delete_mechanic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view Mecánico",
+    "content_type": 12,
+    "codename": "view_mechanic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Servicio",
+    "content_type": 13,
+    "codename": "add_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Servicio",
+    "content_type": 13,
+    "codename": "change_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Servicio",
+    "content_type": 13,
+    "codename": "delete_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Servicio",
+    "content_type": 13,
+    "codename": "view_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add Título",
+    "content_type": 14,
+    "codename": "add_titleheader"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change Título",
+    "content_type": 14,
+    "codename": "change_titleheader"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete Título",
+    "content_type": 14,
+    "codename": "delete_titleheader"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view Título",
+    "content_type": 14,
+    "codename": "view_titleheader"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add Estado",
+    "content_type": 15,
+    "codename": "add_vehiclestatus"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change Estado",
+    "content_type": 15,
+    "codename": "change_vehiclestatus"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete Estado",
+    "content_type": 15,
+    "codename": "delete_vehiclestatus"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view Estado",
+    "content_type": 15,
+    "codename": "view_vehiclestatus"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add Sucursal",
+    "content_type": 16,
+    "codename": "add_workshop"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change Sucursal",
+    "content_type": 16,
+    "codename": "change_workshop"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete Sucursal",
+    "content_type": 16,
+    "codename": "delete_workshop"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view Sucursal",
+    "content_type": 16,
+    "codename": "view_workshop"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add Servicio por trabajo",
+    "content_type": 17,
+    "codename": "add_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change Servicio por trabajo",
+    "content_type": 17,
+    "codename": "change_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete Servicio por trabajo",
+    "content_type": 17,
+    "codename": "delete_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view Servicio por trabajo",
+    "content_type": 17,
+    "codename": "view_work"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add Vehículo",
+    "content_type": 18,
+    "codename": "add_vehicle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change Vehículo",
+    "content_type": 18,
+    "codename": "change_vehicle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete Vehículo",
+    "content_type": 18,
+    "codename": "delete_vehicle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view Vehículo",
+    "content_type": 18,
+    "codename": "view_vehicle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add Punto",
+    "content_type": 19,
+    "codename": "add_point"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change Punto",
+    "content_type": 19,
+    "codename": "change_point"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete Punto",
+    "content_type": 19,
+    "codename": "delete_point"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view Punto",
+    "content_type": 19,
+    "codename": "view_point"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add Cupón",
+    "content_type": 20,
+    "codename": "add_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change Cupón",
+    "content_type": 20,
+    "codename": "change_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete Cupón",
+    "content_type": 20,
+    "codename": "delete_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view Cupón",
+    "content_type": 20,
+    "codename": "view_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add Checklist",
+    "content_type": 21,
+    "codename": "add_checklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change Checklist",
+    "content_type": 21,
+    "codename": "change_checklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete Checklist",
+    "content_type": 21,
+    "codename": "delete_checklist"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view Checklist",
+    "content_type": 21,
+    "codename": "view_checklist"
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Customer",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "Recepcionist",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$IPaM1IOBJzFs37t63UbHkD$TZ8AQHFXUc3fQnSVuR1n9rryK4zyMeksUm4vZBxWBqY=",
+    "last_login": "2023-11-24T02:03:27.185Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.cl",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-11-24T01:15:27.808Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$CbKYJFJIa1Xxrxkb8EflZB$aQySVmYmVedortXM32N1wPztWx05LwyqgpXrBZKgg1A=",
+    "last_login": "2023-11-24T01:49:17.323Z",
+    "is_superuser": false,
+    "username": "recepcionista",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-11-24T01:26:07Z",
+    "groups": [
+      2
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$45iqWiYpjAYkk3Rn85D36U$WH/3c9oZ5Q830ORtJ9JPOQNIq5EKwuu18h1y7iVe4Q0=",
+    "last_login": "2023-11-24T02:00:43.695Z",
+    "is_superuser": false,
+    "username": "cliente",
+    "first_name": "Sebastian",
+    "last_name": "López",
+    "email": "sebastian@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-24T01:27:20.397Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "Management",
+    "model": "appointment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "Management",
+    "model": "attention"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "Management",
+    "model": "configconstant"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "Management",
+    "model": "description"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "Management",
+    "model": "job"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "Management",
+    "model": "mechanic"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "Management",
+    "model": "service"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "Management",
+    "model": "titleheader"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "Management",
+    "model": "vehiclestatus"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "Management",
+    "model": "workshop"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "Management",
+    "model": "work"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "Management",
+    "model": "vehicle"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "Management",
+    "model": "point"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "Management",
+    "model": "coupon"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "Management",
+    "model": "checklist"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "x16yy5q9f9nty4r609mf9lbp3teiq7qu",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAURO_C2pBfCrR26d4zkA98BDVgoE00xrvbJl3oYjbz5s2bGVzmaJZG1STPJibY4bez6G6UN-CvmC-Fu5LnmizfJnynjZ-Lp_tp3_4dRGxxtR2ONHbg7JpBBqGOSnollSXdw0CDD0CkRwngtbYgREDUqyCwR-hAb6eNWkslG3o-Un2xCT5fewM-jg:1r6L4Y:-wmujx29Ocz2oRX8jYNw_dWQvO4hPBA9QIFe0ARcbj4",
+    "expire_date": "2023-12-08T01:33:34.135Z"
+  }
+},
+{
+  "model": "Management.configconstant",
+  "pk": 1,
+  "fields": {
+    "name": "POINTS",
+    "value": 500
+  }
+},
+{
+  "model": "Management.titleheader",
+  "pk": 1,
+  "fields": {
+    "title_header": "Bienvenido"
+  }
+},
+{
+  "model": "Management.titleheader",
+  "pk": 2,
+  "fields": {
+    "title_header": "Aplicación de gestión de citas"
+  }
+},
+{
+  "model": "Management.description",
+  "pk": 1,
+  "fields": {
+    "title": "Agendar y reservar citas de mantenimiento",
+    "description": "Este sistema le permitirá planificar y agendar citas de mantenimiento para servicios tanto correctivos como preventivos, brindándoles la flexibilidad de elegir una hora conveniente para llevar a cabo el trabajo en sus vehículos. Además de eso podrán elegir el mecánico y la sucursal según sus gustos y preferencias.",
+    "description_small": "Podrá registrar más de un vehículo.",
+    "image_description": "index/mantenimiento.PNG",
+    "have_constant": false
+  }
+},
+{
+  "model": "Management.description",
+  "pk": 2,
+  "fields": {
+    "title": "Visualizar el estado de tu vehículo",
+    "description": "Al ingresar su vehículo al sistema y reservar una cita, podrá revisar diariamente el estado de su vehículo, viendo los servicios que están en proceso y finalizados, además de un listado de características fundamentales de su vehículo.",
+    "description_small": "Detalles de servicios, presupuesto y checklist.",
+    "image_description": "index/checklist.PNG",
+    "have_constant": false
+  }
+},
+{
+  "model": "Management.description",
+  "pk": 3,
+  "fields": {
+    "title": "Descuentos exclusivos",
+    "description": "Con cada mantenimiento que realice con esta aplicación podrá conseguir puntos. Con una acumulación de cierta cantidad de puntos podrá canjear un cupón para tener descuentos del 10% en su próximo mantenimiento.",
+    "description_small": "Puntos para canjear cupón:",
+    "image_description": "index/cupon.png",
+    "have_constant": true
+  }
+},
+{
+  "model": "Management.description",
+  "pk": 4,
+  "fields": {
+    "title": "Gestionar mecánicos",
+    "description": "El sistema le permitirá gestionar los mecánicos del taller, pudiendo agregar, modificar o eliminar en caso de ser necesario.",
+    "description_small": "Se puede añadir imagen tipo carnet, o se usara una por defecto.",
+    "image_description": "index/list_mechanic.PNG",
+    "have_constant": false
+  }
+},
+{
+  "model": "Management.description",
+  "pk": 5,
+  "fields": {
+    "title": "Gestionar citas de mantenimiento",
+    "description": "El sistema tendrá múltiples interfaces para el control de citas. Citas diarias muestran las citas registradas en el día actual. Citas en progreso muestra listado de todas las citas. Citas finalizadas o canceladas. Y por ultimo un buscador para citas por patente o número de cita.",
+    "description_small": "Botones para agregar descripcion y servicios, boton para modificar estado de checklist, y botones para cancelar cita o finalizar (Estos 2 ultimos se activan o desactivan según el estado del vehículo)",
+    "image_description": "index/list_jobs2.PNG",
+    "have_constant": false
+  }
+},
+{
+  "model": "Management.description",
+  "pk": 6,
+  "fields": {
+    "title": "Gestionar estado de vehículo",
+    "description": "El sistema tendrá 2 opciones para agregar detalles, descripciones y servicios y otra para modificar el estado del vehículo por medio de un checklist.",
+    "description_small": "Este sistema mostrara en tiempo real el estado del vehículo al cliente.",
+    "image_description": "index/state_vehicle.PNG",
+    "have_constant": false
+  }
+},
+{
+  "model": "Management.vehicle",
+  "pk": 1,
+  "fields": {
+    "customer": 3,
+    "brand": "ford",
+    "model": "focus",
+    "patent": "123ABC",
+    "year": 2022,
+    "is_active": true
+  }
+},
+{
+  "model": "Management.vehicle",
+  "pk": 2,
+  "fields": {
+    "customer": 3,
+    "brand": "honda",
+    "model": "civic",
+    "patent": "ZXCV11",
+    "year": 2012,
+    "is_active": true
+  }
+},
+{
+  "model": "Management.workshop",
+  "pk": 1,
+  "fields": {
+    "name": "Taller Automotriz Maipú",
+    "address": "Maipú, Calle Saturno",
+    "num_address": 999
+  }
+},
+{
+  "model": "Management.mechanic",
+  "pk": 1,
+  "fields": {
+    "first_name": "Alan",
+    "last_name": "Brito",
+    "phone": "111111111",
+    "specialty": "Mecánico",
+    "image": "mechanics/foto_personal.jpg",
+    "is_active": true
+  }
+},
+{
+  "model": "Management.mechanic",
+  "pk": 2,
+  "fields": {
+    "first_name": "Mario",
+    "last_name": "Neta",
+    "phone": "222222222",
+    "specialty": "Eléctrico",
+    "image": "mechanics/foto_personal.jpg",
+    "is_active": false
+  }
+},
+{
+  "model": "Management.mechanic",
+  "pk": 3,
+  "fields": {
+    "first_name": "Juan",
+    "last_name": "Parra",
+    "phone": "333333333",
+    "specialty": "Eléctrico",
+    "image": "mechanics/foto_personal.jpg",
+    "is_active": true
+  }
+},
+{
+  "model": "Management.mechanic",
+  "pk": 4,
+  "fields": {
+    "first_name": "Alex",
+    "last_name": "Tintor",
+    "phone": "444444444",
+    "specialty": "Mecánico",
+    "image": "mechanics/foto_personal.jpg",
+    "is_active": false
+  }
+},
+{
+  "model": "Management.attention",
+  "pk": 1,
+  "fields": {
+    "attention": "08:00:00"
+  }
+},
+{
+  "model": "Management.attention",
+  "pk": 2,
+  "fields": {
+    "attention": "13:00:00"
+  }
+},
+{
+  "model": "Management.appointment",
+  "pk": 1,
+  "fields": {
+    "vehicle": 1,
+    "attention": 1,
+    "date_register": "2023-11-25",
+    "date_created": "2023-11-24T01:32:06.577Z",
+    "date_finished": "2023-11-24T01:41:34.968Z",
+    "mechanic": 1,
+    "workshop": 1,
+    "description_customer": "Frenos en mal estado",
+    "inprogress": true,
+    "completed": true
+  }
+},
+{
+  "model": "Management.appointment",
+  "pk": 2,
+  "fields": {
+    "vehicle": 1,
+    "attention": 2,
+    "date_register": "2023-12-03",
+    "date_created": "2023-11-24T01:32:57.667Z",
+    "date_finished": null,
+    "mechanic": 1,
+    "workshop": 1,
+    "description_customer": "Check engine encendido",
+    "inprogress": true,
+    "completed": false
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 1,
+  "fields": {
+    "name": "Servicio diagnóstico",
+    "price": 10000,
+    "earn_points": 10
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 2,
+  "fields": {
+    "name": "Cambio pastillas o balatas de frenos",
+    "price": 50000,
+    "earn_points": 50
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 3,
+  "fields": {
+    "name": "Cambio líquido frenos y purga",
+    "price": 30000,
+    "earn_points": 30
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 4,
+  "fields": {
+    "name": "Cambio bujía x1",
+    "price": 10000,
+    "earn_points": 5
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 5,
+  "fields": {
+    "name": "Cambio de aceite",
+    "price": 20000,
+    "earn_points": 15
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 6,
+  "fields": {
+    "name": "Cambio de neumáticos",
+    "price": 40000,
+    "earn_points": 40
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 7,
+  "fields": {
+    "name": "Alineación y Balanceo",
+    "price": 20000,
+    "earn_points": 15
+  }
+},
+{
+  "model": "Management.service",
+  "pk": 8,
+  "fields": {
+    "name": "Cambio de correa",
+    "price": 80000,
+    "earn_points": 80
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 1,
+  "fields": {
+    "status": "En espera"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 2,
+  "fields": {
+    "status": "En diagnóstico"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 3,
+  "fields": {
+    "status": "En espera confirmación de presupuesto"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 4,
+  "fields": {
+    "status": "En mantención"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 5,
+  "fields": {
+    "status": "En espera de repuesto"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 6,
+  "fields": {
+    "status": "Listo para entrega"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 7,
+  "fields": {
+    "status": "Finalizado"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 8,
+  "fields": {
+    "status": "Cancelado"
+  }
+},
+{
+  "model": "Management.vehiclestatus",
+  "pk": 9,
+  "fields": {
+    "status": "Eliminado"
+  }
+},
+{
+  "model": "Management.job",
+  "pk": 1,
+  "fields": {
+    "appointment": 1,
+    "description_job": "Revisión de frenos, cambio de pastillas de frenos",
+    "status": 7
+  }
+},
+{
+  "model": "Management.job",
+  "pk": 2,
+  "fields": {
+    "appointment": 2,
+    "description_job": null,
+    "status": 1
+  }
+},
+{
+  "model": "Management.work",
+  "pk": 1,
+  "fields": {
+    "job": 1,
+    "service": 1,
+    "status_service": true
+  }
+},
+{
+  "model": "Management.work",
+  "pk": 2,
+  "fields": {
+    "job": 1,
+    "service": 2,
+    "status_service": true
+  }
+},
+{
+  "model": "Management.work",
+  "pk": 3,
+  "fields": {
+    "job": 1,
+    "service": 3,
+    "status_service": false
+  }
+},
+{
+  "model": "Management.point",
+  "pk": 1,
+  "fields": {
+    "customer": 3,
+    "points": 90
+  }
+},
+{
+  "model": "Management.coupon",
+  "pk": 1,
+  "fields": {
+    "customer": 3,
+    "coupon": "AuIjvbrz",
+    "valid": true
+  }
+},
+{
+  "model": "Management.checklist",
+  "pk": 1,
+  "fields": {
+    "job": 1,
+    "front_lights": true,
+    "rear_lights": true,
+    "chassis": true,
+    "cleaning": true,
+    "extinguisher": true,
+    "first_aid_kit": true,
+    "triangles": true,
+    "hydraulic_jack": true,
+    "spare_wheel": true
+  }
+},
+{
+  "model": "Management.checklist",
+  "pk": 2,
+  "fields": {
+    "job": 2,
+    "front_lights": false,
+    "rear_lights": false,
+    "chassis": false,
+    "cleaning": false,
+    "extinguisher": false,
+    "first_aid_kit": false,
+    "triangles": false,
+    "hydraulic_jack": false,
+    "spare_wheel": false
+  }
+}
+]

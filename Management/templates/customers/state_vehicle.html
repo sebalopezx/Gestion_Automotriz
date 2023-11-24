@@ -95,6 +95,7 @@
 
     <h3 class="text-center mt-3">~Detalle Servicios y Presupuesto~</h3>
     <div class="table-responsive">
+        {% if services %}
         <table class="table">
             <thead class="table-info">
                 <tr>
@@ -106,8 +107,8 @@
                 </tr>
             </thead>
             <tbody>
-
-            {% for service in services %}
+                
+                {% for service in services %}
                 <tr>
                     <th scope="row">{{ service.id }}</th>
                     <td>{{ service.service.name }}</td>
@@ -115,29 +116,32 @@
                     <td>{{ service.status_service|state_display }}</td>
                     <td>{{ service.service.earn_points }}</td>
                 </tr>
-        
-
-        {% comment %} <div class="mt-2 ">
-            <ul class="list-group list-group-horizontal-md justify-content-center text-center ">
-                <li class="list-group-item list-group-item-secondary pt-0 pb-0">N°{{ service.id }}</li>
-                <li class="list-group-item pt-0 pb-0">{{ service.service.name }}</li>
-                <li class="list-group-item pt-0 pb-0">{{ service.service.price|format_clp }}</li>
-                <li class="list-group-item pt-0 pb-0">Estado: {{ service.status_service|state_display }}</li>
-                <li class="list-group-item pt-0 pb-0">Puntos a otorgar: {{ service.service.earn_points }}</li> 
-            </ul>
-        </div> {% endcomment %}
-            {% endfor %}
+                
+                
+                {% comment %} <div class="mt-2 ">
+                    <ul class="list-group list-group-horizontal-md justify-content-center text-center ">
+                        <li class="list-group-item list-group-item-secondary pt-0 pb-0">N°{{ service.id }}</li>
+                        <li class="list-group-item pt-0 pb-0">{{ service.service.name }}</li>
+                        <li class="list-group-item pt-0 pb-0">{{ service.service.price|format_clp }}</li>
+                        <li class="list-group-item pt-0 pb-0">Estado: {{ service.status_service|state_display }}</li>
+                        <li class="list-group-item pt-0 pb-0">Puntos a otorgar: {{ service.service.earn_points }}</li> 
+                    </ul>
+                </div> {% endcomment %}
+                {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <li class="list-group-item list-group-item-warning text-center">No tiene servicios asociados al trabajo.</li>
+        {% endif %}
     </div>
-
+    
     <div>
         <ul class="list-group list-group-horizontal-md justify-content-center text-center mt-3">
             <li class="list-group-item list-group-item-success ">Puntos totales ganados: {{ earn_points }}</li>
             <li class="list-group-item list-group-item-info ">Presupuesto Estimado: {{ estimated_total_price|format_clp }}</li>
             {% comment %} {% if total_price %} {% endcomment %}
             <li class="list-group-item list-group-item-warning ">Presupuesto Total: {{ total_price|format_clp }}</li>
-
+            
             {% comment %} {% if points.points >= POINTS %}
             <button id="btnDiscount" data-total-price="{{ total_price }}">
                 Ver descuento
@@ -149,7 +153,7 @@
                     Ver descuento
                 </button>
             {% endif %}  {% endcomment %}
-{% comment %} 
+        {% comment %} 
             {% else %}
             <li class="list-group-item list-group-item-warning">Presupuesto Total: Sin presupuesto</li> {% endcomment %}
         </ul>
@@ -158,6 +162,20 @@
 
 
     <h3 class="text-center mt-3 mb-2">~Checklist~</h3>
+    {% comment %} {% for state in state_vehicle %}
+    <ul class="list-group ">
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">{{ state.label_tag }}</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state }}
+                    </span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    {% endfor %} {% endcomment %}
     <ul class="list-group ">
         <li class="list-group-item col-12 list-group-item-info ">
             <div class="row">
@@ -174,7 +192,7 @@
                 <label for="brand" class="col-6 text-end">Descripción:</label>
                 <div class="col-6 bg-light rounded ">
                     <span name="brand" class="text-start">
-                        {{ state_vehicle.description_job }}
+                        {{ state_vehicle.description_job|description_valid }}
                     </span>
                 </div>
             </div>

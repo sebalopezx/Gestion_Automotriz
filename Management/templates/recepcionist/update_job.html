@@ -20,6 +20,7 @@
             {% comment %} &#8470; Orden Trabajo: {{ job.id }} {% endcomment %}
             <li class="list-group-item"><span class="details">Vehículo:</span> {{ job.appointment.vehicle }}</li>
             <li class="list-group-item"><span class="details">Estado:</span> {{ job.status }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Cliente:</span> {{ job.appointment.description_customer|description_valid }}</li>
             <li class="list-group-item"><span class="details">Descripción del Trabajo:</span> {{ job.description_job|description_valid }}</li>
         </ul>
     </article>

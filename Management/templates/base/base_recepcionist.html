@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static  %}
 
+{% block script %}
+    <script src="{% static 'js/search.js' %}"></script>
+{% endblock script %}
+
 {% block nav %}
 {% with current_url=request.path %}
 <nav class="navbar navbar-dark bg-dark navbar-expand-xl bg-body-tertiary fixed-top" data-bs-theme="dark">
@@ -78,11 +82,12 @@
                     method='GET' action="{% url 'search_patent' %}"> 
 
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Buscar Patente" aria-label="Search" name="patent">
+                        <input class="form-control me-2" type="search" placeholder="Buscar Patente o Cita" aria-label="Search" name="patent">
                         <button class="btn btn-outline-success" type="submit">
                                 Buscar
                         </button>
                     </form>
+        
                 </div>
             </nav> 
             
@@ -103,7 +108,7 @@
 {% endblock title %}
 
 {% block main %}
-<section class="container border rounded shadow p-4 mb-5">
+<section class=" border rounded shadow mb-5 p-1 p-md-3 mx-0 mx-md-5">
     {% block content %}
     {% endblock content %}
 </section>

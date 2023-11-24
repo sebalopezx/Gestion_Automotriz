@@ -26,7 +26,9 @@
         {% if not job.status.id >= 4 %}
             <form action="{% url 'delete_job_inprogress' job.appointment.id 'inprogress' %}" method="POST" class="d-inline confirm-form">
                 {% csrf_token %} 
-                <button class="btn py-0 btn-danger mb-2 confirm-button" data-action="delete">
+                <button class="btn py-0 btn-danger mb-2 confirm-button" 
+                data-action-key="delete"
+                data-title-key="cancel">
                     <!-- Cancelar -->
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -42,7 +44,9 @@
         {% if job.status.id == 7 %}
             <form action="{% url 'completed_job' job.id %}" method="POST" class="d-inline confirm-form"> 
                 {% csrf_token %} 
-                <button class="btn py-0 btn-success mb-2 confirm-button" data-action="confirm">
+                <button class="btn py-0 btn-success mb-2 confirm-button" 
+                data-action-key="confirm"
+                data-title-key="confirm">
                     <!--  Finalizar -->
                     <i class="fa-solid fa-check"></i>
                 </button>

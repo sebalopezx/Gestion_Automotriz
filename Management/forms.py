@@ -9,12 +9,12 @@ import datetime
 from django.utils.text import capfirst
 # Validadores
 import re
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.core.exceptions import ValidationError
 import json
-from django.core.validators import RegexValidator
 
-# Clase global para capitalize
+
+# Clase global para capitalizar elementos
 class CapitalizeField:
     def clean_capitalize_nameField(self, field_name):
         field_value = self.cleaned_data.get(field_name)
@@ -24,8 +24,9 @@ class CapitalizeField:
         field_value = self.cleaned_data.get(field)
         return field_value.capitalize() if field_value else field_value
 
-# Create your forms here.
 
+
+# Formularios
 
 class UpdateUserCustomForm(CapitalizeField, forms.ModelForm):
     class Meta:
@@ -34,7 +35,7 @@ class UpdateUserCustomForm(CapitalizeField, forms.ModelForm):
         labels = {
             'username': 'Nombre de usuario',
             'first_name': 'Nombre',
-            'last_name': 'Apellido',
+            'last_name': 'Apellidos',
             'email': 'Email'
         }
 
@@ -65,6 +66,40 @@ class CustomUserCreationForm(CapitalizeField, UserCreationForm):
         return self.clean_capitalize_nameField('last_name')
 
 
+from django.http import JsonResponse
+from pathlib import Path 
+import csv
+def get_csv_choices(csv_file, key_column, value_column):
+    csv_path = Path(__file__).resolve().parent / csv_file
+    with open(csv_path, 'r') as file:
+        reader = csv.DictReader(file)
+        return [(row[key_column], row[value_column]) for row in reader]
+    
+# def get_models_choices(brand_slug):
+#     try:
+#         models = []
+#         models_file = Path(__file__).resolve().parent / 'data' / 'modelos.csv'
+
+#         with open(models_file, newline='', encoding='utf-8') as csvfile:
+#             reader = csv.DictReader(csvfile)
+#             for row in reader:
+#                 if row['idmake'] == brand_slug:
+#                     models.append((row['id'], row['model']))
+
+#         return [('', 'Elegir modelo vehículo')] + models
+#     except Exception as e:
+#         # Imprime el error en la consola para depuración
+#         print(f"Error en get_models_choices: {e}")
+#         return JsonResponse({'error': 'Ocurrió un error'}, status=500)
+    
+# def get_year_choices(model_id):
+#     csv_path = Path(__file__).resolve().parent / 'anios.csv'
+#     with open(csv_path, 'r') as file:
+#         reader = csv.DictReader(file)
+#         return [(row['id'], row['year']) for row in reader if row['idmodel'] == str(model_id)]
+    
+
+
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
@@ -75,21 +110,72 @@ class VehicleForm(forms.ModelForm):
         #     'patent': 'Patente',
         #     'year': 'Año'
         # }
-        widgets = {
-            'brand': forms.Select(choices=[('','Elegir marca vehículo'), ('ford', 'Ford'), ('toyota', 'Toyota'), ('honda', 'Honda')]),
-            'model': forms.Select(choices=[('','Elegir modelo vehículo'), ('focus', 'Focus'), ('corolla', 'Corolla'), ('civic', 'Civic')]),
-            'year': forms.Select(choices=[('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)])
-        }
 
+        # NORMALITO
+        # widgets = {
+        #     'brand': forms.Select(choices=[('','Elegir marca vehículo'), ('ford', 'Ford'), ('toyota', 'Toyota'), ('honda', 'Honda')]),
+        #     'model': forms.Select(choices=[('','Elegir modelo vehículo'), ('focus', 'Focus'), ('corolla', 'Corolla'), ('civic', 'Civic')]),
+        #     'year': forms.Select(choices=[('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)])
+        # }
+
+        # WEEEEENOOO
+        widgets = {
+            'brand': forms.Select(choices=[('','Elegir marca vehículo')] + get_csv_choices('marcas.csv', 'slug', 'make')),
+            'model': forms.Select(choices=[('','Elegir modelo vehículo')] + get_csv_choices('modelos.csv', 'slug', 'model')),
+            'year': forms.Select(choices=[('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)])
+            # 'year': forms.Select(choices=[('','Elegir Año vehículo')] + get_csv_choices('anios.csv', 'year', 'year'))
+        }
+        # widgets = {
+        #     'brand': forms.Select(choices=[('','Elegir marca vehículo')] + get_csv_choices('marcas.csv', 'slug', 'make')),
+        #     'model': forms.Select(choices=[('','Elegir modelo vehículo')]),
+        #     'year': forms.Select(choices=[('','Elegir Año vehículo')])
+        # }
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+
+        # Obtener las opciones de marcas y modelos desde el archivo CSV
+        # brand_choices = [('','Elegir marca vehículo')] + self.get_csv_choices('marcas.csv')
+        # model_choices = [('','Elegir modelo vehículo')] + self.get_csv_choices('modelos.csv')
+
+        # self.fields['brand'].widget.choices = get_csv_choices('marcas.csv', 'slug', 'make')
+        # self.fields['model'].widget.choices = get_csv_choices('modelos.csv', 'slug', 'model')
+        # self.fields['year'].widget.choices = get_csv_choices('anios.csv', 'id', 'year')
+
+        # brand_choices = get_csv_choices('marcas.csv', 'slug', 'make')
+        # model_choices = get_csv_choices('modelos.csv', 'slug', 'model')
+        # year_choices = get_csv_choices('anios.csv', 'id', 'year')
+        # print("Brand Choices:", brand_choices)
+        # print("Model Choices:", model_choices)
+        # print("Year Choices:", year_choices)
+        # self.fields['brand'].widget.choices = brand_choices
+        # self.fields['model'].widget.choices = model_choices
+        # self.fields['year'].widget.choices = year_choices
+
+
+
+        # Asignar las opciones a los campos del formulario
+        # self.fields['brand'].widget.choices = brand_choices
+        # self.fields['model'].widget.choices = model_choices
+
+        # # Otras configuraciones si es necesario (por ejemplo, para el campo de año)
+        # self.fields['year'].widget.choices = [('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)]
+
+       
+    # Capturar el valor de patente
     def clean_patent(self):
         patent = self.cleaned_data['patent']
         # Expresiones regulares para identificar solo números y letras
         patent_upper = patent.upper()
         if not re.match("^[A-Za-z0-9]*$", patent):
             raise forms.ValidationError("La patente solo debe contener letras(A-Z) y números(0-9)")
-        # Validación para patentes únicas
+        if len(patent) != 6:
+            raise forms.ValidationError("La patente debe tener exactamente 6 caracteres.")
+        
+        # Validación para patentes únicas en caso de registro
         if not self.instance and Vehicle.objects.filter(patent=patent_upper).exists():
             raise forms.ValidationError("Ya existe un vehículo con esta patente.")
+        # Validación para patentes únicas en caso de modificación
         if self.instance and Vehicle.objects.exclude(id=self.instance.id).filter(patent=patent_upper).exists():
             raise forms.ValidationError("Ya existe un vehículo con esta patente.")
         return patent.upper()
@@ -97,9 +183,8 @@ class VehicleForm(forms.ModelForm):
 
 
 
-
 class AppointmentForm(CapitalizeField, forms.ModelForm):
-    
+    # Inicializacion de datos previos para mostrar en el formulario la data de la base de datos
     def __init__(self, *args, user=None, mechanic=None):
         super().__init__(*args)
         if user is not None:
@@ -113,7 +198,7 @@ class AppointmentForm(CapitalizeField, forms.ModelForm):
         labels = {
             'vehicle':'Vehículo',
             'attention':'Atención',
-            'date_register':'Fecha',
+            'date_register':'Fecha de la cita',
             'mechanic':'Mecánico',
             'workshop':'Sucursal',
             'description_customer':'Descripción'
@@ -137,12 +222,7 @@ class AppointmentForm(CapitalizeField, forms.ModelForm):
 
 
 class MechanicForm(CapitalizeField, forms.ModelForm):
-    phone_validator = RegexValidator(
-        regex=r'^\d{9}$',
-        message="El teléfono solo debe contener números y 9 dígitos.",
-        code='invalid_phone'
-    )
-     
+
     class Meta:
         model = Mechanic
         fields = ['first_name', 'last_name', 'phone', 'specialty', 'image', 'is_active']
@@ -164,19 +244,22 @@ class MechanicForm(CapitalizeField, forms.ModelForm):
     def clean_last_name(self):
         return self.clean_capitalize_nameField('last_name')
     
-    def clean_phone(self):
-        phone = self.cleaned_data['phone']
-        self.phone_validator(phone)
-        return phone
     # def clean_phone(self):
     #     phone = self.cleaned_data['phone']
-    #     # Expresión regular para un número y 9 digitos
-    #     if not re.match(r'^\d{9}$', phone):
-    #         raise forms.ValidationError("El teléfono solo debe contener números y 9 digitos.")
-    #     # Validación para patentes únicas
-    #     # if Mechanic.objects.filter(phone=phone).exists():
-    #     #     raise forms.ValidationError("Ya existe ese número de teléfono.")
+    #     self.phone_validator(phone)
     #     return phone
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        # Expresión regular para validar que sea un número y tenga 9 digitos
+        if not re.match(r'^\d{9}$', phone):
+            raise forms.ValidationError("El teléfono solo debe contener números y 9 digitos.")
+        # Validación para patentes únicas para registro
+        if not self.instance and Mechanic.objects.filter(phone=phone).exists():
+            raise forms.ValidationError("Ya existe ese número de teléfono.")
+        # Validación para patentes únicas para modificacion
+        if self.instance and Mechanic.objects.exclude(id=self.instance.id).filter(phone=phone).exists():
+            raise forms.ValidationError("Ya existe ese número de teléfono.")
+        return phone
 
 
 
@@ -193,7 +276,7 @@ class JobForm(CapitalizeField, forms.ModelForm):
 
 
 class ServiceForm(forms.ModelForm):
-    # Campo para seleccionmar multiples servicios
+    # Campo para seleccionar múltiples servicios
     service = forms.ModelMultipleChoiceField(
         queryset = Service.objects.all(),
         widget = forms.CheckboxSelectMultiple(),

@@ -5,10 +5,30 @@
 {% endblock header %}
 
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    {% comment %} <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#id_brand').change(function() {
+        var brandSlug = $(this).val();
+        if (brandSlug) {
+            $.ajax({
+            url: `/get_models/${brandSlug}/`,
+            success: function(data) {
+                $('#id_model').html(data);
+            }
+            });
+        } else {
+            $('#id_model').empty();
+        }
+        });
+    });
+    </script> {% endcomment %}
 
     <form method="POST" class="confirm-form">
         {% csrf_token %}
-
+        
         {% for f in form %}
             <div class="input-group mb-3 justify-content-center">
                 <div class="label">
@@ -19,10 +39,95 @@
                 </div>
             </div>
         {% endfor %}
+
+        {% comment %} <div class="input-group mb-3 justify-content-center">
+            <div class="label">
+                <span class="form-control bg-light">
+                    {{ form.brand.label_tag }}
+                    {{ form.brand }}
+                </span>
+            </div>
+        </div>
+    
+        <div class="input-group mb-3 justify-content-center">
+            <div class="label">
+                <span class="form-control bg-light">
+                    {{ form.model.label_tag }}
+                    {{ form.model }}
+                </span>
+            </div>
+        </div>
+
+        <div class="input-group mb-3 justify-content-center">
+            <div class="label">
+                <span class="form-control bg-light">
+                    {{ form.year.label_tag }}
+                    {{ form.year }}
+                </span>
+            </div>
+        </div>
         
+        
+        <div class="input-group mb-3 justify-content-center">
+            <div class="label">
+                <span class="form-control bg-light">
+                    {% include 'components/dropdown_model.html' %}
+                </span>
+            </div>
+        </div> {% endcomment %}
+
+        {% comment %} 
+        <div class="input-group mb-3 justify-content-center">
+            <div class="label">
+                <span class="form-control bg-light">
+                    {% include 'components/dropdown_year.html' %}
+                </span>
+            </div>
+        </div> {% endcomment %}
+    
+   
+{% comment %}   
+        <script>
+            $(document).ready(function () {
+                // Manejo del cambio de marca
+                $('#id_brand').change(function () {
+                    var brandSlug = $(this).val();
+                    $.ajax({
+                        url: '/get_models/' + brandSlug + '/',
+                        success: function (data) {
+                            // Actualizar opciones del modelo
+                            $('#id_model').html(data);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+                        }
+                    });
+                });
+    
+                // Manejo del cambio de modelo
+                $('#id_model').change(function () {
+                    var modelId = $(this).val();
+                    $.ajax({
+                        url: '/get_year_choices/' + modelId + '/',
+                        success: function (data) {
+                            // Actualizar opciones de año
+                            $('#id_year').html(data);
+                        }
+                    });
+                });
+            });
+
+        </script> {% endcomment %}
+
+
+    
        
+
+
         <div class="mx-auto text-center">
-            <button class="btn btn-success mt-3 confirm-button" data-action="confirm" type="submit">
+            <button class="btn btn-success mt-3 confirm-button" type="submit"
+            data-action-key="confirm"
+            data-title-key="register" >
                 Registrar vehículo
             </button>
 

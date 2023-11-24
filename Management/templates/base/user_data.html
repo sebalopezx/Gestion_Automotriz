@@ -26,7 +26,9 @@
             </a>
             <form action="{% url 'delete_user' request.user.id %}" method="POST" class="confirm-form d-inline">
                 {% csrf_token %}
-                <button class="confirm-button btn btn-sm py-0  btn-danger my-2" data-action="confirm">
+                <button class="confirm-button btn btn-sm py-0  btn-danger my-2" 
+                data-action-key="delete"
+                data-title-key="confirm">
                     Eliminar cuenta
                 </button>
             </form>
@@ -47,7 +49,9 @@
     <form action="{% url 'create_coupon_points' %}" method="POST" class="confirm-form">
         {% csrf_token %}
         <div class="mx-auto text-center mt-2">
-            <button class="btn btn-success confirm-button" data-action="points" >
+            <button class="btn btn-success confirm-button" 
+            data-action-key="question"
+            data-title-key="points" >
                 Canjear {{ POINTS }} puntos
             </button>
         </div>
@@ -93,7 +97,9 @@
                                     {% else %}
                                         <form action="{% url 'delete_coupon' coupon.id %}" method="POST" class="confirm-form">
                                             {% csrf_token %}
-                                            <button class="btn btn-sm py-0 btn-danger p-1 confirm-button" data-action="delete">
+                                            <button class="btn btn-sm py-0 btn-danger p-1 confirm-button" 
+                                            data-action-key="delete"
+                                            data-title-key="confirm" >
                                                 Eliminar cupón
                                             </button>
                                         </form>

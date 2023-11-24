@@ -28,7 +28,9 @@
         </a> {% endcomment %}
         <form action="{% url 'delete_job_completed' job.appointment.id 'completed' %}" method="POST" class="confirm-form">
             {% csrf_token %} 
-            <button class="btn btn-sm btn-danger confirm-button" data-action="delete">
+            <button class="btn btn-sm btn-danger confirm-button" 
+            data-action-key="delete"
+            data-title-key="confirm">
                 <!-- Eliminar -->
                 <i class="fa-solid fa-xmark"></i>
             </button>

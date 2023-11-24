@@ -1,6 +1,7 @@
 $color-primary: #ff7c38;
 
 
+
 @font-face {
     font-family: fuentePrincipal;
     src: url('../fonts/SpaceGrotesk-SemiBold.ttf') format('woff');
@@ -119,6 +120,10 @@ button:disabled,.btn-outline-primary:disabled{
 }
 
 
+// SWAL ICONS
+div:where(.swal2-icon) {
+    box-sizing: border-box !important;
+}
 
 // CUPONES
 .container-coupon{
@@ -156,7 +161,10 @@ button:disabled,.btn-outline-primary:disabled{
 }
 
 // TABLAS
-
+table thead tr th,
+table tbody tr td{
+    white-space: nowrap;
+}
 // table thead tr th{
 //     max-height: 50px !important;
 //     min-height: 50px !important;
@@ -283,6 +291,9 @@ form input[type="text"][disabled]{
 
 // MECANICOS
 .mechanic-list article{
+    width: 300px !important;
+    min-width: 300px !important;
+    // margin: auto;
     height: 350px;
 }
 .mechanic-list article .card .card-title{

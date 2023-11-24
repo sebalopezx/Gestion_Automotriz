@@ -156,11 +156,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_GROUP_MODEL_CUSTOMER = 'Management.Customer'
 AUTH_GROUP_MODEL_RECEPCIONIST = 'Management.Recepcionist'
-
-SESSION_COOKIE_SECURE = False  # Para desarrollo, puede ser True en producción
+# Para desarrollo, puede ser True en producción
+# SESSION_COOKIE_SECURE = True  
+SESSION_COOKIE_SECURE = False  
 SESSION_COOKIE_NAME = 'sessionid'  
-# SESSION_COOKIE_AGE = 1209600  
-# SESSION_COOKIE_AGE = 60 * 15
+
 
 
 

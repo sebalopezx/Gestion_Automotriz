@@ -11,7 +11,7 @@
 
 <section class="mechanic-list row">
     {% for mechanic in list_mechanic %}
-        <article class="col-12 col-sm-6 col-md-4 col-lg-3 col-md-mb-5 mb-5  ">
+        <article class="col-12 col-sm-6 col-md-4 col-lg-3 col-md-mb-5 mb-5 mx-auto mx-lg-0">
             <div class="card" style="">
                 {% comment %} <img src="{% static 'images/foto_personal.jpg' %}" {% endcomment %}
                 <img src="{{ mechanic.image.url }}"
@@ -32,7 +32,9 @@
 
                 <form action="{% url 'delete_mechanic' mechanic.id %}" method="POST" class="confirm-form">
                     {% csrf_token %} 
-                    <button class="btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
+                    <button class="btn btn-sm py-0 btn-danger confirm-button" 
+                    data-action-key="delete" 
+                    data-title-key="delete-mechanic">
                         Eliminar
                     </button>
                 </form>

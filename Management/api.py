@@ -29,29 +29,42 @@
 
 # serializers.py
 
-# from rest_framework import serializers
+from rest_framework import serializers
 
-# class VehicleDataSerializer(serializers.Serializer):
-#     brand = serializers.CharField()
-#     model = serializers.CharField()
-#     year = serializers.IntegerField()
+class VehicleDataSerializer(serializers.Serializer):
+    brand = serializers.CharField()
+    model = serializers.CharField()
+    year = serializers.IntegerField()
 
-# # views.py
+# views.py
 
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # from .load_data import data 
-# # from .serializers import VehicleDataSerializer
+from django.http import JsonResponse
+import json
+# from .serializers import VehicleDataSerializer
 
-# class VehicleDataAPIView(APIView):
-#     def get(self, request):
-#         # Aquí puedes cargar los datos en memoria desde los archivos CSV
-#         # y convertirlos en una estructura de datos que puedas serializar.
-#         # data = [
-#         #     {"brand": "Toyota", "model": "Camry", "year": 2022},
-#         #     {"brand": "Ford", "model": "Focus", "year": 2021},
-#         #     # ... más datos ...
-#         # ]
+class VehicleDataAPIView(APIView):
+    def get(self, request):
+        # Aquí puedes cargar los datos en memoria desde los archivos CSV
+        # y convertirlos en una estructura de datos que puedas serializar.
+        # data = [
+        #     {"brand": "Toyota", "model": "Camry", "year": 2022},
+        #     {"brand": "Ford", "model": "Focus", "year": 2021},
+        #     # ... más datos ...
+        # ]
+        pass
+        # serializer = VehicleDataSerializer(data, many=True)
+        # return Response(serializer.data)
 
-#         serializer = VehicleDataSerializer(data, many=True)
-#         return Response(serializer.data)
+def obtener_marcas_y_modelos(request):
+    # Tu lógica para obtener los datos de las marcas y modelos
+    # data = []  # Esta es tu lista de datos
+    # print(data)
+    # Serializar los datos a JSON
+    # json_data = json.dumps(data)
+
+    # # Devolver la respuesta JSON
+    # return JsonResponse(json_data, safe=False)
+    pass

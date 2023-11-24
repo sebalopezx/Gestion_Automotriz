@@ -2,14 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.forms import CheckboxInput, DateField, DateTimeField, TimeField
 
-from django.db.models.signals import pre_save,post_save
+from django.db.models.signals import pre_save,post_save,pre_delete,pre_migrate
 from django.dispatch import receiver
 
 import string
 import secrets
+import os
 
 # Validadores
-from django.core.validators import MinValueValidator, MaxValueValidator, MaxLengthValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, MaxLengthValidator, MinLengthValidator
 
 
 # Create your groups here.
@@ -20,7 +21,31 @@ from django.core.validators import MinValueValidator, MaxValueValidator, MaxLeng
 
 
 
-# MODELO DE INDEX
+
+# MODELO DE INDEX DINÁMICO
+class ConfigConstant(models.Model):
+    name = models.CharField(max_length=20, unique=True, verbose_name='Nombre')
+    value = models.IntegerField(verbose_name='Valor')
+
+    class Meta:
+        db_table = 'Constante' 
+        verbose_name = 'Constante'
+        verbose_name_plural = 'Constantes'
+
+    @classmethod
+    def get_points_value(cls):
+        # POINTS = ConfigConstant.objects.get(name='POINTS').value
+        instance, created = ConfigConstant.objects.get_or_create(name='POINTS', defaults={'value': 500})
+        return instance.value
+
+    def __str__(self):
+        return f"{self.id}. {self.name} - {self.value}"
+    
+@receiver(post_save, sender=ConfigConstant)
+def post_save_points(sender, instance, **kwargs):
+    instance.get_points_value()
+
+
 class TitleHeader(models.Model):
     title_header = models.CharField(max_length=50, verbose_name='Título')
 
@@ -47,23 +72,21 @@ class Description(models.Model):
     def points_value(self):
         from .models import ConfigConstant
         return ConfigConstant.objects.get(name='POINTS').value
-
+    
     def __str__(self):
             return f"{self.id}. {self.title}"
 
-class ConfigConstant(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name='Nombre')
-    value = models.IntegerField(verbose_name='Valor')
+@receiver(pre_delete, sender=Description)
+def pre_delete_description(sender, instance, **kwargs):
+    # Eliminar la imagen asociada al objeto Description
+    image_path = instance.image_description.path
+    if os.path.exists(image_path):
+        os.remove(image_path)
 
-    class Meta:
-        # db_table = 'Constante' 
-        verbose_name = 'Constante'
-        verbose_name_plural = 'Constantes'
 
-    def __str__(self):
-        return f"{self.id}. {self.name} - {self.value}"
 
-# MODELOS DE TABLAS
+
+# MODELOS DE INTERACCIÓN TABLAS
 
 class Vehicle(models.Model):
     customer = models.ForeignKey(User,
@@ -91,9 +114,9 @@ class Workshop(models.Model):
     num_address = models.IntegerField(verbose_name='Número dirección')
 
     class Meta:
-        db_table = 'Taller' 
-        verbose_name = 'Taller'
-        verbose_name_plural = 'Talleres' 
+        db_table = 'Sucursal' 
+        verbose_name = 'Sucursal'
+        verbose_name_plural = 'Sucursales' 
 
     def __str__(self):
         return f"{self.name}. {self.address} # {self.num_address}"
@@ -103,13 +126,14 @@ class Mechanic(models.Model):
         ('Mecánico', 'Mecánico'),
         ('Eléctrico', 'Eléctrico'),
     )
-    first_name = models.CharField(max_length=100, verbose_name='Nombre')
-    last_name = models.CharField(max_length=100, verbose_name='Apellido')
+    first_name = models.CharField(max_length=20, verbose_name='Nombre')
+    last_name = models.CharField(max_length=20, verbose_name='Apellido')
     phone = models.CharField(max_length=9,
                              verbose_name='Teléfono',
                              validators=[
-                                MaxLengthValidator(limit_value=9)
-                             ])
+                                MinLengthValidator(limit_value=9)
+                             ]
+                            )
     specialty = models.CharField(max_length=50, choices=SPECIALTY_CHOICES, blank=True, verbose_name='Especialidad')
     image = models.ImageField(upload_to='mechanics/', default="mechanics/foto_personal.jpg", verbose_name='Imágen')
     is_active = models.BooleanField(default=True, verbose_name='Disponible')
@@ -140,6 +164,7 @@ class Attention(models.Model):
     def __str__(self):
         return f"{self.formatted_attention()}"
 
+# Al crear una cita, se creara un registro en JOB, en donde este contendra la data de mantenimiento de las tablas WORK y CHECKLIST
 class Appointment(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, null=True, verbose_name='Data vehículo')
     attention = models.ForeignKey(Attention, on_delete=models.CASCADE, verbose_name='Atención')
@@ -147,7 +172,7 @@ class Appointment(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación') # auto add: ingresa time automaticamente si no se ingresa manualmente
     date_finished = models.DateTimeField(null=True, blank=True, verbose_name='Fecha de finalizado') # Blank , se puede dejar vacio para llenado posterior
     mechanic = models.ForeignKey(Mechanic, on_delete=models.CASCADE, verbose_name='Mecánico')
-    workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, verbose_name='Taller')
+    workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, verbose_name='Sucursal')
     description_customer = models.TextField(null=True, blank=True, verbose_name='Descripción de cliente')
     inprogress = models.BooleanField(default=False, verbose_name='En ejecución')
     completed = models.BooleanField(default=False, verbose_name='Completado')
@@ -251,7 +276,7 @@ class Coupon(models.Model):
     def generate_coupon_code():
         # Generar un código de cupón único
         alphabet = string.ascii_letters + string.digits
-        coupon = ''.join(secrets.choice(alphabet) for i in range(8))  # Ajustar la longitud del cupon
+        coupon = ''.join(secrets.choice(alphabet) for i in range(8))  # Range:? Ajustar la longitud del cupon
         return coupon
 
 class Checklist(models.Model):

@@ -1,8 +1,9 @@
 {% extends 'base_recepcionist.html' %}
 {% load static %}
-
+{% load tz %}
 {% block header %}
     <h1>Listado de trabajos del día:  {{ current_date }}</h1>
+    {{ current_date|timezone:"America/Santiago" }}
 {% endblock header %}
 
 {% block content %}

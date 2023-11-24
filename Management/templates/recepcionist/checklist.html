@@ -24,6 +24,7 @@
             {% comment %} &#8470; Orden Trabajo: {{ checklist.id }} {% endcomment %}
             <li class="list-group-item"><span class="details">Vehículo:</span> {{ checklist.job.appointment.vehicle }}</li>
             <li class="list-group-item"><span class="details">Estado:</span> {{ checklist.job.status }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Cliente:</span> {{ checklist.job.appointment.description_customer|description_valid }}</li>
             <li class="list-group-item"><span class="details">Descripción del Trabajo:</span> {{ checklist.job.description_job|description_valid }}</li>
         </ul>
     </article>
@@ -58,27 +59,8 @@
 
         <h3 class="text-center">~Servicios~</h3>
         <div class="text-center justify-content-center ">
-            
-            {% comment %} {% for service in list_services %}
-                <ul class="list-group list-group-horizontal-md">
-                    <li class="list-group-item list-group-item-secondary label m-0 ">{{ service.pk }}</li>
-                    <li class="list-group-item label m-0 ">{{ service.service.name }}</li>
-                    <li class="list-group-item label m-0 ">
-                        Estado
-                        <input type="checkbox" name="service_{{ service.id }}"
-                        {% if service.status_service %}checked{% endif %}>
-                    </li>
-                    <li class="list-group-item label m-0">
-                        <form action="{% url 'delete_service' service.pk checklist.id %}" method="POST" class="confirm-form">
-                            {% csrf_token %} 
-                            <button class="btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
-                                Eliminar Servicio
-                            </button>
-                        </form>
-                    </li>
-                </ul> 
-            {% endfor %} {% endcomment %}
 
+            {% if list_services %}
             <article class="table-responsive rounded">
                 <table class="table table-hover">
                     <thead class="table-dark">
@@ -112,7 +94,10 @@
                     </tbody>
                 </table>
             </article>
-
+            {% else %}
+            <li class="list-group-item list-group-item-warning">No tiene servicios asociados al trabajo.</li>
+            {% endif %}
+            
             <div class="text-center mx-auto mt-3">
                 <button class="btn btn-success mt-3" id="btn_update_checklist" type="submit">
                     Guardar Servicios

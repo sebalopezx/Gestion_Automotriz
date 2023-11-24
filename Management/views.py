@@ -1,31 +1,37 @@
 import os
+from urllib import request
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
+# Manejo de mensajes de errores
 from django.contrib import messages
 # Creacion de usuario mediante django
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User, Group
-# Creacion y Actualización de Cookies
+# Creacion de Sesiones y Actualización de Cookies
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth import update_session_auth_hash
-# Manejo de error de integridad
+# Manejo de errores de integridad
 from django.db import IntegrityError
-from django.core.exceptions import ObjectDoesNotExist
-# Decoradores para login
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+# Decoradores para login y otros
 from django.contrib.auth.decorators import login_required
 from .templatetags.decorators import customer_required, recepcionist_required
 from .templatetags.decorators import *
 
 # MODELOS 
-from .models import Mechanic, Vehicle, Appointment, Job, Checklist, Point, Service, Work, VehicleStatus, Coupon, ConfigConstant, TitleHeader, Description
+from .models import Mechanic, Vehicle, Appointment, Job, Checklist, Point, Service, Work, VehicleStatus, Coupon, ConfigConstant, TitleHeader, Description, ConfigConstant
 # FORMULARIO
 from .forms import CustomUserCreationForm, UpdateUserCustomForm, VehicleForm, AppointmentForm, MechanicForm, JobForm, ChecklistForm, ServiceForm, WorkForm, VehicleStatusForm
 from django.forms import ValidationError, formset_factory, modelformset_factory
 
 # CONSTANTES
-from .constants import POINTS
-# 
+# from .models import get_points_value
+try:
+    POINTS_VALUE = ConfigConstant.get_points_value()
+except:
+    pass
+# UTILIDADES DE DJANGO
 from django.utils import timezone
 from django.db.models import Q
 # CACHE
@@ -33,8 +39,31 @@ from django.core.cache import cache
 
 
 
+# VIEWS para manejo de uso de base.html, (base_customer o base_recepcionist)
 
-# Create your views here.
+# Verifica el usuario segun su grupo 
+def user_type(user):
+    # is_customer = user.groups.filter(name='Customer').exists()
+    # is_recepcionist = user.groups.filter(name='Recepcionist').exists()
+    if is_customer(user):
+        return "Customer"
+    elif is_recepcionist(user):
+        return "Recepcionist"
+    else:
+        return "AnonymousUser"
+
+# Verifica si el path del base pertenece a cliente o recepcionista
+def template_base(user_type):
+    if user_type == "Customer":
+        base_template = 'base_customer.html'
+    elif user_type == "Recepcionist":
+        base_template = 'base_recepcionist.html'
+    else:
+        base_template = "base.html"
+    return base_template
+
+
+# VIEWS INDEX
 
 def index(request):
     user_type_value = user_type(request.user)
@@ -43,10 +72,11 @@ def index(request):
     index_description = Description.objects.all()
     return render(request, 'index.html',{
         'base_template':base_template,
-        'POINTS':POINTS,
+        'POINTS':POINTS_VALUE,
         'index_title':index_title,
         'index_description':index_description
     })
+
 
 # VIEWS LOGIN 
 
@@ -56,13 +86,12 @@ def signup(request):
         if form_register.is_valid():
             user = form_register.save()
             messages.success(request, 'Usuario registrado con éxito')
-            # login(request, user)
 
             # Asigna el usuario al grupo "Clientes"
             customer_group = Group.objects.get(name='Customer')
             customer_group.user_set.add(user)
 
-            # Inicializar sistema de puntos
+            # Inicializar sistema de puntos para el cliente
             points = Point.objects.create(customer=user)
             points.save()
             return redirect('signin') 
@@ -82,6 +111,7 @@ def signin(request):
             'form_login':AuthenticationForm()
         })
     else:
+        # Validar usuario logeado
         user = authenticate(request, 
             username=request.POST['username'],
             password=request.POST['password']
@@ -92,19 +122,19 @@ def signin(request):
                 'error':'Usuario o Contraseña inválidos.'
             })
         else:
-            # Crea la cookie con fecha de expiracion
+            # Crea la cookie con fecha de expiracion en 0 para cerrar sesión al cerrar navegador
             login(request, user)
             request.session.set_expiry(0)
             print(f"Is Customer: {is_customer(request.user)}")
             print(f"Is Recepcionist: {is_recepcionist(request.user)}")
             print(f"Is Admin: {is_admin(request.user)}")
 
+            # Redirección según grupo asociado 
             if is_customer(request.user): # request.user.groups.filter(name='Customer').exists():
                 return redirect('user_data')
             elif is_recepcionist(request.user): # request.user.groups.filter(name='Recepcionist').exists():
                 return redirect('list_jobs_diary')
             elif is_admin(request.user):
-                # return redirect(reverse('administration'))
                 return redirect('admin:index')
             else:
                 return redirect('index')
@@ -128,38 +158,15 @@ def signout(request):
     # return response
 
 
-# VIEWS  PARA AMBOS
-
-# Verifica el usuario segun su grupo 
-def user_type(user):
-    is_customer = user.groups.filter(name='Customer').exists()
-    is_recepcionist = user.groups.filter(name='Recepcionist').exists()
-    if is_customer:
-        return "Customer"
-    elif is_recepcionist:
-        return "Recepcionist"
-    else:
-        return "AnonymousUser"
-
-# Verifica si el path del base pertenece a cliente o recepcionista
-def template_base(user_type):
-    if user_type == "Customer":
-        base_template = 'base_customer.html'
-    elif user_type == "Recepcionist":
-        base_template = 'base_recepcionist.html'
-    else:
-        base_template = "base.html"
-    return base_template
-
 
 @login_required
 def list_user_data(request):
-    # Mostramos la data del usuario y sus puntos
+    # Mostramos la data del usuario (y sus puntos dependiendo del tipo de usuario)
     user = User.objects.filter(username=request.user)
     points = None
     coupons = None
+    # Se buscan los puntos y cupones asociados al cliente
     user_points = User.objects.filter(username=request.user).first() 
-    # if Point.objects.filter(customer=user).exists():
     if user_points:
         try:
             points = Point.objects.get(customer=request.user)
@@ -167,18 +174,17 @@ def list_user_data(request):
         except ObjectDoesNotExist:
             pass
     error =  'No tiene datos'
+
     user_type_value = user_type(request.user)
     base_template = template_base(user_type_value)
-    # is_customer = user.groups.filter(name='Customer').exists()
     return render(request, 'user_data.html',{
         'list_data':user,
         'points':points,
-        'POINTS':POINTS,
+        'POINTS':POINTS_VALUE,
         'coupons':coupons,
         'error':error,
         'base_template':base_template,
         'user_type_value':user_type_value
-        # 'is_customer':is_customer
     })
 
 
@@ -218,8 +224,7 @@ def detail_user_data(request, id):
 
 @login_required
 def delete_user(request, id):
-    print("Eliminar")
-    print(id)
+    # Cambia el estado a inactivo
     user = request.user
     user.is_active = False
     user.save()
@@ -263,7 +268,8 @@ def update_password(request, id):
 
 
 
-# VIEWS CUSTOMERS
+# VIEWS CUSTOMERS (CLIENTES)
+# Decorador customer para que solo clientes puedan visualizar
 
 @login_required
 @customer_required
@@ -290,6 +296,30 @@ def register_vehicle(request):
     })
 
 
+# from .forms import get_models_choices, get_year_choices
+# from django.http import JsonResponse
+# from .load_data import CSVDataProvider
+
+# data_provider = CSVDataProvider()
+
+# def get_models(request, brand_slug):
+#     form = VehicleForm(initial={'brand': brand_slug})
+#     form.fields['model'].choices = data_provider.get_model_choices(brand_slug)
+#     return render(request, 'components/dropdown_model.html', {'form': form})
+
+# def get_years(request, model_id):
+#     form = VehicleForm(initial={'model': model_id})
+#     form.fields['year'].choices = [('', 'Elegir Año vehículo')] + data_provider.get_year_choices(model_id)
+#     return render(request, 'components/dropdown_year.html', {'form': form})
+# def get_models(request, brand_slug):
+#     form = VehicleForm(initial={'brand': brand_slug})
+#     form.fields['model'].choices = get_models_choices(brand_slug)
+#     return render(request, 'components/dropdown_model.html', {'form': form})
+
+# def get_years(request, model_id):
+#     form = VehicleForm(initial={'model': model_id})
+#     form.fields['year'].choices = [('', 'Elegir Año vehículo')] + get_year_choices(model_id) 
+#     return render(request, 'components/dropdown_year.html', {'form': form})
 
 @login_required
 @customer_required
@@ -322,12 +352,13 @@ def update_vehicle(request, id):
 @login_required
 @customer_required
 def register_date(request):
+    error = ""
     user = request.user  # Usuario Autenticado
     # Obtener los vehículos del usuario logeado
     user_vehicles = Vehicle.objects.filter(customer=user)
     try:
-        mechanic_active = Mechanic.objects.get(is_active=True)
-        # mechanic_active = get_object_or_404(Mechanic, is_active=True)
+        # Obtener los mecánicos disponibles
+        mechanic_active = Mechanic.objects.filter(is_active=True)
     except Mechanic.DoesNotExist:
         mechanic_active = None
 
@@ -339,29 +370,30 @@ def register_date(request):
             attention = form_appointment.cleaned_data['attention']
             mechanic = form_appointment.cleaned_data['mechanic']
 
-            # Verifica si ya existe una cita en ese horario y fecha
+            # Verifica si ya existe una cita en ese horario y fecha para el mecánico
             existing_appointment = Appointment.objects.filter(
                 attention=attention, date_register=date_register, mechanic=mechanic
             ).exists()
 
             if existing_appointment:
-                # Error : ya existe un registro en esa fecha y hora
-                form_appointment.add_error(
-                    'attention',
-                    f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register} {attention}'
-                )
+                # Error 
+                error = f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
+                # form_appointment.add_error(
+                #     'attention',
+                #     f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register} {attention}'
+                # )
             else:
                 form_appointment.save()
-                # Creamos el trabajo y checklist con estado en espera
                 # Buscamos el id de la cita recien creada
                 latest_appointment = Appointment.objects.latest('id').id
                 id_appointment = Appointment.objects.get(id=latest_appointment)
                 id_appointment.inprogress = True
                 id_appointment.save()
+                # Creamos el trabajo y checklist con estado en espera
                 status = VehicleStatus.objects.get(pk=1)
                 job = Job.objects.create(appointment=id_appointment, status=status)
-
                 checklist = Checklist.objects.create(job=job)
+
 
                 messages.success(request, 'Cita confirmada') 
                 return redirect('appointment')
@@ -377,14 +409,15 @@ def register_date(request):
         form_appointment = AppointmentForm(user=user, mechanic=mechanic_active)
         existing_appointment = False
         if not user_vehicles:
-            # form_appointment.fields['vehicle'].widget.attrs['readonly'] = True
+            # Si el usuario no tiene vehiculos, el formulario se dehabilita
             for field in form_appointment.fields.values():
                 field.widget.attrs['disabled'] = True
    
     return render(request, 'register_date.html', {
         'form': form_appointment,
         'user_vehicles': user_vehicles,
-        'existing_appointment': existing_appointment
+        'existing_appointment': existing_appointment,
+        'error':error
     })
 
 
@@ -394,8 +427,10 @@ def register_date(request):
 def create_coupon_points(request):
     points = get_object_or_404(Point, customer=request.user)
     try:
-        points.points -= POINTS
+        # Se crea un cupon, restando la cantidad que tiene el cliente por la constante de PUNTOS
+        points.points -= POINTS_VALUE
         points.save()
+        # Se crea cupón con funcón staticmethod desde el mismo modelo
         new_coupon = Coupon(customer=request.user, coupon=Coupon.generate_coupon_code())
         new_coupon.save()
         messages.success(request, "Cupón creado exitosamente.")
@@ -434,7 +469,7 @@ def list_vehicles(request):
 def delete_vehicle(request, id):
     vehicle = get_object_or_404(Vehicle, pk=id, customer=request.user)
     if request.method == 'POST':
-        # vehicle.delete()
+        # Se cambia el valor a inactivo
         vehicle.is_active = False
         vehicle.save()
         messages.success(request, "Vehículo eliminado con éxito.")
@@ -451,22 +486,20 @@ def state_vehicle(request, id):
     # vehicles = Vehicle.objects.filter(pk=id, customer=request.user)
     # state_vehicle = Job.objects.filter(job_appointment_vehicle_id=id)
     # state_vehicle = get_object_or_404(Appointment, pk=id, vehicle__customer=request.user)
+
+    # Instancias de estado de vehículo por su id
     state_vehicle = get_object_or_404(Job, appointment_id=id)
     services = state_vehicle.work_set.all()
-    
     appointment = get_object_or_404(Appointment, pk=id)
     user = appointment.vehicle.customer
-    # points = Point.objects.get(customer=request.user)
     points = Point.objects.get(customer=user)
-    # for s in services:
-    #     if s.
-    #     earn_points += s.service.earn_points
-    #     print(earn_points)
     for service in services:
+        # Si un servicio se marco como realizado, Se itera por cada servicio en True,  
+        # para calcular el precio total y la cantidad de puntos ganador por serivicio
         if service.status_service == True:
             total_price += service.service.price
             earn_points += service.service.earn_points
-            
+        # En caso de que servicio no se haya realizado, si cuenta para obtener el precio estimativo de todo el servicio completo
         if service.status_service == False or service.status_service == True:
             estimated_total_price += service.service.price
 
@@ -480,7 +513,7 @@ def state_vehicle(request, id):
         'estimated_total_price':estimated_total_price,
         'points':points,
         'earn_points':earn_points,
-        'POINTS':POINTS,
+        'POINTS': POINTS_VALUE,
         'error':error
     })
 
@@ -488,9 +521,7 @@ def state_vehicle(request, id):
 @login_required
 @customer_required
 def list_appointment(request):
-    # date = Vehicle.objects.filter(customer=request.user)
     date = Appointment.objects.filter(vehicle__customer=request.user)
-    # date = Appointment.objects.all()
     error =  'No tiene citas'
     return render(request, 'appointment.html',{
         'list_dates':date,
@@ -504,12 +535,10 @@ def list_appointment(request):
 def cancel_appointment(request, id):
     appointment = get_object_or_404(Appointment, pk=id, vehicle__customer=request.user)
     if request.method == 'POST': 
-        # appointment.delete()
+        # Se cambia el estado a "Cancelado"
         status = VehicleStatus.objects.get(pk=8)
         job = get_object_or_404(Job, appointment=appointment)
         job.status = status
-        # job.description_job = "Cancelado"
-
         appointment.date_finished = timezone.now()
 
         job.save()
@@ -563,7 +592,6 @@ def list_mechanic(request):
 @login_required
 @recepcionist_required
 def register_mechanic(request):
-    error = ""
     if request.method == 'POST':
         form_mechanic = MechanicForm(request.POST, request.FILES)
         try:
@@ -571,16 +599,14 @@ def register_mechanic(request):
                 form_mechanic.save()
                 messages.success(request, 'Mecánico agregado exitosamente.')
                 return redirect('list_mechanic')
-            else:
-                error = "El teléfono solo debe contener números y 9 digitos."
+
         except:
              messages.error(request, 'Error al registrar mecánico.')
     else:
         form_mechanic = MechanicForm()
         
     return render(request, 'register_mechanic.html', {
-        'form_mechanic': form_mechanic,
-        'error': error
+        'form_mechanic': form_mechanic
     })
 
 
@@ -595,8 +621,10 @@ def update_mechanic(request, id):
                 form_update.save()
                 messages.success(request, 'Mecánico actualizado exitosamente.')
                 return redirect('list_mechanic')
-        except:
-            messages.error(request, "Error al actualizar mecánico.")
+            else:
+                messages.error(request, "Error al actualizar mecánico.")
+        except ValidationError as e:
+            messages.error(request, 'Error de ejecución')
     else:
         mechanic = get_object_or_404(Mechanic, pk=id)
         form_update = MechanicForm(instance=mechanic)
@@ -613,7 +641,12 @@ def delete_mechanic(request, id):
     mechanic = get_object_or_404(Mechanic, pk=id)
     if request.method == 'POST':
         try:
+            # Se cambia estado a inactivo
             mechanic.is_active = False
+            # Se borra imágen establecida, y se deja la por default
+            mechanic.image.delete()
+            mechanic.image = "mechanics/foto_personal.jpg"
+
             mechanic.save()
             messages.success(request, "Mecánico eliminado exitosamente.")
             return redirect('list_mechanic')
@@ -633,34 +666,35 @@ def delete_mechanic(request, id):
 
 
 
-# JOBS
+# JOBS VIEWS para Recepcionista
 
-@login_required
-@recepcionist_required
-def list_jobs_pending(request):
-    # appointments = Appointment.objects.all()
-    appointments = Appointment.objects.filter(
-        inprogress=False,  
-        completed=False, 
-        date_finished__isnull=True)
-    job = Job.objects.filter(appointment__in=appointments).order_by('appointment__date_register', 'appointment__attention')
-    form_job = JobForm(request.POST)
-    # form_services = ServiceForm(request.POST)
-    error =  'No existen citas para trabajos'
+# @login_required
+# @recepcionist_required
+# def list_jobs_pending(request):
+#     appointments = Appointment.objects.filter(
+#         inprogress=False,  
+#         completed=False, 
+#         date_finished__isnull=True)
+#     job = Job.objects.filter(appointment__in=appointments).order_by('appointment__date_register', 'appointment__attention')
+#     form_job = JobForm(request.POST)
+#     # form_services = ServiceForm(request.POST)
+#     error =  'No existen citas para trabajos'
      
-    return render(request, 'list_jobs_pending.html', {
-        'list_appointments':appointments,
-        'form_job':form_job,
-        'list_jobs':job,
-        # 'form_services':form_services,
-        'error':error
-    })
+#     return render(request, 'list_jobs_pending.html', {
+#         'list_appointments':appointments,
+#         'form_job':form_job,
+#         'list_jobs':job,
+#         # 'form_services':form_services,
+#         'error':error
+#     })
 
 
 @login_required
 @recepcionist_required
 def list_jobs_diary(request):
     current_date = timezone.now().date()
+    print(current_date)
+    # Filtramos las citas por fecha actual y las ordenamos por hora de atención
     appointments_diary = Appointment.objects.filter(
         inprogress=True, 
         completed=False, 
@@ -677,11 +711,10 @@ def list_jobs_diary(request):
 @login_required
 @recepcionist_required
 def list_jobs_inprogress(request):
-    # appointments = Appointment.objects.all()
-    # jobs = Job.objects.all()
     current_date = timezone.now().date()
+    # Filtra las citas : 
+    # La cita está en progreso y no está completada Y la cita no esta finalizada
 
-    # appointments = Appointment.objects.filter(inprogress=True, completed=False, ~Q(date_register=current_date), date_finished__isnull=True)
     appointments = Appointment.objects.filter(
         Q(inprogress=True, completed=False) 
         # No muestra los del dia actual
@@ -690,28 +723,17 @@ def list_jobs_inprogress(request):
     jobs = Job.objects.filter(appointment__in=appointments).order_by('appointment__date_register')
     error =  'No existen trabajos en progreso'
 
-    # appointments_diary = Appointment.objects.filter(
-    #     inprogress=True, 
-    #     completed=False, 
-    #     date_register=current_date)
-    # jobs_diary = Job.objects.filter(appointment__in=appointments_diary).order_by('appointment__attention')
-    # error_diary =  'No existen trabajos el día de hoy'
 
     return render(request, 'list_jobs_inprogress.html', {
         # 'list_appointments':appointments,
         'list_jobs':jobs,
         'error':error,
-        # 'list_jobs_diary':jobs_diary,
-        # 'error_diary':error_diary,
-        # 'current_date':current_date
     })
 
 @login_required
 @recepcionist_required
 def list_jobs_completed(request):
-    # appointments = Appointment.objects.all()
-    # jobs = Job.objects.all()
-    # appointments = Appointment.objects.filter(inprogress=True, completed=True)
+    # Filtra las citas que estan finalizadas
     appointments = Appointment.objects.filter(date_finished__isnull=False)
     jobs = Job.objects.filter(appointment__in=appointments)
     error =  'No existen trabajos finalizados'
@@ -725,42 +747,42 @@ def list_jobs_completed(request):
 
 
 
-@login_required
-@recepcionist_required
-def generate_ot(request, id):
-    appointment = get_object_or_404(Appointment, pk=id)
-    job = Job.objects.get(appointment=appointment)
-    status = VehicleStatus.objects.get(pk=2)
-    if request.method == 'POST':
+# @login_required
+# @recepcionist_required
+# def generate_ot(request, id):
+#     appointment = get_object_or_404(Appointment, pk=id)
+#     job = Job.objects.get(appointment=appointment)
+#     status = VehicleStatus.objects.get(pk=2)
+#     if request.method == 'POST':
         
-        # Se genera una descripcion mas técnica del trabajo
-        description = request.POST.get('description_job')
-        print(f"description: {description}")
-        # Al generar OT se genera el trabajo y checklist de la cita
-        # job = Job.objects.create(appointment=appointment, description_job=description, status=status)
-        # checklist = Checklist.objects.create(job=job)
-        # form_services = ServiceForm(request.POST, instance=job)
-        job.status = status
-        job.description_job = description.capitalize()
-        job.save()
-        # checklist.save()
-        # if form_services.is_valid():
+#         # Se genera una descripcion mas técnica del trabajo
+#         description = request.POST.get('description_job')
+#         print(f"description: {description}")
+#         # Al generar OT se genera el trabajo y checklist de la cita
+#         # job = Job.objects.create(appointment=appointment, description_job=description, status=status)
+#         # checklist = Checklist.objects.create(job=job)
+#         # form_services = ServiceForm(request.POST, instance=job)
+#         job.status = status
+#         job.description_job = description.capitalize()
+#         job.save()
+#         # checklist.save()
+#         # if form_services.is_valid():
 
-        #     # Procesar los servicios seleccionados y asignarlos al trabajo
-        #     selected_service_ids = request.POST.getlist('service')
-        #     services_to_add = Service.objects.filter(id__in=selected_service_ids)
-        #     for service in services_to_add:
-        #         Work.objects.create(job=job, service=service)
+#         #     # Procesar los servicios seleccionados y asignarlos al trabajo
+#         #     selected_service_ids = request.POST.getlist('service')
+#         #     services_to_add = Service.objects.filter(id__in=selected_service_ids)
+#         #     for service in services_to_add:
+#         #         Work.objects.create(job=job, service=service)
 
-        # Cambio de estado de la cita
-        appointment.inprogress = True
-        appointment.save()
+#         # Cambio de estado de la cita
+#         appointment.inprogress = True
+#         appointment.save()
 
-        messages.success(request, "Trabajo creado exitosamente.")
-        return redirect('list_jobs_pending')
-    else:
-        messages.error(request, "Error al crear trabajo.")
-        return redirect('list_jobs_pending')
+#         messages.success(request, "Trabajo creado exitosamente.")
+#         return redirect('list_jobs_pending')
+#     else:
+#         messages.error(request, "Error al crear trabajo.")
+#         return redirect('list_jobs_pending')
 
 
 
@@ -773,9 +795,10 @@ def job_checklist (request, id):
     works = Work.objects.filter(job_id=job)
 
     if request.method == 'POST':
-        # Servicios
+        # Se filtra por la instancia del trabajo para mostrar todo el checklist como formulario
+        # Ademas de los servicios (En caso que se hayan agregado)
         form_work = WorkForm(request.POST, instance=job)
-        form_update = ChecklistForm(request.POST, instance=job.checklist)  # , instance=job.checklist        
+        form_update = ChecklistForm(request.POST, instance=job.checklist)       
         form_status = VehicleStatusForm(request.POST, instance=job)
 
         # for service in works:
@@ -785,7 +808,8 @@ def job_checklist (request, id):
         #     service.status_service = status
         #     service.save()
         form_update.save()
-        try:   
+        try:
+            # Se realiza la validación mediante el update_checklist.js   
             if form_update.is_valid():
                 form_update.save()
 
@@ -827,6 +851,7 @@ def job_checklist (request, id):
 def delete_service(request, id_service, id):
     service = get_object_or_404(Work, pk=id_service)
     if request.method == 'POST':
+        # Elimina el servicio desde modificar trabajo, el cual esta asociado al mismo trabajo
         service.delete()
         messages.success(request, "Servicio eliminado con éxito.")
         return redirect('checklist', id=id)
@@ -836,7 +861,6 @@ def delete_service(request, id_service, id):
 @login_required
 @recepcionist_required
 def update_job(request, id):
-
     if request.method == 'POST':
         job = get_object_or_404(Job, pk=id)
         description = job.description_job.capitalize() if job.description_job else ''
@@ -846,7 +870,7 @@ def update_job(request, id):
             form_service = ServiceForm(request.POST)
 
             if form_job.is_valid():
-                # Actualizar la descripción
+                # Actualizar la descripción del trabajo
                 job.description_job = request.POST['description_job'].capitalize()
                 job.save()
                 
@@ -880,19 +904,20 @@ def update_job(request, id):
 @recepcionist_required
 def delete_job(request, id, job_type):
     job = get_object_or_404(Job, appointment_id=id)
+    # Cambia estado de cita a "Cancelado"
     status = VehicleStatus.objects.get(pk=8)
     description = request.POST.get('description_job_cancel')
     if request.method == 'POST':
         # return redirect('list_jobs_pending')
-        if job_type == 'pending':
-            job.description_job = description
-            job.status = status
-            job.appointment.date_finished = timezone.now()
-            job.save()
-            job.appointment.save()
-            messages.success(request, "Cita cancelada con éxito.")
-            return redirect('list_jobs_pending')
-        elif job_type == 'inprogress':
+        # if job_type == 'pending':
+        #     job.description_job = description
+        #     job.status = status
+        #     job.appointment.date_finished = timezone.now()
+        #     job.save()
+        #     job.appointment.save()
+        #     messages.success(request, "Cita cancelada con éxito.")
+        #     return redirect('list_jobs_pending')
+        if job_type == 'inprogress':
             job.status = status
             job.appointment.date_finished = timezone.now()
             job.save()
@@ -900,10 +925,10 @@ def delete_job(request, id, job_type):
             messages.success(request, "Cita cancelada con éxito.")
             return redirect('list_jobs_inprogress')
         elif job_type == 'completed':
+            # Cambia estado de cita a "Eliminado"
             status = VehicleStatus.objects.get(pk=9)
             job.status = status
             job.save()
-            # job.appointment.delete()
             messages.success(request, "Cita eliminada con éxito.")
             return redirect('list_jobs_completed')
       
@@ -924,6 +949,7 @@ def completed_job(request, id):
         job.appointment.save()
 
         services = job.work_set.all()
+        # Si el trabajo se finaliza se hacen los calculos para dar los puntos ganados al cliente
         total_points = Point.objects.get(customer=user)
         for point in services:
             point_earned = point.service.earn_points
@@ -942,6 +968,7 @@ def completed_job(request, id):
 @login_required
 @recepcionist_required
 def search_patent(request):
+    # Busqueda de cita por Número de cita o Patente
     data = request.GET.get('patent').upper()
     patent = None
     date = None
@@ -949,15 +976,16 @@ def search_patent(request):
     form_job = JobForm(request.POST)
     if data is not None:
         vehicle = Vehicle.objects.filter(patent=str(data))
+        # Filtrado por patente
         if vehicle.exists():
             appointments = Appointment.objects.filter(vehicle_id=vehicle.first())
             # job = Job.objects.filter(appointment__in=appointments).order_by('appointment__date_register', 'appointment__attention')
-
             # search = Appointment.objects.filter(vehicle_id=vehicle.first())
             patent = Job.objects.filter(appointment__in=appointments)
             error = "Patente no tiene citas."
             search = True
         else:
+            # Filtrado por número de cita
             try:
                 appointment = Appointment.objects.filter(pk=data)
                 job = Job.objects.filter(appointment__in=appointment)

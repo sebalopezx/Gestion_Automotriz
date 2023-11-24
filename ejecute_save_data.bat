@@ -1,0 +1,1 @@
+python -Xutf8 manage.py dumpdata --indent 2 -o data.json

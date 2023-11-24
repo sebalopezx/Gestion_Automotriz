@@ -26,15 +26,14 @@ from Management import views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="administration"),
-
     path('', views.index , name='index' ),
 
-    # LOGIN
+    # URLS LOGIN
     path('signin/', views.signin , name='signin' ),
     path('signup/', views.signup , name='signup' ),
     path('signout/', views.signout , name='signout' ),
 
-    # CUSTOMERS 
+    # URLS CLIENTES 
     path('user_data/', views.list_user_data , name='user_data'),
     path('user_data/<int:id>/data/', views.detail_user_data , name='detail_user_data'),
     path('user_data/<int:id>/update/', views.update_password , name='update_password'),
@@ -54,7 +53,7 @@ urlpatterns = [
 
     # path('points/', views.points, name='points'),
 
-    # WORK USERS list_mechanic
+    # URLS RECEPCIONISTAS
     # path('register_recepcionist/', views.register_recepcionist ,name='register_recepcionist'),
     # path('gestion_coupons/', views.gestion_coupons, name='gestion_coupons'),
 
@@ -62,11 +61,10 @@ urlpatterns = [
     path('list_mechanic/<int:id>/update/', views.update_mechanic ,name='update_mechanic'),
     path('list_mechanic/<int:id>/delete/', views.delete_mechanic ,name='delete_mechanic'),
     path('register_mechanic/', views.register_mechanic ,name='register_mechanic'),
-    # path('list_mechanic/register_mechanic', views.register_mechanic ,name='register_mechanic'),
 
-    path('list_jobs_pending/', views.list_jobs_pending ,name='list_jobs_pending'),
-    path('list_jobs_pending/<int:id>/ot/', views.generate_ot ,name='generate_ot'),
-    path('list_jobs_pending/<int:id>/delete/<str:job_type>/', views.delete_job ,name='delete_job_pending'),
+    # path('list_jobs_pending/', views.list_jobs_pending ,name='list_jobs_pending'),
+    # path('list_jobs_pending/<int:id>/ot/', views.generate_ot ,name='generate_ot'),
+    # path('list_jobs_pending/<int:id>/delete/<str:job_type>/', views.delete_job ,name='delete_job_pending'),
     path('list_jobs_diary/', views.list_jobs_diary ,name='list_jobs_diary'),
     path('list_jobs_inprogress/', views.list_jobs_inprogress ,name='list_jobs_inprogress'),
     path('list_jobs_inprogress/<int:id>/checklist/', views.job_checklist ,name='checklist'),
@@ -77,22 +75,17 @@ urlpatterns = [
     path('list_jobs_completed/<int:id>/<str:job_type>/delete/', views.delete_job ,name='delete_job_completed'),
     path('list_service/<int:id_service>/<int:id>/delete/', views.delete_service ,name='delete_service'),
 
-    # path('search/<str:patent>/', views.search_patent, name='search_patent')
 
-    # re_path('search_patent/(?P<patent>[^/]+)?/', views.search_patent, name='search_patent')
-    # re_path('search_patent/(?P<patent>.*)/', views.search_patent, name='search_patent')
-    # re_path('search_patent/(?P<patent>[.*]+)?/', views.search_patent, name='search_patent')
     re_path('search_patent/(?P<patent>[\w\d]+)?/', views.search_patent, name='search_patent'),
+
 
     # path('obtener_marcas_y_modelos/', obtener_marcas_y_modelos, name='obtener_marcas_y_modelos'),
     # path('api/vehicle_data/', VehicleDataAPIView.as_view(), name='vehicle_data_api'),
 
 
-    # (?P<patent>.+)/$
-    #  /(?P<patent>[^/]+)?/
-    # path('list_jobs/', views.list_jobs ,name='list_jobs'),
-    # path('list_jobs/<int:id>/checklist/', views.job_checklist ,name='checklist'),
-    # path('list_jobs/<int:id>/ot/', views.generate_ot ,name='generate_ot'),
-    # path('list_jobs/<int:id>/update/', views.update_job ,name='update_job'),
-    # path('list_jobs/<int:id>/delete/', views.delete_job ,name='delete_job'),
+    # path('get_models/<slug:brand_id>/', views.get_models, name='get_models'),
+    # path('get_years/<int:model_id>/', views.get_years, name='get_years'),
+    # path('get_models_choices/<slug:brand_slug>/', views.get_models_choices, name='get_models_choices'),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

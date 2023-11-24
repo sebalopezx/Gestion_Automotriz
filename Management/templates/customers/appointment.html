@@ -12,12 +12,12 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col" style="white-space: nowrap;">Vehículo</th>
-                        <th scope="col" style="white-space: nowrap;">Patente</th>
-                        <th scope="col" style="white-space: nowrap;">ID cita</th>
-                        <th scope="col" style="white-space: nowrap;">Fecha de la cita</th>
-                        <th scope="col" style="white-space: nowrap;">Detalles</th>
-                        <th scope="col" style="white-space: nowrap;">Eliminar</th>
+                        <th scope="col">Vehículo</th>
+                        <th scope="col">Patente</th>
+                        <th scope="col">ID cita</th>
+                        <th scope="col">Fecha de la cita</th>
+                        <th scope="col">Detalles</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,18 +27,18 @@
                             {{ date.vehicle.brand|capfirst }}
                             {{ date.vehicle.model|capfirst }}
                         </td>
-                        <td style="width: 50px; white-space: nowrap;">{{ date.vehicle.patent }}</td>
-                        <td style="width: 50px; white-space: nowrap;">{{ date.id }}</td>
-                        <td style="width: 200px; white-space: nowrap;">          
+                        <td style="width: 50px;">{{ date.vehicle.patent }}</td>
+                        <td style="width: 50px;">{{ date.id }}</td>
+                        <td style="width: 200px;">          
                             {{ date.date_register }}
                             {{ date.attention }}
                         </td>
-                        <td style="width: 10px; white-space: nowrap;">
+                        <td style="width: 10px;">
                             <a href="{% url 'state_vehicle' date.id %}" class="btn btn-sm py-0 me-3 btn-info">
                                 <i class="fa-solid fa-circle-info"></i>
                             </a>
                         </td>
-                        <td style="width: 10px; white-space: nowrap;">
+                        <td style="width: 10px;">
                             <form action="{% url 'cancel_appointment' date.id %}" method="POST" class="confirm-form">
                                 {% csrf_token %}
         
@@ -48,7 +48,9 @@
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
                                 {% else %}
-                                <button class="btnCancel btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
+                                <button class="btnCancel btn btn-sm py-0 btn-danger confirm-button" 
+                                data-action-key="delete"
+                                data-title-key="confirm" >
                                     <!-- Cancelar Cita -->
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>

@@ -7,7 +7,7 @@
 {% block content %}
 
     <p>
-        <div class="text-center">
+        <div class="text-center mb-2 ">
             <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Información
             </a>
@@ -16,11 +16,11 @@
         Button with data-bs-target
         </button> {% endcomment %}
     </p>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
+    <div class="collapse mb-2" id="collapseExample">
+        <div class="card card-body text-center ">
             Tienes tu listado de citas separado por vehículo registrado. Estas citas indican el número de cita asociada que tiene al trabajo. <br>
             Además se muestra el color del estado en que se encuentra el mantenimiento, en donde :
-            <div class="btn-group-vertical">
+            <div class="btn-group-vertical  mx-auto">
                 <a href="#" class="btn btn-sm p-0 btn-info">Muestra las citas en estado de espera o en pregreso de ejecución.</a>
                 <a href="#" class="btn btn-sm p-0 btn-success">Muestra las citas en estado de finalizadas.</a>
                 <a href="#" class="btn btn-sm p-0 btn-danger">Muestra las citas canceladas o eliminadas.</a>
@@ -36,27 +36,29 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col" style="white-space: nowrap;">Vehículo</th>
-                        <th scope="col" style="white-space: nowrap;">Patente</th>
-                        <th scope="col" style="white-space: nowrap;">Modificar o Eliminar</th>
+                        <th scope="col">Vehículo</th>
+                        <th scope="col">Patente</th>
+                        <th scope="col" class="text-end">Modificar o Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for vehicle in list_vehicle %}
                     {% if vehicle.is_active == True %}
                     <tr>
-                        <td style="width: 10px; white-space: nowrap;">
+                        <td style="width: 150px;">
                             {{ vehicle.brand|capfirst }} 
                             {{ vehicle.model|capfirst }} 
                         </td>
-                        <td style="width: 100px; white-space: nowrap;">{{ vehicle.patent }}</td>
-                        <td style="width: 10px; white-space: nowrap;">
+                        <td style="width: 100px;">{{ vehicle.patent }}</td>
+                        <td style="width: 100px;" class="text-end">
                             <a href="{% url 'update_vehicle' vehicle.id %}" class="btn btn-sm py-0 me-3 btn-warning">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
                             <form action="{% url 'delete_vehicle' vehicle.id %}" method="POST" class="confirm-form d-inline">
                                 {% csrf_token %}
-                                <button class="btn btn-sm py-0 btn-danger confirm-button" data-action="delete">
+                                <button class="btn btn-sm py-0 btn-danger confirm-button" 
+                                data-action-key="delete"
+                                data-title-key="confirm" >
                                     <!-- Eliminar Vehículo -->
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
@@ -64,8 +66,8 @@
                         </td>
                     </tr>
                     <tr class="border-bottom border-dark">
-                        <th colspan="1" style="white-space: nowrap;">Estado Vehículo</th>
-                        <td colspan="2" style="white-space: nowrap;">
+                        <th colspan="1" >Estado Vehículo</th>
+                        <td colspan="2" style="white-space: wrap;">
                             <!-- appointment_set permite acceder a las relaciones del vehiculo con las citas -->
 
                             {% if vehicle.appointment_set.all  %}

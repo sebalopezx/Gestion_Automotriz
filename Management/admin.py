@@ -3,10 +3,13 @@ from .models import *
 
 # FILTRO PARA FUNCION DE MODELO DE PUNTOS
 from django.utils.translation import gettext_lazy as _
-from .constants import POINTS
+from .models import ConfigConstant
 # Vehicle, VehicleStatus, Workshop, Appointment, Mechanic, Job, Checklist, Point, Attention, Service, Coupon
 
-
+try:
+    POINTS_VALUE = ConfigConstant.get_points_value()
+except:
+    pass
 
 # Register your models here.
 @admin.register(Vehicle)
@@ -271,8 +274,8 @@ class PointsFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return (
-            ('lt_point', _(f'Menor que {POINTS}')),
-            ('gte_point', _(f'Mayor o igual a {POINTS}')),
+            ('lt_point', _(f'Menor que {POINTS_VALUE}')),
+            ('gte_point', _(f'Mayor o igual a {POINTS_VALUE}')),
         )
 
     def queryset(self, request, queryset):
@@ -377,6 +380,13 @@ class TitleHeaderAdmin(admin.ModelAdmin):
     ordering = ('id',)
     list_editable = ('title_header',)
 
+    # def save_model(self, request, obj, form, change):
+    #     # Verifica si la imagen ya existe en la carpeta media
+    #     existing_images = Description.objects.filter(image_description=obj.image_description.name)
+    #     if existing_images.exists():
+    #         obj.image_description = existing_images.first().image_description
+
+    #     super().save_model(request, obj, form, change)
 
 
 @admin.register(Description)

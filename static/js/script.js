@@ -43,6 +43,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+// PREGUNTAS DE CONFIRMACION
+var actionDataTitles = {
+    'delete': 'error',
+    'question': 'question',
+    'confirm': 'success',
+    'warning': 'warning',
+    'info': 'info',
+}
+var confirmationTitles = {
+    'delete-mechanic': '¿Estás seguro de que deseas eliminar el mecánico? <br>Cambiara su disponibilidad a inactivo y eliminaras su imágen.',
+    'confirm': '¿Estás seguro de que deseas realizar esta acción?',
+    'cancel': '¿Estás seguro de que deseas cancelar la cita?',
+    'register': '¿Estás seguro que quieres seguir con el registro?',
+    'update': '¿Estás seguro que deseas actualizar los datos?',
+    'points': '¿Estás seguro de que deseas canjear tus puntos?',
+};
 
 // ALERTAS PARA PREGUNTAS DE CONFIRMACIÓN 
 
@@ -58,80 +74,42 @@ document.addEventListener("DOMContentLoaded", function () {
         // }
         // event.preventDefault();
 
-        const action = button.getAttribute("data-action");
         const form = button.closest(".confirm-form");
+        const actionKey = button.getAttribute("data-action-key");
+        const titleKey = button.getAttribute("data-title-key")
+        // console.log("ACTIONKEY:", actionKey)
+        // console.log("TITLEKEY", titleKey)
 
         if (isFormValid(form)){
             event.preventDefault();
       
+            const action = actionDataTitles[actionKey]
+            const title = confirmationTitles[titleKey]
+            // console.log("ACTION", action)
+            // console.log("TITLE", title)
             // data-action para definir acciones segun boton
             // acción de eliminar
-            if (action === "delete") {
-                const swalButton = Swal.mixin({
-                    customClass:{
-                    confirmButton: 'btn btn-success m-1',
-                    cancelButton: 'btn btn-danger m-1'
-                    },
-                    buttonsStyling: false
-                })
-                swalButton.fire({
-                    title: "¿Estás seguro de que deseas eliminar o cancelar?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Confirmar",
-                    cancelButtonText: "Cancelar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Realiza la acción de eliminación
-                        form.submit();
-                    };
-                });
-
-            } else if (action === "confirm") {
-                // acción de confirmación
-                const swalButton = Swal.mixin({
-                    customClass:{
-                    confirmButton: 'btn btn-success m-1',
-                    cancelButton: 'btn btn-danger m-1'
-                    },
-                    buttonsStyling: false
-                })
-                swalButton.fire({
-                    title: "¿Estás seguro de que deseas realizar esta acción?",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonText: "Confirmar",
-                    cancelButtonText: "Cancelar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Realiza la acción de eliminación
-                        form.submit();
-                    };
-                });
-
-            } else if (action === "points") {
-                // acción de puntos
-                const swalButton = Swal.mixin({
-                    customClass:{
-                        confirmButton: 'btn btn-success m-1',
-                        cancelButton: 'btn btn-danger m-1'
-                    },
-                    buttonsStyling: false
-                })
-                swalButton.fire({
-                    title: "¿Estás seguro de que deseas canjear tus puntos?",
-                    icon: "question",
-                    showCancelButton: true,
-                    confirmButtonText: "Canjear",
-                    cancelButtonText: "Cancelar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Realiza la acción de eliminación
-                        form.submit();
-                    };
-                });
-
-            } // end if action
+            // if (action === "delete") {
+            const swalButton = Swal.mixin({
+                customClass:{
+                confirmButton: 'btn btn-success m-1',
+                cancelButton: 'btn btn-danger m-1'
+                },
+                buttonsStyling: false
+            })
+            swalButton.fire({
+                // title: "¿Estás seguro de que deseas eliminar o cancelar?",
+                title: title,
+                icon: action,
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realiza la acción de eliminación
+                    form.submit();
+                };
+            });
         } // end if formValid
 
         }); // end listener
@@ -154,13 +132,13 @@ function isFormValid(form) {
 
 // FUNCION PARA CAPTURAR DESCRIPCION EN JOB PENDING
 
-function captureDescriptionJob() {
-    console.log("Capture Description Job function called");
-    // Captura el valor del campo description_job del primer formulario.
-    var descriptionJob = document.querySelector('#id_description_job').value;
-    console.log(descriptionJob);
+// function captureDescriptionJob() {
+//     console.log("Capture Description Job function called");
+//     // Captura el valor del campo description_job del primer formulario.
+//     var descriptionJob = document.querySelector('#id_description_job').value;
+//     console.log(descriptionJob);
 
-    // Asigna el valor capturado al campo oculto del segundo formulario.
-    document.querySelector('#description_job_cancel').value = descriptionJob;
-};
+//     // Asigna el valor capturado al campo oculto del segundo formulario.
+//     document.querySelector('#description_job_cancel').value = descriptionJob;
+// };
 

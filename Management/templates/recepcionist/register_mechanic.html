@@ -22,7 +22,9 @@
 
 
         <div class="text-center mx-auto mt-3">
-            <button class="btn btn-success mt-3 confirm-button" data-action="confirm" type="submit">
+            <button class="btn btn-success mt-3 confirm-button"  type="submit" 
+            data-action-key="confirm"
+            data-title-key="register">
                 Registrar
             </button>
             
@@ -30,10 +32,11 @@
                 Mecánicos
             </a>
         </div>
+
+        {% if form_mechanic.phone.errors %}
+            <div class="alert alert-danger mt-5 pb-0 pt-2">{{ form_mechanic.phone.errors }}</div>
+        {% endif %}
     </form>
     
-    {% if error %}
-        <li class="alert alert-danger mt-5 pb-0 pt-2">{{ error }}</li>
-    {% endif %}
     
 {% endblock content %}

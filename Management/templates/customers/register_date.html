@@ -27,7 +27,9 @@
         {% endfor %}
 
         <div class="mx-auto text-center mb-3">
-            <button class="btn btn-success confirm-button" data-action="confirm" type="submit">
+            <button class="btn btn-success confirm-button" type="submit"
+            data-action-key="confirm"
+            data-title-key="register" >
                 Registrar Cita
             </button>
             <a class="btn btn-primary" href="{% url 'appointment' %}">
@@ -41,7 +43,7 @@
     <form method="POST" disabled>
         {% csrf_token %}
         <div class="mx-auto text-center mb-3">
-            <p>Primero debes registrar un vehículo antes de crear una cita.</p>
+            <li class="alert alert-danger pb-0 pt-2 text-center">Primero debes registrar un vehículo antes de crear una cita.</li>
             <a class="btn btn-sm btn-primary" href="{% url 'register_vehicle' %}">
                 Registrar Vehículo
             </a>
@@ -68,12 +70,12 @@
 
         </div>
     </form>
-{% endif %}
-
-
-    {% if existing_appointment %}
-        <li class="alert alert-danger mt-5 pb-0 pt-2">El mecánico ya tiene cita programada para esta fecha y horario.</li>
     {% endif %}
+    
+    {% if existing_appointment %}
+        <li class="alert alert-danger mt-5 pb-0 pt-2 text-center">{{ error }}</li>
+    {% endif %}
+
 
 
 
