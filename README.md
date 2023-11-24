@@ -3,6 +3,7 @@
 `<link>` : <https://gestion-automotriz.onrender.com/>
 
 <img src="https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo.png" alt="Logo del proyecto" width="150" height="150">
+
 > Logo del proyecto
 
 ![Static Badge](https://img.shields.io/badge/versi%C3%B3n-2.0-orange)                            ![Static Badge](https://img.shields.io/badge/creador-Sebasti%C3%A1n%20L%C3%B3pez-orange)
@@ -10,13 +11,13 @@
 
 **Tabla de Contenido**
 
-1. [Tecnologías usadas](#Tecnologías-usadas)
-2. [Descripción de la aplicación](#Descripción-de-la-aplicación)
-3. [Manejo de la aplicación](#Manejo-de-la-aplicación)
-3.1. [Clientes](#Clientes)
-3.1. [Recepcionista](#Recepcionista)
-3.1. [Administrador](#Administrador)
-4. [Instalación de entorno localhost](Instalación-de-entorno-localhost)
+- 1 [Tecnologías usadas](#Tecnologías-usadas)
+- 2 [Descripción de la aplicación](#Descripción-de-la-aplicación)
+- 3 [Manejo de la aplicación](#Manejo-de-la-aplicación)
+-- 3.1 [Clientes](#Clientes)
+-- 3.2 [Recepcionista](#Recepcionista)
+-- 3.3 [Administrador](#Administrador)
+- 4 [Instalación de entorno localhost](Instalación-de-entorno-localhost)
 
 ## Tecnologías usadas
 
@@ -33,7 +34,7 @@ Este sistema permitirá gestionar la programación de citas de mantenimiento, cu
 >Proyecto de estudio
 
 ## Manejo de la aplicación
-El sistema provee de tres intefaces de usuario:
+El sistema tiene tres intefaces de usuario:
 
 
 ### Clientes
