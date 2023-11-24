@@ -11,13 +11,9 @@
 
 **Tabla de Contenido**
 
-- 1 [Tecnologías usadas](#Tecnologías-usadas)
-- 2 [Descripción de la aplicación](#Descripción-de-la-aplicación)
-- 3 [Manejo de la aplicación](#Manejo-de-la-aplicación)
--- 3.1 [Clientes](#Clientes)
--- 3.2 [Recepcionista](#Recepcionista)
--- 3.3 [Administrador](#Administrador)
-- 4 [Instalación de entorno localhost](Instalación-de-entorno-localhost)
+[TOCM]
+
+[TOC]
 
 ## Tecnologías usadas
 
