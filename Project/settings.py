@@ -126,8 +126,7 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
-        con_max_age=600
+        default='sqlite:///db.sqlite3'
     )
 }
 # DATABASES = {

@@ -36,7 +36,7 @@ Este sistema permitirá gestionar la programación de citas de mantenimiento, cu
 ### Aspectos técnicos:
 
 | Aspectos  | Características | Mejoras v2.0 |
-| ------------- | ------------- | |
+| ------------- | ------------- | ------------- |
 | Base de datos | `<PostgreSQL>` `<SQLite3>` | `<Nuevas tablas y usuario Admin>`|
 | Framework Django | `<Model View Template>` | `<Optimización de la disposición modular>` |
 | Diseño | `<Minimalista y responsive>` | `<Mejora en diseño>` |
