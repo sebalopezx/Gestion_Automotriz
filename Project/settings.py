@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from email.policy import default
 from pathlib import Path
 import os
 import dj_database_url
@@ -29,11 +30,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-!neg76s++03)b-6z^ynjyhy*tp@xe2%84ros0inlv^5e2b6jnm'
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+SECRET_KEY = os.environ.get('SECRET_KEY', default='t]jW]%1?n!"tjOnz9_t>62Trgl/?Vz_E')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = 'RENDER' not in os.environ
+# DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 
 ALLOWED_HOSTS = []
@@ -123,18 +124,18 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 
 # if 'DABATASE_URL' in os.environ:
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         # default=os.environ.get('DATABASE_URL')
-#         default='postgresql://postgres:postgres@localhost/postgres'
-#     )
-# }
 DATABASES = {
-    'default':{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+        con_max_age=600
+    )
 }
+# DATABASES = {
+#     'default':{
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -157,8 +158,8 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_GROUP_MODEL_CUSTOMER = 'Management.Customer'
 AUTH_GROUP_MODEL_RECEPCIONIST = 'Management.Recepcionist'
 # Para desarrollo, puede ser True en producción
-# SESSION_COOKIE_SECURE = True  
-SESSION_COOKIE_SECURE = False  
+SESSION_COOKIE_SECURE = True  
+# SESSION_COOKIE_SECURE = False  
 SESSION_COOKIE_NAME = 'sessionid'  
 
 

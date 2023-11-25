@@ -1,37 +1,47 @@
 # Proyecto: "Gestión Automotriz"
-`<link>` : <https://github.com/sebalopezx/Gestion_Automotriz_2.0><br>
 `<link>` : <https://gestion-automotriz.onrender.com/>
 
-<img src="https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo.png" alt="Logo del proyecto" width="150" height="150">
+<img src="https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo.png" alt="Logo del proyecto" width="100" height="100">
 
 > Logo del proyecto
 
-![Static Badge](https://img.shields.io/badge/versi%C3%B3n-2.0-orange) ![Static Badge](https://img.shields.io/badge/creador-Sebasti%C3%A1n%20L%C3%B3pez-orange)
+![Static Badge](https://img.shields.io/badge/Creador-Sebasti%C3%A1n%20L%C3%B3pez-orange) ![Static Badge](https://img.shields.io/badge/Versi%C3%B3n-2.0-orange)
 
 
 **Tabla de Contenido**
 
-+ [Tecnologías usadas](#Tecnologías-usadas)
 + [Descripción de la aplicación](#Descripción-de-la-aplicación)
+	* [Tecnologías usadas](#Tecnologías-usadas)
+	* [Aspectos técnicos](#Aspectos-técnicos)
 + [Manejo de la aplicación](#Manejo-de-la-aplicación)
 	* [Clientes](#Clientes)
 	* [Recepcionista](#Recepcionista)
 	* [Administrador](#Administrador)
 + [Instalación de entorno localhost](#Instalación-de-entorno-localhost)
 
-## Tecnologías usadas
-
-- Django
-- Bootstrap 5
-- SCSS
-- Javascript
-- JSON
-
 ## Descripción de la aplicación
 
 El objetivo principal de este proyecto es implementar un eficiente sistema de reservas para el departamento de mantenimiento de un taller mecánico.
 Este sistema permitirá gestionar la programación de citas de mantenimiento, cuentas de usuario, vehículos registrados, y un sistema de puntos para descuentos por servicio.
 >Proyecto de estudio
+
+### Tecnologías usadas:
+
+- Django
+- Bootstrap 5
+- SCSS
+- JavaScript
+- JSON
+
+### Aspectos técnicos:
+
+| Aspectos  | Características | Mejoras v2.0 |
+| ------------- | ------------- | |
+| Base de datos | `<PostgreSQL>` `<SQLite3>` | `<Nuevas tablas y usuario Admin>`|
+| Framework Django | `<Model View Template>` | `<Optimización de la disposición modular>` |
+| Diseño | `<Minimalista y responsive>` | `<Mejora en diseño>` |
+| Arquitectura | `<Modular>` | `<Mejora en arquitectura modular y escalabilidad>` |
+
 
 ## Manejo de la aplicación
 El sistema tiene de tres intefaces de usuario:
