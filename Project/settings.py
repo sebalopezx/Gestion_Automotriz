@@ -185,7 +185,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
 # URL base para los archivos multimedia
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 # Ruta al directorio donde se guardarán los archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
