@@ -88,7 +88,7 @@ MIDDLEWARE = [
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
-CACHE_MIDDLEWARE_SECONDS = 0
+# CACHE_MIDDLEWARE_SECONDS = 0
 
 ROOT_URLCONF = 'Project.urls'
 
@@ -188,6 +188,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Tell Django to copy statics to the `staticfiles` directory
 # in your application directory on Render.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
