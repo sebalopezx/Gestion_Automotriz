@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from email.policy import default
 from pathlib import Path
 import os
-from re import DEBUG
 import dj_database_url
 from django.contrib.messages import constants as messages
 
@@ -125,8 +124,8 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # default='sqlite:///db.sqlite3'
-        default='postgresql://postgres:postgres@localhost/postgres'
+        default='sqlite:///db.sqlite3'
+        # default='postgresql://postgres:postgres@localhost/postgres'
     )
 }
 # DATABASES = {
@@ -190,14 +189,13 @@ MEDIA_URL = '/media/'
 # Ruta al directorio donde se guardarán los archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# if not DEBUG:
+if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Turn on WhiteNoise storage backend that takes care of compressing static files
-# and creating unique names for each version so they can safely be cached forever.
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
