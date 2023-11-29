@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from email.policy import default
 from pathlib import Path
 import os
+from re import DEBUG
 import dj_database_url
 from django.contrib.messages import constants as messages
 
@@ -30,7 +31,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='t]jW]%1?n!"tjOnz9_t>62Trgl/?Vz_E')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 # DEBUG = 'RENDER' not in os.environ
 
 
