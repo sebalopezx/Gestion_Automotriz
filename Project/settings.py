@@ -84,8 +84,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     # 'django.middleware.cache.CacheMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 CACHE_MIDDLEWARE_SECONDS = 0
@@ -188,6 +188,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Tell Django to copy statics to the `staticfiles` directory
 # in your application directory on Render.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Turn on WhiteNoise storage backend that takes care of compressing static files
 # and creating unique names for each version so they can safely be cached forever.
@@ -200,4 +202,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EDMUNDS_API_KEY = '&api_key=ar355ajjgkz5pxxv5g3dfakx'
+# EDMUNDS_API_KEY = '&api_key=ar355ajjgkz5pxxv5g3dfakx'
