@@ -13,8 +13,8 @@
 {% endblock header %}
 
 {% block content %}
-    <h3 class="text-center">~Datos cliente~</h3>
-    <article class="jobs row border rounded shadow mb-3 p-1 ps-3">
+    <h3 class="text-center">~Datos trabajo~</h3>
+    <article class="jobs row border rounded shadow mb-3 p-1 ps-3 ">
         <ul class="list-group py-1">
             <li class="list-group-item list-group-item-dark">&#127380; Número de Cita: ( {{ job.appointment.id }} )</li>
             {% comment %} &#8470; Orden Trabajo: {{ job.id }} {% endcomment %}
@@ -29,19 +29,6 @@
     <form method="POST" id="updateJobForm"> 
         
         {% csrf_token %}
-
-        {% comment %} <div class="input-group mb-3 justify-content-center">  
-            <div for="description_job" class="label">
-                <span name="description_job" class="form-control block-inline align-items-top">
-                    {{ form_job.description_job.label_tag }}
-                    {{ form_job.description_job }}
-                </span>
-            </div>
-        </div>
-        <div class="job-pending input-group justify-content-center ">
-            <span class="input-group-text " >{{ form_job.description_job.label_tag }} <br class="p-5">
-            {{ form_job.description_job }}
-        </div>  {% endcomment %}
         
         <div class="job-pending input-group justify-content-center py-3">
             {{ form_job.description_job.label_tag }}
@@ -50,13 +37,6 @@
             {{ form_job.description_job }}
         </div>
 
-        {% comment %} <script>
-            const textarea = document.querySelector("textarea");
-            textarea.addEventListener("keyup", e =>{
-                let height = e.target.scrollHeight;
-                textarea.style.height = `${height}px`;
-            });
-        </script> {% endcomment %}
         <hr>
 
         <h3 class="text-center">~Agregar servicios al trabajo~</h3>

@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.forms import CheckboxInput, DateField, DateTimeField, TimeField
@@ -106,7 +107,7 @@ class Vehicle(models.Model):
         verbose_name_plural = 'Vehículos' 
 
     def __str__(self):
-        return f"{self.brand.capitalize()} {self.model.capitalize()} ~ Patente: {self.patent} ~ cliente: {self.customer.first_name} {self.customer.last_name}"
+        return f"{self.brand.capitalize()} {self.model.capitalize()} ~ Patente: {self.patent}" # ~ cliente: {self.customer.first_name} {self.customer.last_name}
 
 class Workshop(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
@@ -144,7 +145,7 @@ class Mechanic(models.Model):
         verbose_name_plural = 'Mecánicos' 
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} - {self.specialty}"
 
 
 class Attention(models.Model):
@@ -171,7 +172,8 @@ class Appointment(models.Model):
     date_register = models.DateField(verbose_name='Fecha de cita')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de creación') # auto add: ingresa time automaticamente si no se ingresa manualmente
     date_finished = models.DateTimeField(null=True, blank=True, verbose_name='Fecha de finalizado') # Blank , se puede dejar vacio para llenado posterior
-    mechanic = models.ForeignKey(Mechanic, on_delete=models.CASCADE, verbose_name='Mecánico')
+    # mechanic = models.ForeignKey(Mechanic, default="No asignado", on_delete=models.CASCADE, verbose_name='Mecánico')
+    mechanic = models.ForeignKey(Mechanic, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Mecánico')
     workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, verbose_name='Sucursal')
     description_customer = models.TextField(null=True, blank=True, verbose_name='Descripción de cliente')
     inprogress = models.BooleanField(default=False, verbose_name='En ejecución')
@@ -280,7 +282,16 @@ class Coupon(models.Model):
         return coupon
 
 class Checklist(models.Model):
+    GASOLINE_TANK_CHOICES = (
+        ('1/4', '1/4'),
+        ('2/4', '2/4'),
+        ('3/4', '3/4'),
+        ('Full', 'Full')
+    )
+
     job = models.OneToOneField(Job, on_delete=models.CASCADE, verbose_name='Id_Trabajo')
+    km = models.PositiveIntegerField(default=0, verbose_name='Kilometraje')
+    gasoline_tank = models.CharField(default="0", max_length=30 ,choices=GASOLINE_TANK_CHOICES, verbose_name='Tanque de gasolina')
     front_lights = models.BooleanField(default=False, verbose_name='Luces delanteras')
     rear_lights = models.BooleanField(default=False, verbose_name='Luces traseras')
     chassis = models.BooleanField(default=False, verbose_name='Chasis')
@@ -290,15 +301,20 @@ class Checklist(models.Model):
     triangles = models.BooleanField(default=False, verbose_name='Triángulos')
     hydraulic_jack = models.BooleanField(default=False, verbose_name='Gato hidráulico')
     spare_wheel = models.BooleanField(default=False, verbose_name='Rueda repuesto')
-
+        
     class Meta:
         db_table = 'Checklist' 
         verbose_name = 'Checklist'
         verbose_name_plural = 'Checklists' 
 
+    # def format_km(self):
+    #     return "{:,} km".format(self.km)
+    
     def __str__(self):
         return f"""Checklist: 
                 {self.id}.
+                {self.km}
+                {self.gasoline_tank}
                 {self.front_lights}
                 {self.rear_lights}
                 {self.chassis} 

@@ -10,7 +10,6 @@
   font-family: fuenteSecondaryBold;
   src: url("../fonts/Comfortaa-Bold.ttf") format("woff");
 }
-
 body {
   overflow-y: scroll;
   font-family: fuenteSecondary !important;
@@ -204,22 +203,6 @@ form .label {
   margin-right: 10px;
 }
 
-form .checklist {
-  margin: 0 20px;
-}
-
-form .checklist ul .checklabel {
-  max-width: 100% !important;
-  width: 100%;
-  text-align: right;
-}
-
-form .checklist ul .checkdata {
-  max-width: 100% !important;
-  width: 100%;
-  text-align: left;
-}
-
 div.input-group input,
 div.input-group select {
   width: 50%;
@@ -264,10 +247,6 @@ form input[type=text][disabled] {
     width: 100%;
     text-align: center;
   }
-  form .checklist ul .checklabel,
-  form .checklist ul .checkdata {
-    text-align: center !important;
-  }
   div.input-group input,
   div.input-group select {
     width: 100%;
@@ -311,4 +290,4 @@ form input[type=text][disabled] {
 
 .form-login a {
   font-weight: 600;
-}/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.af57f4a62d0b.css.map */

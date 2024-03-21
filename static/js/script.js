@@ -67,50 +67,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
     confirmButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
-        // const shouldPreventDefault = button.getAttribute("data-prevent-default") === "true";
-
-        // if (shouldPreventDefault) {
-        //   event.preventDefault(); // Prevenir el envío automático del formulario
-        // }
-        // event.preventDefault();
-
-        const form = button.closest(".confirm-form");
-        const actionKey = button.getAttribute("data-action-key");
-        const titleKey = button.getAttribute("data-title-key")
-        // console.log("ACTIONKEY:", actionKey)
-        // console.log("TITLEKEY", titleKey)
-
-        if (isFormValid(form)){
             event.preventDefault();
-      
-            const action = actionDataTitles[actionKey]
-            const title = confirmationTitles[titleKey]
-            // console.log("ACTION", action)
-            // console.log("TITLE", title)
-            // data-action para definir acciones segun boton
-            // acción de eliminar
-            // if (action === "delete") {
-            const swalButton = Swal.mixin({
-                customClass:{
-                confirmButton: 'btn btn-success m-1',
-                cancelButton: 'btn btn-danger m-1'
-                },
-                buttonsStyling: false
-            })
-            swalButton.fire({
-                // title: "¿Estás seguro de que deseas eliminar o cancelar?",
-                title: title,
-                icon: action,
-                showCancelButton: true,
-                confirmButtonText: "Confirmar",
-                cancelButtonText: "Cancelar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Realiza la acción de eliminación
-                    form.submit();
-                };
-            });
-        } // end if formValid
+            // const shouldPreventDefault = button.getAttribute("data-prevent-default") === "true";
+
+            // if (shouldPreventDefault) {
+            //   event.preventDefault(); // Prevenir el envío automático del formulario
+            // }
+            // event.preventDefault();
+
+            const form = button.closest(".confirm-form");
+            const formDelete = button.closest(".delete-form");
+            const actionKey = button.getAttribute("data-action-key");
+            const titleKey = button.getAttribute("data-title-key")
+            // console.log("ACTIONKEY:", actionKey)
+            // console.log("TITLEKEY", titleKey)
+
+            if (isFormValid(form)){
+                event.preventDefault();
+        
+                const action = actionDataTitles[actionKey]
+                const title = confirmationTitles[titleKey]
+                // console.log("ACTION", action)
+                // console.log("TITLE", title)
+                // data-action para definir acciones segun boton
+                // acción de eliminar
+                // if (action === "delete") {
+                const swalButton = Swal.mixin({
+                    customClass:{
+                    confirmButton: 'btn btn-success m-1',
+                    cancelButton: 'btn btn-danger m-1'
+                    },
+                    buttonsStyling: false
+                })
+                swalButton.fire({
+                    // title: "¿Estás seguro de que deseas eliminar o cancelar?",
+                    title: title,
+                    icon: action,
+                    showCancelButton: true,
+                    confirmButtonText: "Confirmar",
+                    cancelButtonText: "Cancelar",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realiza la acción de eliminación
+                        form.submit();
+                    };
+                });
+            } // end if formValid
 
         }); // end listener
     }); // end foreach

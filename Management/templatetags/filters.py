@@ -14,6 +14,17 @@ def coupon_valid(value):
     return "Válido" if value else "Ocupado"
 
 
+@register.filter(name='km_format')
+def km_format(value):
+    km = '{:,} km'.format(value)
+    return km if value else "Sin kilometraje"
+
+
+@register.filter(name='mechanic_valid')
+def mechanic_valid(value):
+    return value if value else "No asignado"
+
+
 @register.filter(name='description_valid')
 def description_valid(value):
     if value is not None:

@@ -1,5 +1,5 @@
 import os
-from urllib import request
+# from urllib import request
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -16,13 +16,17 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 # Decoradores para login y otros
 from django.contrib.auth.decorators import login_required
+
+from Management.api import api_vehicles
 from .templatetags.decorators import customer_required, recepcionist_required
 from .templatetags.decorators import *
 
 # MODELOS 
-from .models import Mechanic, Vehicle, Appointment, Job, Checklist, Point, Service, Work, VehicleStatus, Coupon, ConfigConstant, TitleHeader, Description, ConfigConstant
+from .models import *
+# Mechanic, Vehicle, Appointment, Job, Checklist, Point, Service, Work, VehicleStatus, Coupon, ConfigConstant, TitleHeader, Description, ConfigConstant
 # FORMULARIO
-from .forms import CustomUserCreationForm, UpdateUserCustomForm, VehicleForm, AppointmentForm, MechanicForm, JobForm, ChecklistForm, ServiceForm, WorkForm, VehicleStatusForm
+from .forms import *
+# CustomUserCreationForm, UpdateUserCustomForm, VehicleForm, AppointmentForm, MechanicForm, JobForm, ChecklistForm, ServiceForm, WorkForm, VehicleStatusForm, ChangeMechanicForm 
 from django.forms import ValidationError, formset_factory, modelformset_factory
 
 # CONSTANTES
@@ -79,6 +83,8 @@ def index(request):
 
 
 # VIEWS LOGIN 
+from django.contrib.auth.views import LoginView
+
 
 def signup(request):
     if request.method == 'POST':
@@ -144,18 +150,7 @@ def signin(request):
 @login_required
 def signout(request):
     logout(request)
-    print(cache)
-    cache.clear()
-    # session.clear()
-    request.session.flush()
     return redirect('index')
-
-    # # Agregar encabezados para evitar el almacenamiento en caché
-    # response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    # response['Pragma'] = 'no-cache'
-    # response['Expires'] = '0'
-
-    # return response
 
 
 
@@ -271,19 +266,24 @@ def update_password(request, id):
 # VIEWS CUSTOMERS (CLIENTES)
 # Decorador customer para que solo clientes puedan visualizar
 
+
 @login_required
 @customer_required
 def register_vehicle(request):
     if request.method == 'POST':
+        print(request.POST)
         form_vehicle = VehicleForm(request.POST)
+        # print("FORM : ", form_vehicle)
         try:
             if form_vehicle.is_valid():
                 vehicle = form_vehicle.save(commit=False)
                 vehicle.customer = request.user
+                print("VEHICLE : ", vehicle)
                 vehicle.save()
                 messages.success(request, 'Vehículo creado exitosamente.')
                 return redirect('vehicle')
             else:
+                # print(form_vehicle.errors)
                 messages.error(request, 'Error al registrar vehículo')
         except ValidationError as e:
             messages.error(request, 'Error de ejecución')
@@ -296,30 +296,7 @@ def register_vehicle(request):
     })
 
 
-# from .forms import get_models_choices, get_year_choices
-# from django.http import JsonResponse
-# from .load_data import CSVDataProvider
 
-# data_provider = CSVDataProvider()
-
-# def get_models(request, brand_slug):
-#     form = VehicleForm(initial={'brand': brand_slug})
-#     form.fields['model'].choices = data_provider.get_model_choices(brand_slug)
-#     return render(request, 'components/dropdown_model.html', {'form': form})
-
-# def get_years(request, model_id):
-#     form = VehicleForm(initial={'model': model_id})
-#     form.fields['year'].choices = [('', 'Elegir Año vehículo')] + data_provider.get_year_choices(model_id)
-#     return render(request, 'components/dropdown_year.html', {'form': form})
-# def get_models(request, brand_slug):
-#     form = VehicleForm(initial={'brand': brand_slug})
-#     form.fields['model'].choices = get_models_choices(brand_slug)
-#     return render(request, 'components/dropdown_model.html', {'form': form})
-
-# def get_years(request, model_id):
-#     form = VehicleForm(initial={'model': model_id})
-#     form.fields['year'].choices = [('', 'Elegir Año vehículo')] + get_year_choices(model_id) 
-#     return render(request, 'components/dropdown_year.html', {'form': form})
 
 @login_required
 @customer_required
@@ -356,28 +333,29 @@ def register_date(request):
     user = request.user  # Usuario Autenticado
     # Obtener los vehículos del usuario logeado
     user_vehicles = Vehicle.objects.filter(customer=user)
-    try:
-        # Obtener los mecánicos disponibles
-        mechanic_active = Mechanic.objects.filter(is_active=True)
-    except Mechanic.DoesNotExist:
-        mechanic_active = None
+    # try:
+    #     # Obtener los mecánicos disponibles
+    #     mechanic_active = Mechanic.objects.filter(is_active=True)
+    # except Mechanic.DoesNotExist:
+    #     mechanic_active = None
 
     if request.method == 'POST':
-        form_appointment = AppointmentForm(request.POST, user=user, mechanic=mechanic_active)
+        form_appointment = AppointmentForm(request.POST, user=user) # , mechanic=mechanic_active
         if form_appointment.is_valid():
             # Obtenemos los datos del formulario
             date_register = form_appointment.cleaned_data['date_register']
             attention = form_appointment.cleaned_data['attention']
-            mechanic = form_appointment.cleaned_data['mechanic']
+            # mechanic = form_appointment.cleaned_data['mechanic']
 
             # Verifica si ya existe una cita en ese horario y fecha para el mecánico
             existing_appointment = Appointment.objects.filter(
-                attention=attention, date_register=date_register, mechanic=mechanic
+                attention=attention, date_register=date_register #, mechanic=mechanic
             ).exists()
 
             if existing_appointment:
                 # Error 
-                error = f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
+                # error = f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
+                error = f'Ya existe cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
                 # form_appointment.add_error(
                 #     'attention',
                 #     f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register} {attention}'
@@ -406,7 +384,7 @@ def register_date(request):
         # vehiculos_usuario = Vehiculo.objects.filter(cliente=user)
         # form = CitaForm(vehiculo=vehiculos_usuario) 
         
-        form_appointment = AppointmentForm(user=user, mechanic=mechanic_active)
+        form_appointment = AppointmentForm(user=user) # , mechanic=mechanic_active
         existing_appointment = False
         if not user_vehicles:
             # Si el usuario no tiene vehiculos, el formulario se dehabilita
@@ -721,6 +699,7 @@ def list_jobs_inprogress(request):
         # & ~Q(date_register=current_date) 
         & Q(date_finished__isnull=True))
     jobs = Job.objects.filter(appointment__in=appointments).order_by('appointment__date_register')
+    # mechanic = Mechanic.objects.get()
     error =  'No existen trabajos en progreso'
 
 
@@ -729,6 +708,30 @@ def list_jobs_inprogress(request):
         'list_jobs':jobs,
         'error':error,
     })
+
+
+@login_required
+@recepcionist_required
+def change_mechanic(request, id):
+    appointment = Appointment.objects.get(id=id)
+    print(appointment)
+    mechanic = appointment.mechanic
+    if request.method == 'POST':
+        form = ChangeMechanicForm(request.POST, instance=appointment)
+        if form.is_valid():
+            new_mechanic = form.cleaned_data['change_mechanic']
+            print(new_mechanic)
+            appointment.mechanic = new_mechanic
+            appointment.save()
+            return redirect('list_jobs_inprogress')  # Redirigir a la lista de trabajos después de cambiar el mecánico
+    else:
+        form = ChangeMechanicForm(instance=appointment)
+
+    return render(request, 'change_mechanic.html', {
+        'form': form, 
+        'appointment': appointment
+    })
+
 
 @login_required
 @recepcionist_required
@@ -793,25 +796,23 @@ def job_checklist (request, id):
 
     job = get_object_or_404(Job, pk=id)
     works = Work.objects.filter(job_id=job)
+    # Obtén los servicios relacionados al trabajo actual
+    list_services = Work.objects.filter(job=job)
+    checklist = job.checklist
+    # km = job.checklist.km
 
     if request.method == 'POST':
         # Se filtra por la instancia del trabajo para mostrar todo el checklist como formulario
         # Ademas de los servicios (En caso que se hayan agregado)
         form_work = WorkForm(request.POST, instance=job)
-        form_update = ChecklistForm(request.POST, instance=job.checklist)       
+        form_checklist = ChecklistForm(request.POST, instance=job.checklist)       
         form_status = VehicleStatusForm(request.POST, instance=job)
 
-        # for service in works:
-        #     checkbox_name = f"service_{service.id}"
-        #     status = checkbox_name in request.POST
-        #     print(f'Service: {service.id}, Checkbox Name: {checkbox_name}, State: {status}')
-        #     service.status_service = status
-        #     service.save()
-        form_update.save()
+        form_checklist.save()
         try:
             # Se realiza la validación mediante el update_checklist.js   
-            if form_update.is_valid():
-                form_update.save()
+            if form_checklist.is_valid():
+                form_checklist.save()
 
             if form_work.is_valid():
                 for service in works:
@@ -830,18 +831,17 @@ def job_checklist (request, id):
     else:
         # Servicios
         form_work = WorkForm(instance=job)
-        form_update = ChecklistForm(instance=job.checklist)
+        form_checklist = ChecklistForm(instance=job.checklist)
         form_status = VehicleStatusForm(instance=job)
 
-    # Obtén los servicios relacionados al trabajo actual
-    list_services = Work.objects.filter(job=job)
-    checklist = job.checklist
+
     return render(request, 'checklist.html', {
         'form_work':form_work,
-        'form_checklist':form_update,
+        'form_checklist':form_checklist,
         'checklist':checklist,
         'form_status':form_status,
         'list_services': list_services
+        # 'km':km
     })
 
 
@@ -1003,3 +1003,5 @@ def search_patent(request):
         'form':form_job,
         'error':error
     })
+
+

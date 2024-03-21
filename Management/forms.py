@@ -66,101 +66,23 @@ class CustomUserCreationForm(CapitalizeField, UserCreationForm):
         return self.clean_capitalize_nameField('last_name')
 
 
-from django.http import JsonResponse
-from pathlib import Path 
-import csv
-def get_csv_choices(csv_file, key_column, value_column):
-    csv_path = Path(__file__).resolve().parent / csv_file
-    with open(csv_path, 'r') as file:
-        reader = csv.DictReader(file)
-        return [(row[key_column], row[value_column]) for row in reader]
-    
-# def get_models_choices(brand_slug):
-#     try:
-#         models = []
-#         models_file = Path(__file__).resolve().parent / 'data' / 'modelos.csv'
-
-#         with open(models_file, newline='', encoding='utf-8') as csvfile:
-#             reader = csv.DictReader(csvfile)
-#             for row in reader:
-#                 if row['idmake'] == brand_slug:
-#                     models.append((row['id'], row['model']))
-
-#         return [('', 'Elegir modelo vehículo')] + models
-#     except Exception as e:
-#         # Imprime el error en la consola para depuración
-#         print(f"Error en get_models_choices: {e}")
-#         return JsonResponse({'error': 'Ocurrió un error'}, status=500)
-    
-# def get_year_choices(model_id):
-#     csv_path = Path(__file__).resolve().parent / 'anios.csv'
-#     with open(csv_path, 'r') as file:
-#         reader = csv.DictReader(file)
-#         return [(row['id'], row['year']) for row in reader if row['idmodel'] == str(model_id)]
-    
 
 
+
+# FORMULARIO CON API
 class VehicleForm(forms.ModelForm):
+    # brand = forms.ChoiceField(choices=[('', 'Seleccione una marca...')])
+    # model = forms.ChoiceField(choices=[('', 'Seleccione un modelo...')])
+    # year = forms.ChoiceField(choices=[('', 'Seleccione un año...')])
     class Meta:
         model = Vehicle
         fields = ['brand', 'model', 'patent', 'year']
-        # labels = {
-        #     'brand': 'Marca',
-        #     'model': 'Modelo',
-        #     'patent': 'Patente',
-        #     'year': 'Año'
-        # }
-
-        # NORMALITO
-        # widgets = {
-        #     'brand': forms.Select(choices=[('','Elegir marca vehículo'), ('ford', 'Ford'), ('toyota', 'Toyota'), ('honda', 'Honda')]),
-        #     'model': forms.Select(choices=[('','Elegir modelo vehículo'), ('focus', 'Focus'), ('corolla', 'Corolla'), ('civic', 'Civic')]),
-        #     'year': forms.Select(choices=[('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)])
-        # }
-
-        # WEEEEENOOO
-        widgets = {
-            'brand': forms.Select(choices=[('','Elegir marca vehículo')] + get_csv_choices('marcas.csv', 'slug', 'make')),
-            'model': forms.Select(choices=[('','Elegir modelo vehículo')] + get_csv_choices('modelos.csv', 'slug', 'model')),
-            'year': forms.Select(choices=[('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)])
-            # 'year': forms.Select(choices=[('','Elegir Año vehículo')] + get_csv_choices('anios.csv', 'year', 'year'))
+        labels = {
+            'brand': 'Marca',
+            'model': 'Modelo',
+            'patent': 'Patente',
+            'year': 'Año'
         }
-        # widgets = {
-        #     'brand': forms.Select(choices=[('','Elegir marca vehículo')] + get_csv_choices('marcas.csv', 'slug', 'make')),
-        #     'model': forms.Select(choices=[('','Elegir modelo vehículo')]),
-        #     'year': forms.Select(choices=[('','Elegir Año vehículo')])
-        # }
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-
-        # Obtener las opciones de marcas y modelos desde el archivo CSV
-        # brand_choices = [('','Elegir marca vehículo')] + self.get_csv_choices('marcas.csv')
-        # model_choices = [('','Elegir modelo vehículo')] + self.get_csv_choices('modelos.csv')
-
-        # self.fields['brand'].widget.choices = get_csv_choices('marcas.csv', 'slug', 'make')
-        # self.fields['model'].widget.choices = get_csv_choices('modelos.csv', 'slug', 'model')
-        # self.fields['year'].widget.choices = get_csv_choices('anios.csv', 'id', 'year')
-
-        # brand_choices = get_csv_choices('marcas.csv', 'slug', 'make')
-        # model_choices = get_csv_choices('modelos.csv', 'slug', 'model')
-        # year_choices = get_csv_choices('anios.csv', 'id', 'year')
-        # print("Brand Choices:", brand_choices)
-        # print("Model Choices:", model_choices)
-        # print("Year Choices:", year_choices)
-        # self.fields['brand'].widget.choices = brand_choices
-        # self.fields['model'].widget.choices = model_choices
-        # self.fields['year'].widget.choices = year_choices
-
-
-
-        # Asignar las opciones a los campos del formulario
-        # self.fields['brand'].widget.choices = brand_choices
-        # self.fields['model'].widget.choices = model_choices
-
-        # # Otras configuraciones si es necesario (por ejemplo, para el campo de año)
-        # self.fields['year'].widget.choices = [('','Elegir Año vehículo')] + [(year, year) for year in range(datetime.date.today().year, 1920, -1)]
-
        
     # Capturar el valor de patente
     def clean_patent(self):
@@ -190,16 +112,16 @@ class AppointmentForm(CapitalizeField, forms.ModelForm):
         if user is not None:
             self.fields['vehicle'].queryset = Vehicle.objects.filter(customer=user, is_active=True)
         # if mechanic is not None:
-        self.fields['mechanic'].queryset = Mechanic.objects.filter(is_active=True)
+        # self.fields['mechanic'].queryset = Mechanic.objects.filter(is_active=True)
 
     class Meta:
         model = Appointment
-        fields = ['vehicle','attention','date_register','mechanic','workshop','description_customer']
+        fields = ['vehicle','attention','date_register','workshop','description_customer']
         labels = {
             'vehicle':'Vehículo',
             'attention':'Atención',
             'date_register':'Fecha de la cita',
-            'mechanic':'Mecánico',
+            # 'mechanic':'Mecánico',
             'workshop':'Sucursal',
             'description_customer':'Descripción'
         }
@@ -222,7 +144,6 @@ class AppointmentForm(CapitalizeField, forms.ModelForm):
 
 
 class MechanicForm(CapitalizeField, forms.ModelForm):
-
     class Meta:
         model = Mechanic
         fields = ['first_name', 'last_name', 'phone', 'specialty', 'image', 'is_active']
@@ -261,6 +182,23 @@ class MechanicForm(CapitalizeField, forms.ModelForm):
             raise forms.ValidationError("Ya existe ese número de teléfono.")
         return phone
 
+
+class ChangeMechanicForm(forms.ModelForm):
+    class Meta:
+        model = Mechanic
+        exclude = ['first_name', 'last_name', 'phone', 'specialty', 'image', 'is_active']
+
+    change_mechanic = forms.ModelChoiceField(
+        queryset=Mechanic.objects.filter(is_active=True),
+        label='Nuevo Mecánico',
+        widget=forms.Select(attrs={'class': 'form-control h-25'}),
+        to_field_name='id',  # Campo a utilizar como valor interno
+        empty_label=None,  # No mostrar una opción vacía en el select
+        # Genera las opciones del select como una tupla de tuplas (id, nombre_completo)
+        # choices=[(mechanic.id, f"{mechanic.first_name} {mechanic.last_name}") for mechanic in Mechanic.objects.all()]
+    )
+    
+    # change_mechanic = forms.ModelChoiceField(queryset=Mechanic.objects.all(), label='Nuevo Mecánico')
 
 
 class JobForm(CapitalizeField, forms.ModelForm):
@@ -315,8 +253,10 @@ class VehicleStatusForm(forms.ModelForm):
 class ChecklistForm(forms.ModelForm):
     class Meta:
         model = Checklist
-        fields = ['front_lights', 'rear_lights', 'chassis', 'cleaning', 'extinguisher', 'first_aid_kit', 'triangles', 'hydraulic_jack', 'spare_wheel']
+        fields = ['km', 'gasoline_tank', 'front_lights', 'rear_lights', 'chassis', 'cleaning', 'extinguisher', 'first_aid_kit', 'triangles', 'hydraulic_jack', 'spare_wheel']
         labels = {
+            'km': 'Kilometraje',
+            'gasoline_tank': 'Tanque de gasolina',
             'front_lights': 'Luces delanteras',
             'rear_lights': 'Luces traseras',
             'chassis': 'Chasis',

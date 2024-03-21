@@ -15,8 +15,12 @@ $color-primary: #ff7c38;
     src: url('../fonts/Comfortaa-Bold.ttf') format('woff');
 }
 
+.body{
+    background-color: #222 !important;
 
+}
 body{
+    background-color: #222 !important;
     overflow-y: scroll;
     font-family: fuenteSecondary !important;
 }
@@ -233,6 +237,21 @@ form .label{
     display: inline-block;
     margin-right: 10px;
 }
+form .checklist{
+    margin: 0 20px;
+}
+form .checklist ul .checklabel{
+    max-width: 100% !important;
+    width: 100%;
+    text-align: right;
+    // margin-left: auto !important;
+}
+form .checklist ul .checkdata{
+    max-width: 100% !important;
+    width: 100%;
+    text-align: left;
+    // margin-right: auto !important;
+}
 
 div.input-group input,
 div.input-group select {
@@ -276,6 +295,11 @@ form input[type="text"][disabled]{
         width: 100%;
         text-align: center;
     }
+    form .checklist ul .checklabel,
+    form .checklist ul .checkdata{
+        text-align: center !important;
+
+    }
     div.input-group input,
     div.input-group select{
         width: 100%;
@@ -304,6 +328,12 @@ form input[type="text"][disabled]{
 
 // TRABAJOS
 
+// .ckecklist ul .checklabel{ 
+//     height: 100px !important;
+//     width: 100px !important;
+//     text-align: right !important;
+//     color: greenyellow;
+// }
 // .jobs .btn-jobs .custom-btn{
 //     width: 90px;
 // }

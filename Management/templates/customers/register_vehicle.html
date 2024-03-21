@@ -5,31 +5,93 @@
 {% endblock header %}
 
 {% block content %}
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    {% comment %} <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#id_brand').change(function() {
-        var brandSlug = $(this).val();
-        if (brandSlug) {
-            $.ajax({
-            url: `/get_models/${brandSlug}/`,
-            success: function(data) {
-                $('#id_model').html(data);
-            }
-            });
-        } else {
-            $('#id_model').empty();
-        }
-        });
-    });
-    </script> {% endcomment %}
+    <script type="text/javascript">
 
-    <form method="POST" class="confirm-form">
+        let DATA = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar datos iniciales
+            fetch('https://apicardetails-production.up.railway.app/vehiculos')
+                .then(response => response.json())
+                .then(data => {
+                    // console.log("Datos cargados desde la API:");
+                    // console.log(data);
+                    DATA = data;
+                    llenarMarcas();
+                });
+
+            // Evento change para marcas
+            document.querySelector('#id_brand').addEventListener('change', function() {
+                const marcaSeleccionada = this.value;
+                llenarModelos(marcaSeleccionada);
+            });
+
+            // Evento change para modelos
+            document.querySelector('#id_model').addEventListener('change', function() {
+                const modeloSeleccionado = this.value;
+                const marcaSeleccionada = document.querySelector('#id_brand').value;
+                llenarAnios(marcaSeleccionada, modeloSeleccionado);
+            });
+        });
+
+        const llenarMarcas = () => {
+            const selectMarca = document.querySelector('#id_brand');
+            // selectMarca.innerHTML = '<option value="">Seleccione una marca...</option>';
+
+            DATA.forEach(marca => {
+                const opcion = document.createElement('option');
+                opcion.value = marca.slugmarca;
+                opcion.textContent = marca.marca;
+                selectMarca.appendChild(opcion);
+            });
+        };
+
+        const llenarModelos = (marcaSeleccionada) => {
+            const selectModelo = document.querySelector('#id_model');
+            // selectModelo.innerHTML = '<option value="">Seleccione un modelo...</option>';
+
+            const marca = DATA.find(m => m.slugmarca === marcaSeleccionada);
+            if (marca && marca.modelos) {
+                marca.modelos.forEach(modelo => {
+                    const opcion = document.createElement('option');
+                    opcion.value = modelo.slugmodelo;
+                    opcion.textContent = modelo.modelo;
+                    selectModelo.appendChild(opcion);
+                });
+            }
+            // document.querySelector('#hidden_brand').value = marcaSeleccionada;
+        };
+
+        const llenarAnios = (marcaSeleccionada, modeloSeleccionado) => {
+            const selectAnio = document.querySelector('#id_year');
+            // selectAnio.innerHTML = '<option value="">Seleccione un año...</option>';
+
+            const marca = DATA.find(m => m.slugmarca === marcaSeleccionada);
+            const modelo = marca?.modelos.find(m => m.slugmodelo === modeloSeleccionado);
+            const anios = modelo?.anios || [];
+
+            anios.forEach(anio => {
+                const opcion = document.createElement('option');
+                opcion.value = anio;
+                opcion.textContent = anio;
+                selectAnio.appendChild(opcion);
+            });
+            // document.querySelector('#hidden_model').value = modeloSeleccionado;
+        };
+
+       
+    </script> 
+
+        
+
+
+    <form method="POST" class="confirm-form" id="form_vehicle">
         {% csrf_token %}
         
-        {% for f in form %}
+        {% comment %} {% for f in form %}
             <div class="input-group mb-3 justify-content-center">
                 <div class="label">
                     <span class="form-control bg-light">
@@ -38,91 +100,52 @@
                     </span>
                 </div>
             </div>
-        {% endfor %}
-
-        {% comment %} <div class="input-group mb-3 justify-content-center">
-            <div class="label">
-                <span class="form-control bg-light">
-                    {{ form.brand.label_tag }}
-                    {{ form.brand }}
-                </span>
-            </div>
-        </div>
-    
-        <div class="input-group mb-3 justify-content-center">
-            <div class="label">
-                <span class="form-control bg-light">
-                    {{ form.model.label_tag }}
-                    {{ form.model }}
-                </span>
-            </div>
-        </div>
-
-        <div class="input-group mb-3 justify-content-center">
-            <div class="label">
-                <span class="form-control bg-light">
-                    {{ form.year.label_tag }}
-                    {{ form.year }}
-                </span>
-            </div>
-        </div>
+        {% endfor %} {% endcomment %}
         
         
+        <!-- Campos visibles para la selección de usuario -->
         <div class="input-group mb-3 justify-content-center">
-            <div class="label">
-                <span class="form-control bg-light">
-                    {% include 'components/dropdown_model.html' %}
-                </span>
-            </div>
-        </div> {% endcomment %}
-
-        {% comment %} 
+            <label class="label " for="id_brand">
+                Marca:
+                <select id="id_brand" name="brand" class="form-control p-1">
+                    <option value="">Seleccione una marca...</option>
+                    <!-- Las opciones se llenarán con JavaScript -->
+                </select>
+            </label>
+        </div>
+        
         <div class="input-group mb-3 justify-content-center">
-            <div class="label">
-                <span class="form-control bg-light">
-                    {% include 'components/dropdown_year.html' %}
-                </span>
-            </div>
-        </div> {% endcomment %}
-    
-   
-{% comment %}   
-        <script>
-            $(document).ready(function () {
-                // Manejo del cambio de marca
-                $('#id_brand').change(function () {
-                    var brandSlug = $(this).val();
-                    $.ajax({
-                        url: '/get_models/' + brandSlug + '/',
-                        success: function (data) {
-                            // Actualizar opciones del modelo
-                            $('#id_model').html(data);
-                        },
-                        error: function (xhr, textStatus, errorThrown) {
-                            console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
-                        }
-                    });
-                });
-    
-                // Manejo del cambio de modelo
-                $('#id_model').change(function () {
-                    var modelId = $(this).val();
-                    $.ajax({
-                        url: '/get_year_choices/' + modelId + '/',
-                        success: function (data) {
-                            // Actualizar opciones de año
-                            $('#id_year').html(data);
-                        }
-                    });
-                });
-            });
+            <label class="label" for="id_model">
+                Modelo:
+                <select id="id_model" name="model" class="form-control p-1">
+                    <option value="">Seleccione un modelo...</option>
+                    <!-- Las opciones se llenarán con JavaScript -->
+                </select>
+            </label>
+        </div>
+        
+        <div class="input-group mb-3 justify-content-center">
+            <label class="label" for="id_year">
+                Año:
+                <select id="id_year" name="year" class="form-control p-1">
+                    <option value="">Seleccione un año...</option>
+                    <!-- Las opciones se llenarán con JavaScript -->
+                </select>
+            </label>
+        </div>
+        
+        <div class="input-group mb-3 justify-content-center">
+            <label class="label" for="id_patent">
+                Patente:
+                <input type="text" name="patent" id="id_patent" class="form-control" value="{{ f.patent }}">
+            </label>
+        </div>
 
-        </script> {% endcomment %}
+        
 
-
-    
-       
-
+        <!-- Indicador de carga (puedes usar un spinner aquí) -->
+        {% comment %} <div id="loadingIndicator" class="text-center alert alert-warning mt-5 pb-0 pt-2" style="display: none;">Cargando modelos...</div> {% endcomment %}
+  
 
         <div class="mx-auto text-center">
             <button class="btn btn-success mt-3 confirm-button" type="submit"

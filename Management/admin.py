@@ -339,7 +339,9 @@ class CouponAdmin(admin.ModelAdmin):
 @admin.register(Checklist)
 class ChecklistAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 
+        'id',
+        'km',
+        'gasoline_tank', 
         'job_id_display', 
         'front_lights', 
         'rear_lights', 
@@ -356,7 +358,7 @@ class ChecklistAdmin(admin.ModelAdmin):
     ordering = ('id',)
     raw_id_fields = ('job',)
     
-    list_editable = ('front_lights', 'rear_lights', 'chassis', 'cleaning',
+    list_editable = ('km','gasoline_tank','front_lights', 'rear_lights', 'chassis', 'cleaning',
                     'extinguisher', 'first_aid_kit', 'triangles', 'hydraulic_jack', 'spare_wheel',)
 
     def job_object(self, obj):

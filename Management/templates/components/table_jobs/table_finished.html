@@ -16,7 +16,7 @@
         {% comment %} <a class="btn py-0 btn-info mb-2 " href="{% url 'checklist' job.id %}">
             <i class="fa-solid fa-circle-info"></i>
         </a> {% endcomment %}
-        <a class="btn btn-sm btn-info me-2" href="{% url 'state_vehicle' job.appointment.id %}">
+        <a class="btn btn-sm btn-info me-2 py-0 px-2 " href="{% url 'state_vehicle' job.appointment.id %}">
             <!-- Detalles -->
             <i class="fa-solid fa-pen"></i>
         </a>
@@ -28,7 +28,7 @@
         </a> {% endcomment %}
         <form action="{% url 'delete_job_completed' job.appointment.id 'completed' %}" method="POST" class="confirm-form">
             {% csrf_token %} 
-            <button class="btn btn-sm btn-danger confirm-button" 
+            <button class="btn btn-sm btn-danger confirm-button py-0 px-2 " 
             data-action-key="delete"
             data-title-key="confirm">
                 <!-- Eliminar -->

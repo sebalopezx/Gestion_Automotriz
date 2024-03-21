@@ -197,6 +197,26 @@
                 </div>
             </div>
         </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Kilometraje:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.km|km_format }}
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item col-12 list-group-item-info ">
+            <div class="row">
+                <label for="brand" class="col-6 text-end">Estanque:</label>
+                <div class="col-6 bg-light rounded ">
+                    <span name="brand" class="text-start">
+                        {{ state_vehicle.checklist.gasoline_tank }}
+                    </span>
+                </div>
+            </div>
+        </li>
     </ul>
 
     <ol class="list-group mt-1">

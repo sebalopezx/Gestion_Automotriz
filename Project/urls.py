@@ -22,11 +22,19 @@ from django.conf.urls.static import static
 
 # from Management.views import signin
 from Management import views
+from Management import api
 # from Management.api import obtener_marcas_y_modelos, VehicleDataAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="administration"),
     path('', views.index , name='index' ),
+
+    path('api/', api.api_vehicles , name='vehicles' ),
+    path('api/brands/', api.get_brands , name='brands' ),
+    path('api/brands/<str:object_id_marca>/', api.get_models , name='models' ),
+    path('api/brands/<str:object_id_marca>/models/<str:object_id_modelo>/', api.get_years , name='years' ),
+
+
 
     # URLS LOGIN
     path('signin/', views.signin , name='signin' ),
@@ -61,6 +69,7 @@ urlpatterns = [
     path('list_mechanic/<int:id>/update/', views.update_mechanic ,name='update_mechanic'),
     path('list_mechanic/<int:id>/delete/', views.delete_mechanic ,name='delete_mechanic'),
     path('register_mechanic/', views.register_mechanic ,name='register_mechanic'),
+    path('change_mechanic/<int:id>/', views.change_mechanic ,name='change_mechanic'),
 
     # path('list_jobs_pending/', views.list_jobs_pending ,name='list_jobs_pending'),
     # path('list_jobs_pending/<int:id>/ot/', views.generate_ot ,name='generate_ot'),

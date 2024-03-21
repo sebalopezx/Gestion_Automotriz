@@ -13,12 +13,12 @@
         <article class="table-responsive rounded">
             <table class="table table-hover">
                 <thead class="table-dark">
-                    {% include 'components/table_header_jobs.html' %}
+                    {% include 'components/table_jobs/table_header_jobs.html' %}
                 </thead>
                 <tbody>
                     {% for job in list_jobs_diary %}
                     {% if not job.appointment.completed and job.appointment.inprogress %}
-                    {% include 'components/table_jobs.html' with job=job %}
+                    {% include 'components/table_jobs/table_jobs.html' with job=job %}
                     {% endif %}
                     {% endfor %}
                 </tbody>
