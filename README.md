@@ -34,6 +34,8 @@ Este sistema permitirá gestionar la programación de citas de mantenimiento, cu
 - JSON
 
 ### Aspectos técnicos:
+> [!NOTE]
+> Tabla de estructura y mejoras del proyecto
 
 | Aspectos  | Características | Mejoras v2.0 |
 | ------------- | ------------- | ------------- |
@@ -44,7 +46,8 @@ Este sistema permitirá gestionar la programación de citas de mantenimiento, cu
 
 
 ## Manejo de la aplicación
-El sistema tiene de tres intefaces de usuario:
+> [!TIP]
+> El sistema tiene de tres intefaces de usuario
 
 
 ### Clientes
@@ -101,8 +104,9 @@ El administrador del sistema tendra su interfaz propia donde:
 > Panel de administración
 
 ## Instalación de entorno localhost
+> [!IMPORTANT]
+> Para poder ejecutar el proyecto en un entorno de localhost, se debera:
 
-Para poder ejecutar el proyecto en un entorno de localhost, se debera:
 1. Clonar el repositorio
 ```
 git clone https://github.com/sebalopezx/Gestion_Automotriz_2.0
