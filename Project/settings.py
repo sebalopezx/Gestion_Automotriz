@@ -97,7 +97,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'Management/templates/base'),
             os.path.join(BASE_DIR, 'Management/templates/recepcionist'),
             os.path.join(BASE_DIR, 'Management/templates/customers'),
-            os.path.join(BASE_DIR, 'templatestags')
+            os.path.join(BASE_DIR, 'Management/templatestags')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -159,8 +159,8 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_GROUP_MODEL_CUSTOMER = 'Management.Customer'
 AUTH_GROUP_MODEL_RECEPCIONIST = 'Management.Recepcionist'
 # Para desarrollo, puede ser True en producción
-SESSION_COOKIE_SECURE = True  
 # SESSION_COOKIE_SECURE = False  
+SESSION_COOKIE_SECURE = True  
 SESSION_COOKIE_NAME = 'sessionid'  
 
 

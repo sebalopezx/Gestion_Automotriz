@@ -198,6 +198,9 @@ form{
     // max-width: 1200px;
     margin: 0 auto;
 }
+form input[type="checkbox"] {
+    cursor: pointer !important;
+}
 // input[type="checkbox"]{
 //     -webkit-appearance: none;
 //     -moz-appearance: none;

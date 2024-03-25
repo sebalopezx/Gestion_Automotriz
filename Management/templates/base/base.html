@@ -23,16 +23,9 @@
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- ALERTAS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="{% static 'js/script.js' %}"></script>
 
     {% block css %}
     {% endblock css %}
-
-    {% block script %}
-    {% endblock script %}
     
 </head>
 
@@ -77,20 +70,19 @@
 
  
     {% block main %}
-    
     {% endblock main %} 
 
     {% block error %}
 
-    {% if messages %}
-        {% for message in messages %}
-        <div class="message" data-message="{{ message }}" data-message-class="{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
-                <div id="toast-container" aria-live="polite" aria-atomic="true">
-                    {% comment %} MENSAJE {% endcomment %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="message" data-message="{{ message }}" data-message-class="{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                    <div id="toast-container" aria-live="polite" aria-atomic="true">
+                        {% comment %} MENSAJE POR MEDIO DE MESSAGE DESDE LA VISTA {% endcomment %}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        {% endif %}
 
     {% endblock error %}
 
@@ -169,7 +161,13 @@
     {% endblock footer %}
 
 
+    <!-- ALERTAS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   
+    <script src="{% static 'js/script.js' %}"></script>
+    
+    {% block script %}
+    {% endblock script %}
+
 </body>
 </html>

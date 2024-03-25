@@ -83,7 +83,9 @@ class VehicleForm(forms.ModelForm):
             'patent': 'Patente',
             'year': 'Año'
         }
-       
+        widget = {
+            'patent': forms.TextInput(attrs={'maxlength':6})
+        }
     # Capturar el valor de patente
     def clean_patent(self):
         patent = self.cleaned_data['patent']
@@ -91,7 +93,7 @@ class VehicleForm(forms.ModelForm):
         patent_upper = patent.upper()
         if not re.match("^[A-Za-z0-9]*$", patent):
             raise forms.ValidationError("La patente solo debe contener letras(A-Z) y números(0-9)")
-        if len(patent) != 6:
+        if len(patent) > 6:
             raise forms.ValidationError("La patente debe tener exactamente 6 caracteres.")
         
         # Validación para patentes únicas en caso de registro
@@ -141,6 +143,26 @@ class AppointmentForm(CapitalizeField, forms.ModelForm):
     def clean_description_customer(self):
         return self.clean_capitalize_field('description_customer')
 
+    def clean(self):
+        cleaned_data = super().clean()
+        attention = cleaned_data.get("attention")
+        date_register = cleaned_data.get("date_register")
+        # Si decides incluir la validación del mecánico más adelante:
+        # mechanic = cleaned_data.get("mechanic")
+
+        # Asegúrate de que ambos campos necesarios estén presentes antes de proceder con la validación
+        if attention and date_register:
+            existing_appointment = Appointment.objects.filter(
+                attention=attention,
+                date_register=date_register,
+                # Si incluyes mecánico: mechanic=mechanic
+            ).exists()
+
+            # Si se encuentra una cita existente, agrega un error de validación
+            if existing_appointment:
+                raise forms.ValidationError("Ya existe una cita programada para esta fecha y hora.")
+
+        return cleaned_data
 
 
 class MechanicForm(CapitalizeField, forms.ModelForm):

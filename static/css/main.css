@@ -10,8 +10,12 @@
   font-family: fuenteSecondaryBold;
   src: url("../fonts/Comfortaa-Bold.ttf") format("woff");
 }
+.body {
+  background-color: #222 !important;
+}
 
 body {
+  background-color: #222 !important;
   overflow-y: scroll;
   font-family: fuenteSecondary !important;
 }
@@ -194,6 +198,10 @@ form .form-login {
 
 form {
   margin: 0 auto;
+}
+
+form input[type=checkbox] {
+  cursor: pointer !important;
 }
 
 form .label {

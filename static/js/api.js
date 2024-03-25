@@ -1,23 +1,75 @@
+// TEST DE API MEDIANTE JS
 
+let DATA = null;
+let URL = 'https://apicardetails-production.up.railway.app/vehiculos'
 
-$(document).ready(function() {
-    $('#id_brand').change(function() {  // Asume que 'id_brand' es el ID del campo de selección de marca en tu formulario
-        var brandSlug = $(this).val();
-        var url = '/tu-url-para-obtener-modelos/' + brandSlug;  // Asegúrate de reemplazar esto con la URL correcta
-
-        $.ajax({
-            url: url,
-            success: function(data) {
-                var modelsSelect = $('#id_model');  // Asume que 'id_model' es el ID del campo de selección de modelo
-                modelsSelect.empty();  // Limpia las opciones existentes
-                modelsSelect.append($('<option>').val('').text('Elegir modelo vehículo'));  // Opción por defecto
-
-                // Itera sobre los modelos y los añade al campo de selección
-                $.each(data.models, function(index, model) {
-                    modelsSelect.append($('<option>').val(model.slugmodelo).text(model.modelo));
-                });
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    // Cargar datos iniciales
+    fetch(URL)
+        .then(response => response.json())
+        .then(data => {
+            // console.log("Datos cargados desde la API:");
+            // console.log(data);
+            DATA = data;
+            llenarMarcas();
         });
+
+    // Evento change para marcas
+    document.querySelector('#id_brand').addEventListener('change', function() {
+        const marcaSeleccionada = this.value;
+        llenarModelos(marcaSeleccionada);
+    });
+
+    // Evento change para modelos
+    document.querySelector('#id_model').addEventListener('change', function() {
+        const modeloSeleccionado = this.value;
+        const marcaSeleccionada = document.querySelector('#id_brand').value;
+        llenarAnios(marcaSeleccionada, modeloSeleccionado);
     });
 });
+
+const llenarMarcas = () => {
+    const selectMarca = document.querySelector('#id_brand');
+    // selectMarca.innerHTML = '<option value="">Seleccione una marca...</option>';
+
+    DATA.forEach(marca => {
+        const opcion = document.createElement('option');
+        opcion.value = marca.slugmarca;
+        opcion.textContent = marca.marca;
+        selectMarca.appendChild(opcion);
+    });
+};
+
+const llenarModelos = (marcaSeleccionada) => {
+    const selectModelo = document.querySelector('#id_model');
+    // selectModelo.innerHTML = '<option value="">Seleccione un modelo...</option>';
+
+    const marca = DATA.find(m => m.slugmarca === marcaSeleccionada);
+    if (marca && marca.modelos) {
+        marca.modelos.forEach(modelo => {
+            const opcion = document.createElement('option');
+            opcion.value = modelo.slugmodelo;
+            opcion.textContent = modelo.modelo;
+            selectModelo.appendChild(opcion);
+        });
+    }
+    // document.querySelector('#hidden_brand').value = marcaSeleccionada;
+};
+
+const llenarAnios = (marcaSeleccionada, modeloSeleccionado) => {
+    const selectAnio = document.querySelector('#id_year');
+    // selectAnio.innerHTML = '<option value="">Seleccione un año...</option>';
+
+    const marca = DATA.find(m => m.slugmarca === marcaSeleccionada);
+    const modelo = marca?.modelos.find(m => m.slugmodelo === modeloSeleccionado);
+    const anios = modelo?.anios || [];
+
+    anios.forEach(anio => {
+        const opcion = document.createElement('option');
+        opcion.value = anio;
+        opcion.textContent = anio;
+        selectAnio.appendChild(opcion);
+    });
+    // document.querySelector('#hidden_model').value = modeloSeleccionado;
+};
 

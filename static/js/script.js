@@ -1,9 +1,13 @@
 // TOAST DE ALERTAS PARA CONFIRMACIÓN Y ERRORES
 
+// Toma un contenedor con id #toast-container, que solo aparece si el envio de un formulario POST manda un elemento message
+// En caso de que obtenga un valor true en message, muestra un mensaje de confirmacion o error
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const toastContainer = document.getElementById("toast-container");
 
-    // Función para crear y mostrar un toast
+    // Función para crear y mostrar un toast, con dos paramentros (el mensaje y las variantes por el tipo de mensaje)
     function showToast(message, variant) {
         const toast = document.createElement("div");
         toast.classList.add("toast", `bg-${variant}`, "text-white");
@@ -34,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const messages = document.querySelectorAll(".message");
     messages.forEach(function (messageElement) {
         // const messageText = messageElement.textContent.trim();
+        // Obtener mensaje
         const messageText = messageElement.getAttribute("data-message");
+        // get atrr =  danger o success
         const messageClass = messageElement.getAttribute("data-message-class");
         showToast(messageText, messageClass);
     });
@@ -43,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// PREGUNTAS DE CONFIRMACION
+// PREGUNTAS DE CONFIRMACION  sacadas desde los elementos html como etiquetas data = {}
 var actionDataTitles = {
     'delete': 'error',
     'question': 'question',
@@ -61,20 +67,14 @@ var confirmationTitles = {
 };
 
 // ALERTAS PARA PREGUNTAS DE CONFIRMACIÓN 
-
 document.addEventListener("DOMContentLoaded", function () {
     const confirmButtons = document.querySelectorAll(".confirm-button");
 
     confirmButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
             event.preventDefault();
-            // const shouldPreventDefault = button.getAttribute("data-prevent-default") === "true";
 
-            // if (shouldPreventDefault) {
-            //   event.preventDefault(); // Prevenir el envío automático del formulario
-            // }
-            // event.preventDefault();
-
+            // Se toman los valores cercanos al click y la info de los data={}
             const form = button.closest(".confirm-form");
             const formDelete = button.closest(".delete-form");
             const actionKey = button.getAttribute("data-action-key");
@@ -82,52 +82,50 @@ document.addEventListener("DOMContentLoaded", function () {
             // console.log("ACTIONKEY:", actionKey)
             // console.log("TITLEKEY", titleKey)
 
-            if (isFormValid(form)){
-                event.preventDefault();
-        
-                const action = actionDataTitles[actionKey]
-                const title = confirmationTitles[titleKey]
-                // console.log("ACTION", action)
-                // console.log("TITLE", title)
-                // data-action para definir acciones segun boton
-                // acción de eliminar
-                // if (action === "delete") {
-                const swalButton = Swal.mixin({
-                    customClass:{
-                    confirmButton: 'btn btn-success m-1',
-                    cancelButton: 'btn btn-danger m-1'
-                    },
-                    buttonsStyling: false
-                })
-                swalButton.fire({
-                    // title: "¿Estás seguro de que deseas eliminar o cancelar?",
-                    title: title,
-                    icon: action,
-                    showCancelButton: true,
-                    confirmButtonText: "Confirmar",
-                    cancelButtonText: "Cancelar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Realiza la acción de eliminación
-                        form.submit();
-                    };
-                });
-            } // end if formValid
+            // event.preventDefault();
+    
+            const action = actionDataTitles[actionKey]
+            const title = confirmationTitles[titleKey]
+            // console.log("ACTION", action)
+            // console.log("TITLE", title)
 
-        }); // end listener
-    }); // end foreach
-  
+            // data-action para definir acciones segun boton
+
+            const swalButton = Swal.mixin({
+                customClass:{
+                confirmButton: 'btn btn-success m-1',
+                cancelButton: 'btn btn-danger m-1'
+                },
+                buttonsStyling: false
+            })
+            swalButton.fire({
+                title: title,
+                icon: action,
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realiza la acción de eliminación
+                        form.submit();         
+                };
+            });
+        } // end if formValid
+
+    ); // end listener
+}); // end foreach
+
 // analizamos si form es valido, para saltar alerta cuando ya ha finalizado la validación de django
-function isFormValid(form) {
-    const requiredInputs = form.querySelectorAll("[required]");
+// function isFormValid(form) {
+//     const requiredInputs = form.querySelectorAll("[required]");
 
-    for (const input of requiredInputs) {
-        if (!input.value.trim()) {
-            return false;
-        }
-    }
-    return true;
-    }
+//     for (const input of requiredInputs) {
+//         if (!input.value.trim()) {
+//             return false;
+//         }
+//     }
+//     return true;
+//     }
 }); // end DOMlistener
 
 

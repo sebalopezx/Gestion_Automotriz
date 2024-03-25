@@ -85,8 +85,13 @@ urlpatterns = [
     path('list_service/<int:id_service>/<int:id>/delete/', views.delete_service ,name='delete_service'),
 
 
+    # Toma un parámetro opcional llamado 'patent' compuesto por letras o números 
+    # Esta ruta se usa para buscar una patente específica y está asociada al id de la cita o patente.
     re_path('search_patent/(?P<patent>[\w\d]+)?/', views.search_patent, name='search_patent'),
 
+
+
+    # PATH para API (detalle vehiculos)  --test
 
     # path('obtener_marcas_y_modelos/', obtener_marcas_y_modelos, name='obtener_marcas_y_modelos'),
     # path('api/vehicle_data/', VehicleDataAPIView.as_view(), name='vehicle_data_api'),

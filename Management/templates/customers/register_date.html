@@ -3,7 +3,7 @@
 
 {% block script %}
     <script src="{% static 'js/update_job.js' %}"></script>
-{% endblock script %}
+{% endblock script %} 
 
 {% block header %}
     <h1>Registrar cita</h1>
@@ -24,9 +24,16 @@
                     </span>
                 </div>
             </div>
+            {% if form.errors %}
+                {% for error in f.errors %}
+                    <div class="alert alert-danger mb-2 p-0  mx-auto w-50 text-center">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         {% endfor %}
 
-        <div class="mx-auto text-center mb-3">
+        <div class="mx-auto text-center mt-5 mb-3">
             <button class="btn btn-success confirm-button" type="submit"
             data-action-key="confirm"
             data-title-key="register" >
@@ -72,11 +79,18 @@
     </form>
     {% endif %}
     
-    {% if existing_appointment %}
+ 
+    {% comment %} {% if existing_appointment %}
         <li class="alert alert-danger mt-5 pb-0 pt-2 text-center">{{ error }}</li>
+    {% endif %} {% endcomment %}
+
+    {% if form.non_field_errors %}
+        <li class="alert alert-danger mt-5 pb-0 pt-2 text-center">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </li>
     {% endif %}
-
-
 
 
 {% endblock content %}

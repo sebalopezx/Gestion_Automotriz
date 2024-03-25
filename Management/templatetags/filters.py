@@ -27,10 +27,7 @@ def mechanic_valid(value):
 
 @register.filter(name='description_valid')
 def description_valid(value):
-    if value is not None:
-        return value
-    else:
-        return "Sin descripción"
+    return value if value else "Sin descripción"
     
 # @register.filter(name='mechanic_active')
 # def mechanic_active(value):

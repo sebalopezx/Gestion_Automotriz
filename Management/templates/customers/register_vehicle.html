@@ -1,4 +1,10 @@
 {% extends 'base_customer.html' %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'js/api.js' %}"></script>
+{% endblock script %}
+
 
 {% block header %}
     <h1>Registrar vehículo</h1>
@@ -6,87 +12,6 @@
 
 {% block content %}
 {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-    <script type="text/javascript">
-
-        let DATA = null;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar datos iniciales
-            fetch('https://apicardetails-production.up.railway.app/vehiculos')
-                .then(response => response.json())
-                .then(data => {
-                    // console.log("Datos cargados desde la API:");
-                    // console.log(data);
-                    DATA = data;
-                    llenarMarcas();
-                });
-
-            // Evento change para marcas
-            document.querySelector('#id_brand').addEventListener('change', function() {
-                const marcaSeleccionada = this.value;
-                llenarModelos(marcaSeleccionada);
-            });
-
-            // Evento change para modelos
-            document.querySelector('#id_model').addEventListener('change', function() {
-                const modeloSeleccionado = this.value;
-                const marcaSeleccionada = document.querySelector('#id_brand').value;
-                llenarAnios(marcaSeleccionada, modeloSeleccionado);
-            });
-        });
-
-        const llenarMarcas = () => {
-            const selectMarca = document.querySelector('#id_brand');
-            // selectMarca.innerHTML = '<option value="">Seleccione una marca...</option>';
-
-            DATA.forEach(marca => {
-                const opcion = document.createElement('option');
-                opcion.value = marca.slugmarca;
-                opcion.textContent = marca.marca;
-                selectMarca.appendChild(opcion);
-            });
-        };
-
-        const llenarModelos = (marcaSeleccionada) => {
-            const selectModelo = document.querySelector('#id_model');
-            // selectModelo.innerHTML = '<option value="">Seleccione un modelo...</option>';
-
-            const marca = DATA.find(m => m.slugmarca === marcaSeleccionada);
-            if (marca && marca.modelos) {
-                marca.modelos.forEach(modelo => {
-                    const opcion = document.createElement('option');
-                    opcion.value = modelo.slugmodelo;
-                    opcion.textContent = modelo.modelo;
-                    selectModelo.appendChild(opcion);
-                });
-            }
-            // document.querySelector('#hidden_brand').value = marcaSeleccionada;
-        };
-
-        const llenarAnios = (marcaSeleccionada, modeloSeleccionado) => {
-            const selectAnio = document.querySelector('#id_year');
-            // selectAnio.innerHTML = '<option value="">Seleccione un año...</option>';
-
-            const marca = DATA.find(m => m.slugmarca === marcaSeleccionada);
-            const modelo = marca?.modelos.find(m => m.slugmodelo === modeloSeleccionado);
-            const anios = modelo?.anios || [];
-
-            anios.forEach(anio => {
-                const opcion = document.createElement('option');
-                opcion.value = anio;
-                opcion.textContent = anio;
-                selectAnio.appendChild(opcion);
-            });
-            // document.querySelector('#hidden_model').value = modeloSeleccionado;
-        };
-
-       
-    </script> 
-
-        
-
 
     <form method="POST" class="confirm-form" id="form_vehicle">
         {% csrf_token %}
@@ -113,6 +38,9 @@
                 </select>
             </label>
         </div>
+        {% if form.errors.brand %}
+            <div class="alert alert-danger mb-2 p-0  mx-auto w-50 text-center">{{ form.errors.brand }}</div>
+        {% endif %}
         
         <div class="input-group mb-3 justify-content-center">
             <label class="label" for="id_model">
@@ -123,6 +51,9 @@
                 </select>
             </label>
         </div>
+        {% if form.errors.model %}
+            <div class="alert alert-danger mb-2 p-0  mx-auto w-50 text-center">{{ form.errors.model }}</div>
+        {% endif %}
         
         <div class="input-group mb-3 justify-content-center">
             <label class="label" for="id_year">
@@ -133,6 +64,9 @@
                 </select>
             </label>
         </div>
+        {% if form.errors.year %}
+            <div class="alert alert-danger mb-2 p-0  mx-auto w-50 text-center">{{ form.errors.year }}</div>
+        {% endif %}
         
         <div class="input-group mb-3 justify-content-center">
             <label class="label" for="id_patent">
@@ -140,6 +74,9 @@
                 <input type="text" name="patent" id="id_patent" class="form-control" value="{{ f.patent }}">
             </label>
         </div>
+        {% if form.errors.patent %}
+            <div class="alert alert-danger mb-2 p-0  mx-auto w-50 text-center">{{ form.errors.patent }}</div>
+        {% endif %}
 
         
 
@@ -159,11 +96,21 @@
             </a>
         </div>
 
-        {% if form.errors.patent %}
+        {% comment %} {% if form.errors.patent %}
             <div class="alert alert-danger mt-5 pb-0 pt-2">{{ form.errors.patent }}</div>
-        {% endif %}
+        {% endif %} {% endcomment %}
+        {% comment %} {% if form.errors %}
+            <div class="alert alert-danger mt-5 pb-0 pt-2">
+                {% for field_errors in form.errors.values %}
+                    {% for error in field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %} {% endcomment %}
 
     </form>
     
 
 {% endblock content %}
+

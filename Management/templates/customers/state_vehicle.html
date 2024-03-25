@@ -142,14 +142,14 @@
             {% comment %} {% if total_price %} {% endcomment %}
             <li class="list-group-item list-group-item-warning ">Presupuesto Total: {{ total_price|format_clp }}</li>
             
+            
             {% comment %} {% if points.points >= POINTS %}
-            <button id="btnDiscount" data-total-price="{{ total_price }}">
-                Ver descuento
-            </button>
-            <p id="discount" class="descuento"></p>
-
+                <button class="btn btn-sm btn-primary" id="btnDiscount" data-total-price="{{ total_price }}">
+                    Ver descuento
+                </button>
+                <p id="discount" class="descuento"></p>
             {% else %}
-                <button data-total-price="{{ total_price }}" disabled>
+                <button class="btn btn-sm btn-primary" data-total-price="{{ total_price }}" disabled>
                     Ver descuento
                 </button>
             {% endif %}  {% endcomment %}
@@ -345,7 +345,7 @@
 
 {% endblock content %}
 
-{% comment %} 
-{% block script %}
+
+{% comment %} {% block script %}
     <script src="{% static 'js/discount.js' %}"></script>
 {% endblock script %} {% endcomment %}

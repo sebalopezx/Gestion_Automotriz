@@ -271,22 +271,22 @@ def update_password(request, id):
 @customer_required
 def register_vehicle(request):
     if request.method == 'POST':
-        print(request.POST)
+        # print(request.POST)
         form_vehicle = VehicleForm(request.POST)
         # print("FORM : ", form_vehicle)
-        try:
-            if form_vehicle.is_valid():
-                vehicle = form_vehicle.save(commit=False)
-                vehicle.customer = request.user
-                print("VEHICLE : ", vehicle)
-                vehicle.save()
-                messages.success(request, 'Vehículo creado exitosamente.')
-                return redirect('vehicle')
-            else:
-                # print(form_vehicle.errors)
-                messages.error(request, 'Error al registrar vehículo')
-        except ValidationError as e:
-            messages.error(request, 'Error de ejecución')
+        # try:
+        if form_vehicle.is_valid():
+            vehicle = form_vehicle.save(commit=False)
+            vehicle.customer = request.user
+            # print("VEHICLE : ", vehicle)
+            vehicle.save()
+            messages.success(request, 'Vehículo creado exitosamente.')
+            return redirect('vehicle')
+        else:
+            # print(form_vehicle.errors)
+            messages.error(request, 'Error al registrar vehículo')
+        # except ValidationError as e:
+        #     messages.error(request, 'Error de ejecución')
     else:
         form_vehicle = VehicleForm()
 
@@ -341,42 +341,46 @@ def register_date(request):
 
     if request.method == 'POST':
         form_appointment = AppointmentForm(request.POST, user=user) # , mechanic=mechanic_active
+        print(form_appointment)
+        print(form_appointment.is_valid())
         if form_appointment.is_valid():
             # Obtenemos los datos del formulario
-            date_register = form_appointment.cleaned_data['date_register']
-            attention = form_appointment.cleaned_data['attention']
-            # mechanic = form_appointment.cleaned_data['mechanic']
+            # date_register = form_appointment.cleaned_data['date_register']
+            # attention = form_appointment.cleaned_data['attention']
+            # # mechanic = form_appointment.cleaned_data['mechanic']
 
-            # Verifica si ya existe una cita en ese horario y fecha para el mecánico
-            existing_appointment = Appointment.objects.filter(
-                attention=attention, date_register=date_register #, mechanic=mechanic
-            ).exists()
+            # # Verifica si ya existe una cita en ese horario y fecha para el mecánico
+            # existing_appointment = Appointment.objects.filter(
+            #     attention=attention, date_register=date_register #, mechanic=mechanic
+            # ).exists()
 
-            if existing_appointment:
-                # Error 
-                # error = f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
-                error = f'Ya existe cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
-                # form_appointment.add_error(
-                #     'attention',
-                #     f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register} {attention}'
-                # )
-            else:
-                form_appointment.save()
-                # Buscamos el id de la cita recien creada
-                latest_appointment = Appointment.objects.latest('id').id
-                id_appointment = Appointment.objects.get(id=latest_appointment)
-                id_appointment.inprogress = True
-                id_appointment.save()
-                # Creamos el trabajo y checklist con estado en espera
-                status = VehicleStatus.objects.get(pk=1)
-                job = Job.objects.create(appointment=id_appointment, status=status)
-                checklist = Checklist.objects.create(job=job)
+            # if existing_appointment:
+            #     # Error 
+            #     # error = f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
+            #     error = f'Ya existe cita programada para fecha {date_register.strftime("%d-%m-%Y")} a las {attention}'
+            #     # form_appointment.add_error(
+            #     #     'attention',
+            #     #     f'El mecánico {mechanic}, ya tiene cita programada para fecha {date_register} {attention}'
+            #     # )
+            #     messages.error(request, 'Error al crear cita')
 
+            # else:
+            form_appointment.save()
+            # Buscamos el id de la cita recien creada
+            latest_appointment = Appointment.objects.latest('id').id
+            id_appointment = Appointment.objects.get(id=latest_appointment)
+            id_appointment.inprogress = True
+            id_appointment.save()
+            # Creamos el trabajo y checklist con estado en espera
+            status = VehicleStatus.objects.get(pk=1)
+            job = Job.objects.create(appointment=id_appointment, status=status)
+            checklist = Checklist.objects.create(job=job)
 
-                messages.success(request, 'Cita confirmada') 
-                return redirect('appointment')
+            messages.success(request, 'Cita confirmada') 
+            return redirect('appointment')
         else:
             # form_appointment = AppointmentForm()
+            print("ERROR EN EL FORM")
             messages.error(request, 'Error al crear cita')
 
     else:
@@ -393,9 +397,7 @@ def register_date(request):
    
     return render(request, 'register_date.html', {
         'form': form_appointment,
-        'user_vehicles': user_vehicles,
-        'existing_appointment': existing_appointment,
-        'error':error
+        'user_vehicles': user_vehicles
     })
 
 
@@ -408,7 +410,7 @@ def create_coupon_points(request):
         # Se crea un cupon, restando la cantidad que tiene el cliente por la constante de PUNTOS
         points.points -= POINTS_VALUE
         points.save()
-        # Se crea cupón con funcón staticmethod desde el mismo modelo
+        # Se crea cupón con función staticmethod desde el mismo modelo
         new_coupon = Coupon(customer=request.user, coupon=Coupon.generate_coupon_code())
         new_coupon.save()
         messages.success(request, "Cupón creado exitosamente.")
