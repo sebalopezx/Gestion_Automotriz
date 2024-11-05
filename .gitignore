@@ -2,7 +2,6 @@ venv
 __pychache__
 db.sqlite3
 
-
 base_test.html
 table_pendings.html
 table_header_pending.html
