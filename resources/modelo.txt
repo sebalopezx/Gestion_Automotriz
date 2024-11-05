@@ -1,0 +1,100 @@
+cliente  prueba123
+recepcionista  prueba123
+
+Servicios
+
+Servicio diagnóstico 10000 10
+Cambio pastillas o balatas de frenos  50000 50
+Cambio líquido frenos y purga 30000 30
+Cambio bujía x1 10000 5
+Cambio de aceite 20000 15
+Cambio de neumáticos 40000 40
+Alineación y Balanceo 20000 15
+Cambio de correa 80000 80
+
+Atención
+8:00
+13:00
+
+Mecánico
+Alan
+Brito
+123123123
+
+Sucursal
+Taller Automotriz Maipú
+Maipú, Calle Saturno
+999
+
+Estado
+1. En espera
+2. En diagnóstico
+3. En espera confirmación de presupuesto
+4. En mantención
+5. En espera de repuesto
+6. Listo para entrega
+7. Finalizado
+8. Cancelado
+9. Eliminado
+
+Config POINTS
+1000
+
+
+INDEX
+Bienvenido
+Aplicación de gestión de citas
+
+1.
+Agendar y reservar citas de mantenimiento
+
+Este sistema le permitirá planificar y agendar citas de mantenimiento para servicios tanto correctivos como preventivos, brindándoles la flexibilidad de elegir una hora conveniente para llevar a cabo el trabajo en sus vehículos. Además de eso podrán elegir el mecánico y la sucursal según sus gustos y preferencias.
+
+Podrá registrar más de un vehículo.
+
+images/mantenimiento.PNG
+
+2.
+Visualizar el estado de tu vehículo
+
+Al ingresar su vehículo al sistema y reservar una cita, podrá revisar diariamente el estado de su vehículo, viendo los servicios que están en proceso y finalizados, además de un listado de características fundamentales de su vehículo.
+
+Detalles de servicios, presupuesto y checklist.
+
+images/checklist.PNG
+
+3.
+Descuentos exclusivos
+
+Con cada mantenimiento que realice con esta aplicación podrá conseguir puntos. Con una acumulación de cierta cantidad de puntos podrá canjear un cupón para tener descuentos del 10% en su próximo mantenimiento.
+
+Puntos para canjear cupón: 
+
+images/cupon.png
+
+4.
+Gestionar mecánicos
+
+El sistema le permitirá gestionar los mecánicos del taller, pudiendo agregar, modificar o eliminar en caso de ser necesario.
+
+Se puede añadir imagen tipo carnet, o se usara una por defecto.
+
+images/user_mechanic.png
+
+5.
+Gestionar citas de mantenimiento
+
+El sistema tendrá múltiples interfaces para el control de citas. Citas diarias muestran las citas registradas en el día actual. Citas en progreso muestra listado de todas las citas. Citas finalizadas o canceladas. Y por ultimo un buscador para citas por patente o número de cita.
+
+Botones para agregar descripcion y servicios, boton para modificar estado de checklist, y botones para cancelar cita o finalizar (Estos 2 ultimos se activan o desactivan según el estado del vehículo)
+
+images/list_jobs.png
+
+6.
+Gestionar estado de vehículo
+
+El sistema tendrá 2 opciones para agregar detalles, descripciones y servicios y otra para modificar el estado del vehículo por medio de un checklist.
+
+Este sistema mostrara en tiempo real el estado del vehículo al cliente.
+
+images/state_job.PNG

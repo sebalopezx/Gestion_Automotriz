@@ -1,0 +1,195 @@
+https://jinja.palletsprojects.com/en/3.1.x/
+https://www.djangoproject.com/
+# Descarga sql lite portable
+https://sqlitebrowser.org/dl/
+
+
+###  OPCIONAL: settings JSON
+# para mostrar texto html justificado
+"editor.wordWrap": "on"
+# para autoComplete de html en django
+"python.analysis.autoImportCompletions": true,
+"python.autoComplete.addBrackets": true,
+"emmet.includeLanguages": {
+    "django-html": "html"
+}
+
+
+# Instalar entorno virtual para proyecto
+pip install virtualenv 
+
+python -m virtualenv --version
+
+# Creacion del entorno venv
+python -m virtualenv venv     
+
+# Activar entorno
+.\venv\Scripts\activate
+
+### Si no funciona ver restriccion en POWERSHELL
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+
+# Seleccionar interprete con F1
+select interpreter
+terminal> create new terminal
+
+# Instalar Django
+pip install django
+python -m django --version
+
+
+# CREAR PROYECTO Django
+django-admin startproject nombre_proyecto
+django-admin startproject nombre_proyecto .   # no duplica carpeta
+
+
+
+# HELP = python manage.py runserver --help
+
+# EJECUTAR SERVIDOR
+python manage.py runserver
+# CERAR SERVIDOR
+ctrl + c
+
+### Problema de puerto: CAMBIAR HOST
+python manage.py runserver 3000
+
+
+{ " La carpeta curso es el folder principal del proyecto " }
+
+# Crear aplicaciones
+python manage.py startapp app_nombre
+
+# CREAR SUPER USUARIO (ADMIN)
+python manage.py createseuperuser    
+admin.py = sirve para agregar funciones al panel de admin
+
+
+** FOLDER PRINCIPAL
+{
+    __init__: paquete de python
+    asgi:   configura el despliege de la app cuando se utilize un servidor
+    wsgi:    despliege de app sobre servidor
+    settings: caracteristicas, conexiones
+    url: Indicar imports de url de las views creadas en las aplicaciones,
+        (se pasa por paramentros las urls que seran creadas en las mimas apps)
+    manage:  permite ejecutar comandos de django
+    db.sqlite3:  base de datos creada por django
+}
+
+
+** APLICACIONES
+
+{
+    migration: Cambios de base de datos
+    admin: Añadir apps a panel de administrador 
+    apps: Configurar de la app creada
+    models: Creacion de clases, tablas de SQL
+    tests: Escribir testing de las vistas
+    views: Se define que se quiere enviar al cliente o servidor visualmente (HTML)
+
+    urls: Se crea una carpeta urls para indicar solo las que son propias de la app
+
+}
+
+# REQUEST : 
+
+
+# VIEWS:  "importaciones"
+{
+    from django.http import HttpResponse, JsonResponse
+    HttpResponse = Muestra en pantalla codigo HTML
+    JsonResponse = Muestra codigo JSON traido de bd
+
+    from django.shortcuts import get_object_or_404
+    get_object_or_404 = busca un objeto y si no lo encuentra lanza error 404
+
+    from django.shortcuts import render
+    render = se crea carpeta con nombre reservado "template", render muestra archivos html
+}
+
+
+
+
+** db browser for sqlite (APP para ver data base)
+# MODELS: 
+{
+    settings: {
+        # Config de base de datos
+        https://docs.djangoproject.com/en/4.2/ref/databases/
+    }
+    # Agregar app al setting del folder principal
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'app_nombre',
+    ]
+
+    class ModelNombre(models.Model):
+    nombre = models.CharField(max_length=20)
+    edad = models.(max_length=200)
+    text = models.TextField(max_length=200)
+    # Relaciones y/o dependencias
+    relaciones = models.ForeignKey(nombre_Clase, on_delete=models.CASCADE)
+   	(blank=True) # Blank , se puede dejar vacio
+	(auto_now_add=True) # auto add: ingresa time automaticamente si no se ingresa manualmente
+	(null=True) # Deja como null
+	(default=False) # Se puede dejar un valor default
+
+    python manage.py showmigrations     = mostrar conf pendientes
+    python manage.py makemigration  = Crear folder y tablas para migraciones  ( python manage.py makemigration app_nombre )
+    python manage.py migrate        = Aplicar los cambios realizados en las migraciones
+    python manage.py sqlmigrate nombre_app archivo  (personas 0001)   # verificar creacion de tabla (nombre_app archivo)
+}
+
+
+
+
+# SHELL Django
+python manage.py shell
+# Crear objetos y guardar en bd
+from .models import *
+xxx.save()
+# Obtener QuerySet
+Clase.objects.all()
+Clase.objects.get(id=x)  => variable
+variable.nombreTabla_set.create(parametros)
+variable.nombreTabla_set.all()
+Clase.objects.filter(name__startwith="xxx")
+
+
+# CONFIGURACION DE PRODUCCION Y DESARROLLO      VER MAS INFO
+crear en settings.py 
+development.py y production.py
+
+DJANGO_SETTINGS_MODULE
+export DJANGO_SETTINGS_MODULE=nombre_del_proyecto.settings.development
+set DJANGO_SETTINGS_MODULE=nombre_del_proyecto.settings.development
+
+Esto se puede hacer en tu archivo wsgi.py y asgi.py:
+import os
+from django.core.wsgi import get_wsgi_application
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nombre_del_proyecto.settings.development')
+application = get_wsgi_application()
+
+
+// REQUERIMIENTOS
+pip freeze > requirements.txt
+
+pip install -r requirements.txt
+
+
+// MANEJO DE DATA
+UTF 8
+python -Xutf8 manage.py dumpdata --indent 2 -o data.json
+
+python manage.py dumpdata --indent 2 --output=data.json
+python manage.py dumpdata --indent 2 > data.json
+extraer info data base, crea json
+indent columnas de separación
+
+
+python manage.py loaddata data.json
+python manage.py loaddata data.json --encoding utf-8
+
+
