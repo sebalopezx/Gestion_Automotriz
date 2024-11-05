@@ -1,0 +1,44 @@
+{% extends '../base/base_recepcionist.html' %}
+{% load static %}
+{% load filters %}
+
+{% block header %}
+    <h1>Listado de Citas Pendientes</h1>
+{% endblock header %}
+
+{% block script %}
+    <script src={% static 'js/update_job.js' %}></script>
+{% endblock script %}
+
+{% block content %}
+
+    {% if list_jobs %}
+       
+
+        <article class="table-responsive rounded">
+            <table class="table table-hover">
+                <thead class="table-dark ">
+                    {% include 'components/../components/table_header_pending.html' %}
+                </thead>
+                
+                <tbody>
+                    {% for job in list_jobs %}
+                    {% if not job.appointment.inprogress.inprogress and not job.appointment.date_finished %}
+                    {% include 'components/../components/table_pendings.html' with job=job %}
+                    {% endif %}
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </article>
+
+        
+  
+   
+
+    {% else %}
+        <li class="list-group-item list-group-item-warning">{{ error }}</li>
+    {% endif %}
+    
+
+{% endblock content %}
+

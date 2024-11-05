@@ -1,0 +1,54 @@
+{% extends '../base/base_recepcionist.html' %}
+{% load static %}
+{% load filters %}
+
+
+{% block header %}
+    <h1>Listado de Mecánicos</h1>
+{% endblock header %}
+
+{% block content %}
+
+<section class="mechanic-list row">
+    {% for mechanic in list_mechanic %}
+        <article class="col-12 col-sm-6 col-md-4 col-lg-3 col-md-mb-5 mb-5 mx-auto mx-lg-0">
+            <div class="card" style="">
+                {% comment %} <img src="{% static 'images/foto_personal.jpg' %}" {% endcomment %}
+                <img src="{{ mechanic.image.url }}"
+                class="card-img-top w-50 mx-auto"
+                style="width: 150px; height: 120px;" 
+                alt="{{ mechanic.first_name }}{{ mechanic.last_name }}">
+                <div class="card-body bg-light">
+                <h5 class="card-title"><b>{{ mechanic.first_name }} {{ mechanic.last_name }}</b></h5>
+                <p class="card-text"><b>Teléfono: </b>{{ mechanic.phone }}</p>
+                <p class="card-text"><b>Especialidad: </b>{{ mechanic.specialty }}</p>
+                <p class="card-text"><b>Disponibilidad: </b>{{ mechanic.is_active|state_display }}</p>
+            </div>     
+
+            <div class="text-center mx-auto m-1 d-flex">
+                <a class="btn btn-sm py-0 me-2 btn-warning " href="{% url 'update_mechanic' mechanic.id %}">
+                    Actualizar
+                </a>
+
+                <form action="{% url 'delete_mechanic' mechanic.id %}" method="POST" class="confirm-form">
+                    {% csrf_token %} 
+                    <button class="btn btn-sm py-0 btn-danger confirm-button" 
+                    data-action-key="delete" 
+                    data-title-key="delete-mechanic">
+                        Eliminar
+                    </button>
+                </form>
+            </div>
+        </article>
+    {% endfor %}
+</section>
+
+
+
+    <div class="text-center mx-auto mt-5">
+        <a class="btn btn-primary" href="{% url 'register_mechanic' %}">
+            Registrar nuevo Mecánico
+        </a>
+    </div>
+    
+    {% endblock content %}

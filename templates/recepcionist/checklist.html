@@ -1,0 +1,131 @@
+{% extends '../base/base_recepcionist.html' %}
+{% load static %}
+{% load filters %}
+
+{% block script %}
+    <script src={% static 'js/update_checklist.js' %}></script>
+{% endblock script %}
+
+{% block header %}
+    <h1>Checklist</h1>
+{% endblock header %}
+
+{% block content %}
+
+    <h3 class="text-center">~Datos cliente~</h3>
+    <article class="jobs row mx-auto mb-3 p-1 ps-3">
+        <ul class="list-group py-1">
+            <li class="list-group-item list-group-item-dark">&#127380; Número de Cita: ( {{ checklist.job.appointment.id }} )</li>   
+            {% comment %} &#8470; Orden Trabajo: {{ checklist.id }} {% endcomment %}
+            <li class="list-group-item"><span class="details">Vehículo:</span> {{ checklist.job.appointment.vehicle }}</li>
+            <li class="list-group-item"><span class="details">Cliente:</span>
+                {{ checklist.job.appointment.vehicle.customer.first_name }} {{ checklist.job.appointment.vehicle.customer.last_name }}
+            </li>
+            <li class="list-group-item"><span class="details">Contacto:</span> {{ checklist.job.appointment.vehicle.customer.email }}</li>
+            <li class="list-group-item"><span class="details">Estado:</span> {{ checklist.job.status }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Cliente:</span> {{ checklist.job.appointment.description_customer|description_valid }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Trabajo:</span> {{ checklist.job.description_job|description_valid }}</li>
+            <li class="list-group-item"><span class="details">Mecánico asignado:</span> {{ checklist.job.appointment.mechanic|mechanic_valid }}</li>
+            <li class="list-group-item"><span class="details">Kilometraje:</span> {{ checklist.km|km_format }}</li>
+            
+        </ul>
+    </article>
+
+    <hr>
+
+    <h3 class="text-center">~Estado del trabajo~</h3>
+    
+    <form method="POST" id="form_update_checklist"> 
+        {% csrf_token %}
+        {% comment %} {{ form_status }} {% endcomment %}
+        <div class="input-group mb-3 justify-content-center">  
+            <label for="status" class="label">
+                <span name="status" class="form-control ">
+                    {{ form_status.status.label_tag }}
+                    {{ form_status.status }}
+                </span>
+            </label>
+        </div>
+
+        <hr>
+
+        <h3 class="text-center">~Servicios~</h3>
+        <div class="text-center justify-content-center ">
+        
+
+
+        {% if list_services %}
+        <article class="table-responsive rounded mx-3">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Servicio</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    
+                    <form action="" disabled></form>
+                    {% for service in list_services %}
+                    
+                    {% comment %} <form action="">X</form> {% endcomment %}
+                    <tr>
+                        <td style="width: 10px;">{{ service.pk }}</td>
+                        <td style="width: 200px;">{{ service.service.name }}</td>
+                        <td style="width: 10px;">
+                            <input type="checkbox" name="service_{{ service.id }}" 
+                            {% if service.status_service %}checked{% endif %}>
+                        </td>
+                        <td style="width: 50px;">
+                            <form action="{% url 'delete_service' service.id checklist.id %}" method="POST" class="confirm-form" id="form_services{{ service.id }}">
+                                {% csrf_token %} 
+                                <button class="btn btn-sm py-0 btn-danger confirm-button" data-action-key="delete" data-title-key="confirm">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </article>
+        {% else %}
+            <li class="list-group-item list-group-item-warning">No tiene servicios asociados al trabajo.</li>
+        {% endif %}
+
+        <hr>
+
+        <h3 class="text-center">~Checklist~</h3>
+        <div class="checklist  px-auto">
+            {% for fch in form_checklist %}
+                <ul class="list-group list-group-horizontal-md ">
+                    <li class="checklabel list-group-item list-group-item-secondary  m-0 ">{{ fch.label_tag }}</li>
+                    <li class="checkdata list-group-item ">{{ fch }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+
+        
+            
+            <div class="text-center mx-auto mt-3">
+                <button class="btn btn-success mt-3" id="btn_update_checklist" type="submit">
+                    Guardar Servicios
+                </button>
+
+                <a class="btn btn-primary mt-3" href="{% url 'list_jobs_inprogress' %}">
+                    Volver a Listado de Trabajos
+                </a>
+
+            </div>
+        </div>
+    </form>
+
+  
+
+
+
+{% endblock content %}
+

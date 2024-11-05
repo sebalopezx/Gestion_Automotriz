@@ -94,10 +94,11 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'Management/templates/base'),
-            os.path.join(BASE_DIR, 'Management/templates/recepcionist'),
-            os.path.join(BASE_DIR, 'Management/templates/customers'),
-            os.path.join(BASE_DIR, 'Management/templatestags')
+            # os.path.join(BASE_DIR, 'Management/../templates/base'),
+            # os.path.join(BASE_DIR, 'Management/../templates/recepcionist'),
+            # os.path.join(BASE_DIR, 'Management/../templates/customers'),
+            # os.path.join(BASE_DIR, 'Management/templatestags')
+            os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {

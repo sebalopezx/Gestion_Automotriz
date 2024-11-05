@@ -1,0 +1,61 @@
+{% extends '../base/base_recepcionist.html' %}
+{% load static %}
+{% load filters %}
+
+{% block script %}
+    <script src={% static 'js/update_job.js' %}></script>
+{% endblock script %}
+
+{% block header %}
+    <h1>Servicios</h1>
+    {% comment %} <h1>Vehículo: {{ job.appointment.vehicle }}</h1>
+    <h3 class="text-dark">&#127380; Cita: {{ job.appointment.id }} &#8470; Orden Trabajo: {{ job.id }}</h3> {% endcomment %}
+{% endblock header %}
+
+{% block content %}
+    <h3 class="text-center">~Datos trabajo~</h3>
+    <article class="jobs row border rounded shadow mb-3 p-1 ps-3 ">
+        <ul class="list-group py-1">
+            <li class="list-group-item list-group-item-dark">&#127380; Número de Cita: ( {{ job.appointment.id }} )</li>
+            {% comment %} &#8470; Orden Trabajo: {{ job.id }} {% endcomment %}
+            <li class="list-group-item"><span class="details">Vehículo:</span> {{ job.appointment.vehicle }}</li>
+            <li class="list-group-item"><span class="details">Estado:</span> {{ job.status }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Cliente:</span> {{ job.appointment.description_customer|description_valid }}</li>
+            <li class="list-group-item"><span class="details">Descripción del Trabajo:</span> {{ job.description_job|description_valid }}</li>
+        </ul>
+    </article>
+
+    <h3 class="text-center">~Actualizar descripción del trabajo~</h3>
+    <form method="POST" id="updateJobForm"> 
+        
+        {% csrf_token %}
+        
+        <div class="job-pending input-group justify-content-center py-3">
+            {{ form_job.description_job.label_tag }}
+        </div> 
+        <div class="job-pending input-group justify-content-center">
+            {{ form_job.description_job }}
+        </div>
+
+        <hr>
+
+        <h3 class="text-center">~Agregar servicios al trabajo~</h3>
+        {% for service in form_service %}
+        <ul class="list-services-job list-group mx-auto fit-content">
+            <li class="list-group-item">{{ service }}</li>
+        </ul>
+        {% endfor %}
+
+        <div class="text-center mx-auto mt-3">
+            <button class="btn btn-success mt-3" type="submit">
+                Guardar Servicios
+            </button>
+            <a class="btn btn-primary mt-3" href="{% url 'list_jobs_inprogress' %}">
+                Listado de Trabajos
+            </a> 
+        </div>
+    </form>
+
+
+
+{% endblock content %}

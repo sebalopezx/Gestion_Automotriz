@@ -1,0 +1,119 @@
+{% extends '../base/base_customer.html' %}
+
+{% block header %}
+    <h1>Citas</h1>
+{% endblock header %}
+
+{% block content %}
+
+    {% if list_dates %}
+        
+        <article class="table-responsive rounded">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Vehículo</th>
+                        <th scope="col">Patente</th>
+                        <th scope="col">ID cita</th>
+                        <th scope="col">Fecha de la cita</th>
+                        <th scope="col">Detalles</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for date in list_dates %}
+                    <tr class="border-bottom border-dark">
+                        <td style="width: 80px; white-space: nowrap;">
+                            {{ date.vehicle.brand|capfirst }}
+                            {{ date.vehicle.model|capfirst }}
+                        </td>
+                        <td style="width: 50px;">{{ date.vehicle.patent }}</td>
+                        <td style="width: 50px;">{{ date.id }}</td>
+                        <td style="width: 200px;">          
+                            {{ date.date_register }}
+                            {{ date.attention }}
+                        </td>
+                        <td style="width: 10px;">
+                            <a href="{% url 'state_vehicle' date.id %}" class="btn btn-sm py-0 me-3 btn-info">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </a>
+                        </td>
+                        <td style="width: 10px;">
+                            <form action="{% url 'cancel_appointment' date.id %}" method="POST" class="confirm-form">
+                                {% csrf_token %}
+        
+                                {% if date.inprogress or date.date_finished is not None %}
+                                <button class="btnCancel btn btn-sm py-0 btn-outline-danger" disabled>
+                                    <!-- Cancelar Cita -->
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                                {% else %}
+                                <button class="btnCancel btn btn-sm py-0 btn-danger confirm-button" 
+                                data-action-key="delete"
+                                data-title-key="confirm" >
+                                    <!-- Cancelar Cita -->
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                                {% endif %}
+                            </form>
+
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+
+        {% comment %} {% for date in list_dates %}
+        <li class="list-group-item d-flex justify-content-between border mb-3">
+            <div class="row col-12 text-center">
+
+                <div class="col-md-4 col-sm-12">
+                {{ date.vehicle.brand|capfirst }}
+                {{ date.vehicle.model|capfirst }}
+                Patente: {{ date.vehicle.patent }}
+                </div>
+                <div class="col-md-4 col-sm-12">
+                {{ date.date_register }}
+                {{ date.attention }}
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <form action="{% url 'cancel_appointment' date.id %}" method="POST" class="confirm-form">
+                        {% csrf_token %}
+
+                        {% if date.inprogress or date.date_finished is not None %}
+                        <button class="btnCancel btn btn-sm btn-outline-danger" disabled>
+                            Cancelar Cita
+                        </button>
+                        {% else %}
+                        <button class="btnCancel btn btn-sm btn-danger confirm-button" data-action="delete">
+                            Cancelar Cita
+                        </button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </li>
+        {% endfor %} {% endcomment %}
+
+    {% else %}
+        <li class="list-group-item list-group-item-warning mb-5">{{ error }}</li>
+    {% endif %}
+
+
+
+
+<div class="mx-auto text-center mt-5">
+        <a class="btn btn-primary mt-3" href="{% url 'register_date' %}">
+            Registrar nueva Cita
+        </a>
+        <a class="btn btn-primary mt-3" href="{% url 'register_vehicle' %}">
+            Registrar nuevo Vehículo
+        </a>
+</div>
+
+
+{% endblock content %}
+
+

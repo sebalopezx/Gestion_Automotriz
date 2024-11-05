@@ -1,0 +1,42 @@
+{% extends '../base/base_recepcionist.html' %}
+
+{% block header %}
+    <h1>Actualizar Mecánico</h1>
+{% endblock header %}
+
+{% block content %}
+
+    <form method="POST" class="confirm-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% for f in form_update %}
+            <div class="forms-mechanics input-group mb-3 justify-content-center">
+                <div class="label">
+                    <span class="form-control bg-light">
+                        {{ f.label_tag }}
+                        {{ f }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}     
+
+        <div class="text-center mx-auto mt-3">
+            <button class="btn btn-success mt-3 confirm-button" type="submit"
+            data-action-key="question"
+            data-title-key="update">
+                Actualizar
+            </button>
+            <a class="btn btn-primary mt-3" href="{% url 'list_mechanic' %}">
+                Mecánicos
+            </a>
+        </div>
+
+        {% if form_update.phone.errors %}
+            <div class="alert alert-danger mt-5 pb-0 pt-2">{{ form_update.phone.errors }}</div>
+        {% endif %}
+
+    </form>
+
+
+    
+{% endblock content %}
