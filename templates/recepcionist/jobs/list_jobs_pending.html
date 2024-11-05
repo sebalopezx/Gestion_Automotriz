@@ -1,4 +1,4 @@
-{% extends '../base/base_recepcionist.html' %}
+{% extends 'base/base_recepcionist.html' %}
 {% load static %}
 {% load filters %}
 
@@ -18,13 +18,13 @@
         <article class="table-responsive rounded">
             <table class="table table-hover">
                 <thead class="table-dark ">
-                    {% include 'components/../components/table_header_pending.html' %}
+                    {% include 'components/../components/components/table_header_pending.html' %}
                 </thead>
                 
                 <tbody>
                     {% for job in list_jobs %}
                     {% if not job.appointment.inprogress.inprogress and not job.appointment.date_finished %}
-                    {% include 'components/../components/table_pendings.html' with job=job %}
+                    {% include 'components/../components/components/table_pendings.html' with job=job %}
                     {% endif %}
                     {% endfor %} 
                 </tbody>

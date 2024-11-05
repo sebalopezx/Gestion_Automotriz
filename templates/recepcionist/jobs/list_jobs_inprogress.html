@@ -1,4 +1,4 @@
-{% extends '../base/base_recepcionist.html' %}
+{% extends 'base/base_recepcionist.html' %}
 {% load static %}
 
 {% block header %}
@@ -12,12 +12,12 @@
         <article class="table-responsive rounded">
             <table class="table table-hover">
                 <thead class="table-dark">
-                    {% include '../recepcionist/components/table_jobs/table_header_jobs.html' %}
+                    {% include 'recepcionist/components/table_jobs/table_header_jobs.html' %}
                 </thead>
                 <tbody>
                     {% for job in list_jobs %}
                         {% if not job.appointment.completed and job.appointment.inprogress %}
-                            {% include '../recepcionist/components/table_jobs/table_jobs.html' with job=job %}
+                            {% include 'recepcionist/components/table_jobs/table_jobs.html' with job=job %}
                         {% endif %}
                     {% endfor %}
                 </tbody>

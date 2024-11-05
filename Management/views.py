@@ -106,14 +106,14 @@ def signup(request):
     else:
         form_register = CustomUserCreationForm()
     
-    return render(request, 'base/signup.html', {
+    return render(request, 'base/login/signup.html', {
         'form_register': form_register
         })
 
 
 def signin(request):
     if request.method == 'GET':
-        return render(request, 'base/signin.html', {
+        return render(request, 'base/login/signin.html', {
             'form_login':AuthenticationForm()
         })
     else:
@@ -123,7 +123,7 @@ def signin(request):
             password=request.POST['password']
         )
         if user is None:
-            return render(request,'base/signin.html',{
+            return render(request, 'base/login/signin.html', {
                 'form_login':AuthenticationForm(),
                 'error':'Usuario o Contraseña inválidos.'
             })
@@ -172,7 +172,7 @@ def list_user_data(request):
 
     user_type_value = user_type(request.user)
     base_template = template_base(user_type_value)
-    return render(request, 'base/user_data.html',{
+    return render(request, 'base/details/user_data.html', {
         'list_data':user,
         'points':points,
         'POINTS':POINTS_VALUE,
@@ -210,7 +210,7 @@ def detail_user_data(request, id):
         # Deshabilitar edición del campo username
         form_update.fields['username'].widget.attrs['readonly'] = True
         
-    return render(request, 'base/detail_user_data.html', {
+    return render(request, 'base/details/detail_user_data.html', {
         'user': user,
         'form_update': form_update,
         'base_template':base_template
@@ -254,7 +254,7 @@ def update_password(request, id):
         # Deshabilitar edición del campo username
         # form_update.fields['username'].widget.attrs['disabled'] = True
         
-    return render(request, 'base/update_password.html', {
+    return render(request, 'base/details/update_password.html', {
         'user': user,
         'form_update': form_update,
         'base_template':base_template
@@ -291,7 +291,7 @@ def register_vehicle(request):
         form_vehicle = VehicleForm()
 
     
-    return render(request, 'customers/register_vehicle.html', {
+    return render(request, 'customers/vehicle/register_vehicle.html', {
         'form': form_vehicle
     })
 
@@ -320,7 +320,7 @@ def update_vehicle(request, id):
         form_vehicle = VehicleForm(instance=vehicle)
 
 
-    return render(request, 'customers/update_vehicle.html', {
+    return render(request, 'customers/vehicle/update_vehicle.html', {
         'form': form_vehicle
     })
 
@@ -395,7 +395,7 @@ def register_date(request):
             for field in form_appointment.fields.values():
                 field.widget.attrs['disabled'] = True
    
-    return render(request, 'customers/register_date.html', {
+    return render(request, 'customers/appointment/register_date.html', {
         'form': form_appointment,
         'user_vehicles': user_vehicles
     })
@@ -438,7 +438,7 @@ def list_vehicles(request):
     vehicles = Vehicle.objects.filter(customer=request.user).prefetch_related('appointment_set__job_set')
     job = Job.objects.all()
     error = 'No tiene vehículos'
-    return render(request, 'customers/vehicle.html', {
+    return render(request, 'customers/vehicle/vehicle.html', {
         'list_vehicle': vehicles,
         'error': error,
         'job': job
@@ -484,7 +484,7 @@ def state_vehicle(request, id):
             estimated_total_price += service.service.price
 
     error =  'No tiene vehículos'
-    return render(request, 'customers/state_vehicle.html',{
+    return render(request, 'customers/vehicle/state_vehicle.html', {
         # 'list_vehicle':vehicles,
         'base_template':base_template,
         'state_vehicle':state_vehicle,
@@ -503,7 +503,7 @@ def state_vehicle(request, id):
 def list_appointment(request):
     date = Appointment.objects.filter(vehicle__customer=request.user)
     error =  'No tiene citas'
-    return render(request, 'customers/appointment.html',{
+    return render(request, 'customers/appointment/appointment.html', {
         'list_dates':date,
         'error':error
     })
@@ -564,7 +564,7 @@ def cancel_appointment(request, id):
 def list_mechanic(request):
     mechanic = Mechanic.objects.all()
     error =  'No existen Mecánicos'   
-    return render(request, 'recepcionist/list_mechanic.html', {
+    return render(request, 'recepcionist/mechanic/list_mechanic.html', {
         'list_mechanic':mechanic,
         'error':error
     })
@@ -585,7 +585,7 @@ def register_mechanic(request):
     else:
         form_mechanic = MechanicForm()
         
-    return render(request, 'recepcionist/register_mechanic.html', {
+    return render(request, 'recepcionist/mechanic/register_mechanic.html', {
         'form_mechanic': form_mechanic
     })
 
@@ -609,7 +609,7 @@ def update_mechanic(request, id):
         mechanic = get_object_or_404(Mechanic, pk=id)
         form_update = MechanicForm(instance=mechanic)
 
-    return render(request, 'recepcionist/update_mechanic.html',{
+    return render(request, 'recepcionist/mechanic/update_mechanic.html', {
             'data_mechanic': mechanic,
             'form_update': form_update,
         })
@@ -682,7 +682,7 @@ def list_jobs_diary(request):
     jobs_diary = Job.objects.filter(appointment__in=appointments_diary).order_by('appointment__attention')
     error_diary =  'No existen trabajos el día de hoy'
 
-    return render(request, 'recepcionist/list_jobs_diary.html', {
+    return render(request, 'recepcionist/jobs/list_jobs_diary.html', {
         'list_jobs_diary':jobs_diary,
         'error_diary':error_diary,
         'current_date':current_date
@@ -705,7 +705,7 @@ def list_jobs_inprogress(request):
     error =  'No existen trabajos en progreso'
 
 
-    return render(request, 'recepcionist/list_jobs_inprogress.html', {
+    return render(request, 'recepcionist/jobs/list_jobs_inprogress.html', {
         # 'list_appointments':appointments,
         'list_jobs':jobs,
         'error':error,
@@ -729,7 +729,7 @@ def change_mechanic(request, id):
     else:
         form = ChangeMechanicForm(instance=appointment)
 
-    return render(request, 'recepcionist/change_mechanic.html', {
+    return render(request, 'recepcionist/mechanic/change_mechanic.html', {
         'form': form, 
         'appointment': appointment
     })
@@ -743,7 +743,7 @@ def list_jobs_completed(request):
     jobs = Job.objects.filter(appointment__in=appointments)
     error =  'No existen trabajos finalizados'
      
-    return render(request, 'recepcionist/list_jobs_completed.html', {
+    return render(request, 'recepcionist/jobs/list_jobs_completed.html', {
         # 'list_appointments':appointments,
         'list_jobs':jobs,
         'error':error
@@ -893,7 +893,7 @@ def update_job(request, id):
         form_job = JobForm(initial={'description_job':description}) 
         form_service = ServiceForm()
 
-    return render(request, 'recepcionist/update_job.html', {
+    return render(request, 'recepcionist/jobs/update_job.html', {
         'form_job':form_job,
         'form_service':form_service,
         'job':job

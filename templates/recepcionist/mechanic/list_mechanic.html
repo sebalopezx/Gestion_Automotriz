@@ -1,4 +1,4 @@
-{% extends '../base/base_recepcionist.html' %}
+{% extends 'base/base_recepcionist.html' %}
 {% load static %}
 {% load filters %}
 
@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<section class="mechanic-list row">
+    <section class="mechanic-list row">
     {% for mechanic in list_mechanic %}
         <article class="col-12 col-sm-6 col-md-4 col-lg-3 col-md-mb-5 mb-5 mx-auto mx-lg-0">
             <div class="card" style="">
