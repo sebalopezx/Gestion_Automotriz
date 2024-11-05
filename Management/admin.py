@@ -107,6 +107,7 @@ class AppointmentAdmin(admin.ModelAdmin):
         'completed',
         # 'description_customer',
     )
+    readonly_fields = ('date_created',)
     def get_list_display(self, request):
         fields = super().get_list_display(request)
 
