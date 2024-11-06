@@ -1,0 +1,29 @@
+@font-face {
+    font-family: fuentePrincipal;
+    src: url("../fonts/SpaceGrotesk-SemiBold.ttf") format("woff");
+}
+
+@font-face {
+    font-family: fuenteSecondary;
+    src: url("../fonts/Comfortaa-Regular.ttf") format("woff");
+}
+
+@font-face {
+    font-family: fuenteSecondaryBold;
+    src: url("../fonts/Comfortaa-Bold.ttf") format("woff");
+}
+
+
+:root {
+    --primary-color: #ff7c38;
+    --primary-color-lighter :#ff9e6b;
+    --primary-color-darker :#ca4d0a;
+    --secondary-color: ;
+
+    --background-color: #c4c4c4;
+    --menu-color: #222;
+
+    --white-color: #f5f5f5;
+    --dark-color: #000000;
+}
+

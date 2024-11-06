@@ -1,0 +1,13 @@
+/* DROPDOWNS */
+
+.dropdown-menu {
+    min-width: 200px;
+    width: auto;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.dropdown-item {
+    width: auto;
+    display: block;
+}

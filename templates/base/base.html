@@ -11,7 +11,13 @@
     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
     <title>Gestion Automotriz</title>
      <!-- CSS -->
-     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/dropdown.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/toast.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/costumers.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/recepcionist.css' %}">
      <!-- BOOTSTRAP -->
      {% load bootstrap5 %}
      {% bootstrap_css %}
@@ -29,7 +35,7 @@
     
 </head>
 
-<body class="bg-light d-flex flex-column min-vh-100 mt-2">
+<body class="d-flex flex-column min-vh-100 mt-2">
 
     {% block nav %}
     {% with current_url=request.path %}

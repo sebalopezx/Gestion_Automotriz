@@ -1,0 +1,249 @@
+
+/* LAYOUT */
+
+body {
+    background-color: var(--background-color) !important;
+    /* background: green !important; */
+    overflow-y: scroll;
+    font-family: fuenteSecondary !important;
+}
+
+
+/* TITLES AND SUBTITLES */
+
+h1 {
+    color: var(--primary-color);
+    font-family: fuentePrincipal !important;
+}
+
+h2, h3, h4, .navbar-brand {
+    font-family: fuentePrincipal !important;
+}
+
+h5 {
+    font-family: fuenteSecondaryBold;
+    font-weight: 700;
+}
+
+
+/* ELEMENTS */
+
+p, span, .btn, .btn:disabled, li {
+    font-size: 0.9rem !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.border {
+    border: 1px solid var(--primary-color) !important;
+}
+
+
+/* BUTTONS */
+
+.btn-primary {
+    color: var(--white-color) !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn, a, .icon-custom, form button {
+    transition: 0.3s !important;
+}
+
+button, a {
+    color: var(--white-color) !important;
+}
+
+button a {
+    text-decoration: none;
+}
+
+.btn:hover {
+    color: black !important;
+}
+
+.btn-outline-primary {
+    border: var(--primary-color);
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+button:disabled, .btn-outline-primary:disabled {
+    color: var(--menu-color) !important;
+}
+
+/* NAVBAR */
+
+.navbar .navbar-toggler {
+    color: var(--primary-color) !important;
+}
+
+#search-nav {
+    top: 54px;
+}
+
+.navbar .navbar-nav .nav-link:hover, .icon-custom:hover {
+    color: var(--primary-color) !important;
+    text-shadow: var(--primary-color-lighter) 0px 0px 5px;
+}
+
+.navbar .navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+
+
+/* TABLES */
+
+table thead tr th,
+table tbody tr td {
+    white-space: nowrap;
+}
+
+
+
+/* FORMS */
+
+.form-login.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+.form-login a,
+.forms-mechanics a {
+    text-decoration: underline;
+    color: var(--dark-color) !important;
+}
+
+.form-login a:hover,
+.forms-mechanics a:hover {
+    color: var(--primary-color) !important;
+}
+
+form .form-login {
+    max-width: 460px;
+}
+
+form {
+    margin: 0 auto;
+}
+
+form input[type=checkbox] {
+    cursor: pointer !important;
+}
+
+form .label {
+    width: 600px;
+    max-width: 1200px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+form .checklist {
+    margin: 0 20px;
+}
+
+form .checklist ul .checklabel {
+    max-width: 100% !important;
+    width: 100%;
+    text-align: right;
+}
+
+form .checklist ul .checkdata {
+    max-width: 100% !important;
+    width: 100%;
+    text-align: left;
+}
+
+div.input-group input,
+div.input-group select {
+    width: 50%;
+    display: inline-block;
+    margin-left: 2px;
+    padding-left: 10px;
+}
+
+form select {
+    height: 30px;
+}
+
+form textarea:empty {
+    height: 28px;
+}
+
+form textarea {
+    width: 50%;
+    height: 28px;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+
+form input[type=text][disabled] {
+    width: 50% !important;
+    display: inline-block !important;
+}
+
+@media screen and (max-width: 1024px) {
+    form.search-patent input {
+        height: 38px;
+        margin-top: 0px;
+    }
+
+    form .form-login {
+        max-width: 250px;
+    }
+
+    form {
+        max-width: 100%;
+    }
+
+    form .label {
+        width: 100%;
+        text-align: center;
+    }
+
+    form .checklist ul .checklabel,
+    form .checklist ul .checkdata {
+        text-align: center !important;
+    }
+
+    div.input-group input,
+    div.input-group select {
+        width: 100%;
+        display: inline-block;
+        margin-left: 0px;
+        padding-left: 5px;
+    }
+
+    form textarea {
+        width: 100%;
+    }
+}
+
+
+
+/* FORMS LOGIN */
+
+.form-login {
+    background: transparent;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    /* color: whitesmoke; */
+}
+
+.form-login span {
+    /* color: whitesmoke; */
+    background: transparent;
+}
+
+.form-login a {
+    font-weight: 600;
+}

@@ -1,0 +1,45 @@
+/* COUPONS */
+
+div:where(.swal2-icon) {
+    box-sizing: border-box !important;
+}
+
+.container-coupon {
+    background-color: var(--menu-color);
+}
+
+.coupon .coupon-line {
+    border-left: 1px dashed var(--menu-color);
+    width: 40% !important;
+    position: relative;
+}
+
+.coupon .coupon-line .info::after, .coupon .coupon-line .info::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--menu-color);
+    border-radius: 100%;
+}
+
+.coupon .coupon-line .info::before {
+    top: -10px;
+    left: -10px;
+}
+
+.coupon .coupon-line .info::after {
+    bottom: -10px;
+    left: -10px;
+}
+
+@media screen and (max-width: 768px) {
+    .coupon h4 {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .coupon p {
+        font-size: 0.9rem;
+    }
+}

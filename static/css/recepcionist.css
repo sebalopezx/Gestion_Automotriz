@@ -1,0 +1,13 @@
+/* MECHANINCS */
+
+.mechanic-list article {
+    width: 300px !important;
+    min-width: 300px !important;
+    height: 350px;
+}
+
+.mechanic-list article .card .card-title {
+    height: 50px;
+    overflow: hidden;
+}
+

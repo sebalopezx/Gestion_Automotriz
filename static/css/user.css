@@ -1,0 +1,20 @@
+/* USER DATA */
+
+.details {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.user-data li span {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.info-contact span, .icon-custom {
+    color: var(--primary-color);
+}
+
+.user-data {
+    max-width: 450px;
+    margin: 0 auto;
+}
