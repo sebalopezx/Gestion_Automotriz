@@ -52,7 +52,7 @@ Este sistema le permitirá planificar y agendar citas de mantenimiento para serv
 
 Podrá registrar más de un vehículo.
 
-images/mantenimiento.PNG
+images/project/mantenimiento.png
 
 2.
 Visualizar el estado de tu vehículo
@@ -61,7 +61,7 @@ Al ingresar su vehículo al sistema y reservar una cita, podrá revisar diariame
 
 Detalles de servicios, presupuesto y checklist.
 
-images/checklist.PNG
+images/project/checklist.png
 
 3.
 Descuentos exclusivos
@@ -70,7 +70,7 @@ Con cada mantenimiento que realice con esta aplicación podrá conseguir puntos.
 
 Puntos para canjear cupón: 
 
-images/cupon.png
+images/project/cupon.png
 
 4.
 Gestionar mecánicos
@@ -79,7 +79,7 @@ El sistema le permitirá gestionar los mecánicos del taller, pudiendo agregar, 
 
 Se puede añadir imagen tipo carnet, o se usara una por defecto.
 
-images/user_mechanic.png
+images/project/user_mechanic.png
 
 5.
 Gestionar citas de mantenimiento
@@ -88,7 +88,7 @@ El sistema tendrá múltiples interfaces para el control de citas. Citas diarias
 
 Botones para agregar descripcion y servicios, boton para modificar estado de checklist, y botones para cancelar cita o finalizar (Estos 2 ultimos se activan o desactivan según el estado del vehículo)
 
-images/list_jobs.png
+images/project/list_jobs.png
 
 6.
 Gestionar estado de vehículo
@@ -97,4 +97,4 @@ El sistema tendrá 2 opciones para agregar detalles, descripciones y servicios y
 
 Este sistema mostrara en tiempo real el estado del vehículo al cliente.
 
-images/state_job.PNG
+images/project/state_job.png

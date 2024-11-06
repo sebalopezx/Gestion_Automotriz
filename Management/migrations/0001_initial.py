@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=50, verbose_name='Título')),
                 ('description', models.TextField(verbose_name='Descripción')),
                 ('description_small', models.CharField(max_length=255, verbose_name='Descripción pequeña')),
-                ('image_description', models.ImageField(default='index/mantenimiento.PNG', upload_to='index/', verbose_name='Imágen')),
+                ('image_description', models.ImageField(default='index/mantenimiento.png', upload_to='index/', verbose_name='Imágen')),
                 ('have_constant', models.BooleanField(default=False, verbose_name='Tiene Constante')),
             ],
             options={

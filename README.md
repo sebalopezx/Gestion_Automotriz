@@ -1,7 +1,7 @@
 # Proyecto: "Gestión Automotriz"
 `<link>` : <https://gestion-automotriz.onrender.com/>
 
-<img src="https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo.png" alt="Logo del proyecto" width="100" height="100">
+<img src="https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/logo/logo.png" alt="Logo del proyecto" width="100" height="100">
 
 > Logo del proyecto
 
@@ -59,19 +59,19 @@ El cliente podra gestionar:
 - Listar sus vehículos
 - Visualizar estado de vehículo en mantenimiento
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/user_data.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/user_data.png)
 > Información de usuario con puntos obtenidos y cupones canjeados
 
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/register_vehicle.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/register_vehicle.png)
 > Registro de vehículos
 
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/register_date2.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/register_date2.png)
 > Agendar cita de mantenimiento
 
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/list_vehicles.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/list_vehicles.png)
 > Listar vehículos y entrar a ver estado en tiempo real
 
 
@@ -82,15 +82,15 @@ El recepcionista podra gestionar:
 - Gestionar citas finalizadas o canceladas
 - Gestionar mecánicos
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/list_jobs2.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/list_jobs2.png)
 > Listar vehículos con citas agendadas
 
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/checklist_finalizado.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/checklist_finalizado.png)
 > Checklist de vehículo seleccionado y cambiar estados de mantenimiento
 
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/list_mechanic.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/list_mechanic.png)
 > Listar mecánicos para su gestión
 
 
@@ -100,7 +100,7 @@ El administrador del sistema tendra su interfaz propia donde:
 - Gestionara valores, visualización de la página de inicio
 - Gestionara nuevos recepcionistas
 
-![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/admin.PNG)
+![](https://github.com/sebalopezx/Gestion_Automotriz_2.0/blob/master/static/images/project/admin.png)
 > Panel de administración
 
 ## Instalación de entorno localhost

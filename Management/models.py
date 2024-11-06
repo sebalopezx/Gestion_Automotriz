@@ -62,7 +62,7 @@ class Description(models.Model):
     title = models.CharField(max_length=50, verbose_name='Título')
     description = models.TextField(verbose_name='Descripción')
     description_small = models.CharField(max_length=255, verbose_name='Descripción pequeña')
-    image_description = models.ImageField(upload_to='index/', default='index/mantenimiento.PNG', verbose_name='Imágen')
+    image_description = models.ImageField(upload_to='index/', default='index/mantenimiento.png', verbose_name='Imágen')
     have_constant = models.BooleanField(default=False, verbose_name='Tiene Constante')
 
     class Meta:
