@@ -18,8 +18,8 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth.decorators import login_required
 
 from Management.api import api_vehicles
-from .templatetags.decorators import customer_required, recepcionist_required
-from .templatetags.decorators import *
+from templatetags.decorators import customer_required, recepcionist_required, is_admin, is_customer, is_recepcionist
+# from .templatetags.decorators import *
 
 # MODELOS 
 from .models import *
