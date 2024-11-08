@@ -124,8 +124,8 @@ class Workshop(models.Model):
 
 class Mechanic(models.Model):
     SPECIALTY_CHOICES = (
-        ('Mecánico', 'Mecánico'),
-        ('Eléctrico', 'Eléctrico'),
+        ('mecanico', 'Mecánico'),
+        ('electrico', 'Eléctrico'),
     )
     first_name = models.CharField(max_length=20, verbose_name='Nombre')
     last_name = models.CharField(max_length=20, verbose_name='Apellido')
@@ -150,6 +150,7 @@ class Mechanic(models.Model):
 
 class Attention(models.Model):
     attention = models.TimeField(verbose_name='Atención')
+
     def formatted_attention(self):
         if self.attention.hour == 8:
             context = ('AM')
@@ -283,10 +284,10 @@ class Coupon(models.Model):
 
 class Checklist(models.Model):
     GASOLINE_TANK_CHOICES = (
-        ('1/4', '1/4'),
-        ('2/4', '2/4'),
-        ('3/4', '3/4'),
-        ('Full', 'Full')
+        ('1', '1/4'),
+        ('2', '2/4'),
+        ('3', '3/4'),
+        ('4', 'Full')
     )
 
     job = models.OneToOneField(Job, on_delete=models.CASCADE, verbose_name='Id_Trabajo')

@@ -1,0 +1,35 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <option name="RIGHT_MARGIN" value="1000" />
+    <JSCodeStyleSettings version="0">
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+      <option name="FORCE_QUOTE_STYlE" value="true" />
+      <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline" />
+      <option name="OBJECT_LITERAL_WRAP" value="2" />
+    </JSCodeStyleSettings>
+    <Python>
+      <option name="DICT_ALIGNMENT" value="1" />
+      <option name="DICT_WRAPPING" value="0" />
+      <option name="OPTIMIZE_IMPORTS_SORT_NAMES_IN_FROM_IMPORTS" value="true" />
+      <option name="OPTIMIZE_IMPORTS_JOIN_FROM_IMPORTS_WITH_SAME_SOURCE" value="true" />
+      <option name="FROM_IMPORT_WRAPPING" value="0" />
+    </Python>
+    <codeStyleSettings language="JavaScript">
+      <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
+      <option name="ELSE_ON_NEW_LINE" value="true" />
+      <option name="CATCH_ON_NEW_LINE" value="true" />
+      <option name="FINALLY_ON_NEW_LINE" value="true" />
+      <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
+      <option name="METHOD_PARAMETERS_WRAP" value="5" />
+      <option name="ARRAY_INITIALIZER_WRAP" value="2" />
+      <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
+      <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
+      <option name="WRAP_ON_TYPING" value="0" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Python">
+      <option name="RIGHT_MARGIN" value="999" />
+      <option name="CALL_PARAMETERS_WRAP" value="0" />
+      <option name="METHOD_PARAMETERS_WRAP" value="0" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>
