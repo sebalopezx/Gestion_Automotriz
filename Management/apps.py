@@ -7,3 +7,4 @@ class ManagementConfig(AppConfig):
 
     def ready(self):
         import Management.signals
+        import Project.signals
